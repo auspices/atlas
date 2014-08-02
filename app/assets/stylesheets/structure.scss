@@ -1,0 +1,60 @@
+@import './common';
+
+// Common
+// ------
+.l-container {
+  margin: ($unit * 2);
+}
+
+// Index
+// -----
+.images {
+  font-size: 0;
+  margin: $unit;
+  text-align: center;
+}
+
+.image {
+  display: inline-block;
+  position: relative;
+  vertical-align: middle;
+  text-align: center;
+  // Reset font-size
+  font-size: $baseFontSize;
+  margin: $unit;
+  & > a {
+    display: block;
+  }
+}
+
+.image-delete-link {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: $unit;
+  color: white;
+  font-size: $unit;
+  &:hover {
+    background-color: red;
+  }
+}
+
+.image-add-link {
+  display: block;
+  position: fixed;
+  top: $unit;
+  right: $unit;
+}
+
+// Show
+// ----
+.full-image {
+  text-align: center;
+  & > span {
+    position: relative;
+    display: inline-block;
+    & > img {
+      display: inline-block;
+    }
+  }
+}
