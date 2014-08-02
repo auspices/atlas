@@ -1,5 +1,5 @@
 class ImagesController < ApplicationController
-  before_action :authenticate, only: [:edit, :update, :destroy]
+  before_action :authenticate, except: [:index, :show]
   before_action :set_image, only: [:show, :edit, :update, :destroy]
 
   # GET /images
