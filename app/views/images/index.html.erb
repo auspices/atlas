@@ -2,6 +2,8 @@
   <%= link_to 'Add', new_image_path, class: 'image-add-link' %>
 <% end %>
 
+<%= paginate @images %>
+
 <div class='images'>
   <%= content_tag_for :figure, @images do |image| %>
     <%= link_to image do %>
@@ -13,3 +15,5 @@
     <% end %>
   <% end %>
 </div>
+
+<%= paginate @images %>

@@ -6,7 +6,3 @@ json._embedded do
     end
   end
 end
-
-json._links do
-  json.pagination paginate(@images)
-end
