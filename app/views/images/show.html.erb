@@ -1,0 +1,9 @@
+<% if current_user %>
+  <p id="notice"><%= notice %></p>
+<% end %>
+
+<%= image_tag @image.url %>
+
+<% if current_user %>
+  <%= link_to 'Delete', @image, method: :delete, data: { confirm: 'Are you sure?' } %>
+<% end %>

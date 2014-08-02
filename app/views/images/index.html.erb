@@ -1,0 +1,12 @@
+<% if current_user %>
+  <p><%= link_to 'Add', new_image_path %></p>
+<% end %>
+
+<% @images.each do |image| %>
+  <%= link_to image do %>
+    <%= image_tag resize(url: image.url, width: 300, height: 300) %>
+  <% end %>
+  <% if current_user %>
+    <%= link_to 'Delete', image, method: :delete, data: { confirm: 'Are you sure?' } %>
+  <% end %>
+<% end %>
