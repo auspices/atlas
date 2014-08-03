@@ -53,9 +53,13 @@
 
 .image-delete-link {
   position: absolute;
+  display: block;
   top: 0;
   right: 0;
-  padding: $unit;
+  width: ($unit * 2);
+  height: ($unit * 2);
+  line-height: ($unit * 2);
+  text-align: center;
   color: white;
   font-size: $unit;
   &:hover {
