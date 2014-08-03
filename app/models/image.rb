@@ -12,8 +12,8 @@
 class Image < ActiveRecord::Base
   validates_presence_of :source_url
 
-  after_create :store!
-  before_destroy :remove!
+  after_create :store!, if: proc { |image| image.url.blank? }
+  before_destroy :remove_s3_object!
 
   def store!
     self.update_attributes!(url: ImageMover.new(self).move!)
@@ -23,7 +23,7 @@ class Image < ActiveRecord::Base
     URI.parse(url).path[1..-1]
   end
 
-  def remove!
+  def remove_s3_object!
     Storage.delete(url_key)
   end
 end
