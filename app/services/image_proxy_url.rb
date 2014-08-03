@@ -5,7 +5,8 @@ class ImageProxyUrl
 
   def initialize(options = {})
     raise 'Requires :url' if options[:url].blank?
-    @method = options[:method] || :resize
+    options.reverse_merge!(method: :resize)
+    @method = options[:method]
     @options = options
       .send(:extract!, *QUERY_PARAMS)
       .reverse_merge!(

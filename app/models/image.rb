@@ -19,7 +19,11 @@ class Image < ActiveRecord::Base
     self.update_attributes!(url: ImageMover.new(self).move!)
   end
 
+  def url_key
+    URI.parse(url).path[1..-1]
+  end
+
   def remove!
-    Storage.delete(URI.parse(url).path[1..-1])
+    Storage.delete(url_key)
   end
 end
