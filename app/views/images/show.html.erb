@@ -1,11 +1,11 @@
-<% if current_user %>
+<% if @current_user %>
   <div class='alert'><%= notice %></div>
 <% end %>
 
 <div class='full-image'>
   <span>
     <%= image_tag resize(url: @image.url, width: 900, height: 900) %>
-    <% if current_user %>
+    <% if @current_user %>
       <%= link_to '&times;'.html_safe, @image, method: :delete, data: { confirm: 'Are you sure?' }, class: 'image-delete-link' %>
     <% end %>
   </span>
