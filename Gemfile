@@ -17,6 +17,7 @@ group :development do
   gem 'pry'
   gem 'spring'
   gem 'annotate'
+  gem 'rubocop'
 end
 
 group :development, :test do
