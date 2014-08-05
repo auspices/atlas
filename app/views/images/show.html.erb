@@ -2,11 +2,13 @@
   <div class='alert'><%= notice %></div>
 <% end %>
 
-<div class='full-image'>
-  <span>
+<a class='home-link' href='/'>Up</a>
+
+<div class='image-show-stage'>
+  <div class='image-show-stage-inner'>
     <%= image_tag resize(url: @image.url, width: 900, height: 900) %>
     <% if current_user %>
       <%= link_to '&times;'.html_safe, @image, method: :delete, data: { confirm: 'Are you sure?' }, class: 'image-delete-link' %>
     <% end %>
-  </span>
+  </div>
 </div>
