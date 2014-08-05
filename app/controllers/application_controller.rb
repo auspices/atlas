@@ -6,9 +6,10 @@ class ApplicationController < ActionController::Base
   private
 
   def current_user
-    @current_user ||= if auth_str = request.env['HTTP_AUTHORIZATION']
-      "#{ENV['ADMIN_USERNAME']}:#{ENV['ADMIN_PASSWORD']}" == Base64.decode64(auth_str.sub(/^Basic\s+/, ''))
-    end
+    @current_user ||=
+      if auth_str = request.env['HTTP_AUTHORIZATION']
+        "#{ENV['ADMIN_USERNAME']}:#{ENV['ADMIN_PASSWORD']}" == Base64.decode64(auth_str.sub(/^Basic\s+/, ''))
+      end
   end
 
   def authenticate
