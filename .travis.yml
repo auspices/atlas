@@ -1,12 +1,18 @@
 language: ruby
 cache: bundler
 rvm:
-  - 2.1.0
+- 2.1.0
 addons:
   postgresql: '9.3'
 before_script:
-  - psql -c 'create database travis_ci_test;' -U postgres
-  - cp config/database.yml.travis config/database.yml
+- psql -c 'create database travis_ci_test;' -U postgres
+- cp config/database.yml.travis config/database.yml
 script:
- - 'bundle exec rubocop'
- - 'bundle exec rspec'
+- bundle exec rubocop
+- bundle exec rspec
+deploy:
+  provider: heroku
+  app:
+    master: auspices-atlas-production
+  api_key:
+    secure: K/auqn1fePJcSUFoPa5NLvRh8hGX0MyWXufKU/MGLMyeXvpCTykJutcEUFMgy+3ZDYl98xhYWjv8kPQTvLbge7pCx7kADvWPOE7eBO8b67G3H/a+hzDti1Ip8IbWd0W9e+XFJ1Cf2ZEHQeNBajx9FqJsttlhnXSYX94qpCG5yYA=
