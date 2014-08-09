@@ -1,4 +1,5 @@
-<%= form_for(@image) do |f| %>
+<%= form_for([current_user, @image]) do |f| %>
+  <%= render 'common/errors', resource: @image %>
   <%= f.text_field :source_url, placeholder: 'http://', required: true, autofocus: true %>
   <%= f.submit 'Add' %>
 <% end %>
