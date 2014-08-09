@@ -1,7 +1,24 @@
 @import './common';
 
+@include keyframes(fade-out) {
+  0% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
 // Common
 // ------
+.l-alerts {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  color: black;
+  background-color: yellow;
+  @include sans-serif-font();
+  @include vendor(animation, fade-out 1s normal forwards);
+  @include vendor(animation-delay, 1s);
+}
+
 .l-container {
   margin: ($unit * 2);
 }
@@ -49,6 +66,11 @@
   & > a {
     display: block;
   }
+  &:hover {
+    .image-delete-link {
+      opacity: 1;
+    }
+  }
 }
 
 .image-delete-link {
@@ -60,33 +82,18 @@
   height: ($unit * 2);
   line-height: ($unit * 2);
   text-align: center;
+  background-color: black;
   color: white;
   font-size: $unit;
+  opacity: 0;
+  @include vendor(transition, opacity 0.125s);
   &:hover {
     background-color: red;
   }
 }
 
-.image-add-link {
-  display: block;
-  position: fixed;
-  top: $unit;
-  right: $unit;
-}
-
 // Show
 // ----
-.home-link {
-  display: block;
-  text-align: center;
-  text-transform: uppercase;
-  color: black;
-  &:hover {
-    text-decoration: underline;
-  }
-}
-
-
 .image-show-stage {
   z-index: -1;
   position: absolute;
@@ -104,7 +111,4 @@
     height: 100%;
     vertical-align: middle;
     text-align: center;
-    & > img {
-      display: inline-block;
-    }
   }

@@ -1,0 +1,5 @@
+<%= form_tag sessions_path, method: :post do %>
+  <%= text_field_tag :username, nil, { placeholder: 'Username', required: true, autofocus: true } %>
+  <%= password_field_tag :password, nil, { placeholder: 'Password', required: true } %>
+  <%= submit_tag 'Login' %>
+<% end %>

@@ -1,5 +1,5 @@
-<% if current_user %>
-  <%= link_to 'Add', new_image_path, class: 'image-add-link' %>
+<% if logged_in? %>
+  <%= link_to 'Add', new_image_path, class: 'button is-block' %>
 <% end %>
 
 <%= paginate @images %>
@@ -10,10 +10,16 @@
       <%= image_tag resize(url: image.url, width: 300, height: 300) %>
     <% end %>
 
-    <% if current_user %>
+    <% if logged_in? %>
       <%= link_to '&times;'.html_safe, image, method: :delete, data: { confirm: 'Are you sure?' }, class: 'image-delete-link' %>
     <% end %>
   <% end %>
 </div>
 
 <%= paginate @images %>
+
+<% if logged_in? %>
+  <%= link_to "Logged in as #{current_user.username} — Logout", logout_path, class: 'button is-block' %>
+<% else %>
+  <%= link_to 'Login', login_path, class: 'button is-block' %>
+<% end %>

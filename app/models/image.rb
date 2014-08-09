@@ -10,10 +10,13 @@
 #
 
 class Image < ActiveRecord::Base
-  validates_presence_of :source_url
-
   after_create :store!, if: proc { |image| image.url.blank? }
   before_destroy :remove_s3_object!
+
+  belongs_to :user
+
+  validates_presence_of :source_url
+  validates_presence_of :user_id
 
   def store!
     self.update_attributes!(url: ImageMover.new(self).move!)

@@ -12,6 +12,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'aws-sdk'
 gem 'aws-s3'
 gem 'kaminari', '~> 0.16.1'
+gem 'sorcery'
 
 group :development do
   gem 'pry'

@@ -11,7 +11,7 @@ class ImageMover
     [
       image.id.to_s, '/',
       Digest::SHA256.hexdigest(url),
-      File.extname(url)
+      File.extname(url).downcase
     ]
       .compact
       .reject(&:empty?)

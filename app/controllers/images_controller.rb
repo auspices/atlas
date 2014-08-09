@@ -1,5 +1,5 @@
 class ImagesController < ApplicationController
-  before_action :authenticate, except: [:index, :show]
+  skip_before_filter :require_login, only: [:index, :show]
   before_action :set_image, only: [:show, :edit, :update, :destroy]
 
   # GET /images

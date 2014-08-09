@@ -1,4 +1,4 @@
 <%= form_for(@image) do |f| %>
-  <%= f.text_field :source_url, placeholder: 'http://', required: true %>
+  <%= f.text_field :source_url, placeholder: 'http://', required: true, autofocus: true %>
   <%= f.submit 'Add' %>
 <% end %>
