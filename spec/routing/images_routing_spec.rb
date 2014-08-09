@@ -18,10 +18,6 @@ RSpec.describe ImagesController, type: :routing do
       expect(post: '/users/1/images').to route_to('images#create', user_id: '1')
     end
 
-    it 'routes to #update' do
-      expect(put: '/users/1/images/1').to route_to('images#update', user_id: '1', id: '1')
-    end
-
     it 'routes to #destroy' do
       expect(delete: '/users/1/images/1').to route_to('images#destroy', user_id: '1', id: '1')
     end
