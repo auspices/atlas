@@ -3,9 +3,11 @@ Rails.application.routes.draw do
   get 'login' => 'sessions#new', as: 'login'
   get 'register' => 'users#new', as: 'register'
 
-  resources :users
-  resources :sessions
-  resources :images, except: :edit
+  resources :users do
+    resources :images, except: :edit
+  end
 
-  root to: 'images#index'
+  resources :sessions
+
+  root to: 'home#index'
 end
