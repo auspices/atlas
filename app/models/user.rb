@@ -26,11 +26,10 @@ class User < ActiveRecord::Base
   validates :username, uniqueness: true
   validates :password, length: { minimum: 3 }
   validates :password, confirmation: true
-  validates :password_confirmation, presence: true
 
   has_many :images
 
-  def is_admin?
+  def admin?
     username == 'damon'
   end
 end

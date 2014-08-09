@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   get 'register' => 'users#new', as: 'register'
 
   resources :users do
-    resources :images, except: :edit
+    resources :images, except: [:edit, :update]
   end
 
   resources :sessions

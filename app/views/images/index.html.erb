@@ -19,7 +19,7 @@
 <%= paginate @images %>
 
 <% if logged_in? %>
-  <%= link_to "Logged in as #{current_user.username} — Logout", logout_path, class: 'button is-block' %>
+  <%= link_to "Logged in as #{current_user.username} — Logout?", logout_path, class: 'button is-block' %>
 <% else %>
   <%= link_to 'Login', login_path, class: 'button is-block' %>
 <% end %>

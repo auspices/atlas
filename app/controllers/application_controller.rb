@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
     redirect_to login_path, alert: 'Please login first'
   end
 
-  def is_admin?
-    current_user.is_admin?
+  def admin?
+    current_user.admin?
   end
 end
