@@ -1,0 +1,58 @@
+@import './common'
+
+// Index
+// -----
+.images
+  font-size: 0
+  margin: $unit
+  text-align: center
+
+.image
+  display: inline-block
+  position: relative
+  vertical-align: middle
+  text-align: center
+  // Reset font-size
+  font-size: $baseFontSize
+  margin: $unit
+  & > a
+    display: block
+  &:hover
+    .image-delete-link
+      opacity: 1
+
+.image-delete-link
+  position: absolute
+  display: block
+  top: 0
+  right: 0
+  width: ($unit * 2)
+  height: ($unit * 2)
+  line-height: ($unit * 2)
+  text-align: center
+  background-color: black
+  color: white
+  font-size: $unit
+  opacity: 0
+  @include vendor(transition, opacity 0.125s)
+  &:hover
+    background-color: red
+
+// Show
+// ----
+.image-show-stage
+  z-index: -1
+  position: absolute
+  display: table
+  top: 0
+  right: 0
+  bottom: 0
+  left: 0
+  width: 100%
+  height: 100%
+  .image-show-stage-inner
+    display: table-cell
+    width: 100%
+    height: 100%
+    vertical-align: middle
+    text-align: center
