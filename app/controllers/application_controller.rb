@@ -1,20 +1,14 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
-  before_action :current_user
-  helper_method :current_user
+  before_filter :require_login
 
   private
 
-  def current_user
-    @current_user ||=
-      if auth_str = request.env['HTTP_AUTHORIZATION']
-        "#{ENV['ADMIN_USERNAME']}:#{ENV['ADMIN_PASSWORD']}" == Base64.decode64(auth_str.sub(/^Basic\s+/, ''))
-      end
+  def not_authenticated
+    redirect_to login_path, alert: 'Please login first'
   end
 
-  def authenticate
-    authenticate_or_request_with_http_basic('Administration') do |username, password|
-      username == ENV['ADMIN_USERNAME'] && password == ENV['ADMIN_PASSWORD']
-    end
+  def admin?
+    current_user.admin?
   end
 end

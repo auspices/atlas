@@ -1,0 +1,45 @@
+@import './common'
+
+@include keyframes(fade-out)
+  0%
+    opacity: 1
+  100%
+    opacity: 0
+
+// Common
+// ------
+.l-alerts
+  position: fixed
+  top: 0
+  left: 0
+  pointer-events: none
+  color: black
+  background-color: yellow
+  @include sans-serif-font()
+  @include vendor(animation, fade-out 1s normal forwards)
+  @include vendor(animation-delay, 1s)
+
+.l-container
+  margin: ($unit * 2)
+
+.pagination
+  text-align: center
+  & > span
+    display: inline-block
+    & > a
+      text-decoration: underline
+      color: black
+      &:hover
+        background-color: white
+        text-decoration: none
+    & > a,
+    &.current
+      display: inline-block
+      padding: ($unit / 2) ($unit / 1.5)
+    &.current
+      color: lighten(black, 50%)
+      background-color: white
+
+.errors
+  font-style: italic
+  color: red

@@ -10,5 +10,7 @@ module Atlas
       #{config.root}/lib
       #{config.root}/app/services
     )
+
+    config.action_view.field_error_proc = proc { |tag| "<span class='has-error'>#{tag}</span>".html_safe }
   end
 end

@@ -7,13 +7,18 @@
 #  source_url :text
 #  created_at :datetime
 #  updated_at :datetime
+#  user_id    :integer
 #
 
 class Image < ActiveRecord::Base
-  validates_presence_of :source_url
-
   after_create :store!, if: proc { |image| image.url.blank? }
-  before_destroy :remove_s3_object!
+  before_destroy :remove_s3_object!, if: proc { |image| image.url.present? }
+
+  belongs_to :user
+
+  validates_format_of :source_url, with: URI::regexp(%w(http https))
+  validates_presence_of :source_url
+  validates_presence_of :user_id
 
   def store!
     self.update_attributes!(url: ImageMover.new(self).move!)
