@@ -12,10 +12,10 @@ input
   display: inline-block
   margin: 0
   padding: 10px
-  border: 2px solid #ccc
+  border: 2px solid $borderColor
   border-radius: 0
   box-shadow: none
-  @include sans-serif-font()
+  @include serif-font()
   background-color: transparent
   &:focus,
   &:active
@@ -34,7 +34,7 @@ input
 .button,
 button,
 input[type='submit']
-  background-color: #ccc
+  background-color: $borderColor
   color: black
   text-align: center
   @include vendor(transition, all 0.125s)

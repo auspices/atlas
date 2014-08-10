@@ -4,17 +4,16 @@
 // -----
 .images
   font-size: 0
-  margin: $unit
-  text-align: center
+  margin: ($unit * 4) 0
 
 .image
   display: inline-block
   position: relative
-  vertical-align: middle
+  vertical-align: bottom
   text-align: center
   // Reset font-size
   font-size: $baseFontSize
-  margin: $unit
+  margin: 0 ($unit * 2) ($unit * 2) 0
   & > a
     display: block
   &:hover
@@ -30,12 +29,13 @@
   height: ($unit * 2)
   line-height: ($unit * 2)
   text-align: center
-  background-color: black
   color: white
+  text-shadow: 0 0 3px rgba(black, 0.75)
   font-size: $unit
   opacity: 0
-  @include vendor(transition, opacity 0.125s)
+  @include vendor(transition, all 0.125s)
   &:hover
+    text-shadow: none
     background-color: red
 
 // Show
