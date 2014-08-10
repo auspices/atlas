@@ -4,7 +4,7 @@ class ImagesController < ApplicationController
 
   # GET /users/:user_id/images
   def index
-    @images = @user.images.order(created_at: :desc).page(params[:page])
+    @images = @user.images.page(params[:page])
   end
 
   # GET /users/:user_id/images/:id

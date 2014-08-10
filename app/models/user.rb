@@ -27,7 +27,7 @@ class User < ActiveRecord::Base
   validates :password, length: { minimum: 3 }
   validates :password, confirmation: true
 
-  has_many :images
+  has_many :images, -> { order created_at: :desc }, dependent: :destroy
 
   def admin?
     username == 'damon'
