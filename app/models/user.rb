@@ -19,13 +19,12 @@
 class User < ActiveRecord::Base
   authenticates_with_sorcery!
 
-  validates_presence_of :email
-  validates_presence_of :username
   validates_presence_of :password, on: :create
-  validates :email, uniqueness: true
+  validates :email, presence: true, uniqueness: true
   validates :username, uniqueness: true
   validates :password, length: { minimum: 3 }
   validates :password, confirmation: true
+  validates :username, presence: true, format: { with: /\A[a-z0-9_-]+\z/ }, length: { maximum: 15 }
 
   has_many :images, -> { order created_at: :desc }, dependent: :destroy
 
