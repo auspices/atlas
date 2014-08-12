@@ -14,7 +14,6 @@ gem 'kaminari', '~> 0.16.1'
 gem 'sorcery'
 
 group :development do
-  gem 'pry'
   gem 'spring'
   gem 'annotate'
   gem 'rubocop'
@@ -22,6 +21,10 @@ end
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.0.0'
+  gem 'pry'
+  gem 'pry-remote'
+  gem 'pry-stack_explorer'
+  gem 'pry-debugger'
 end
 
 group :test do
