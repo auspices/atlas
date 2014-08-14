@@ -14,11 +14,13 @@ class Image < ActiveRecord::Base
   after_create :store!, if: proc { |image| image.url.blank? }
   before_destroy :remove_s3_object!, if: proc { |image| image.url.present? }
 
+  has_many :connections
+  has_many :collections, through: :connections
   belongs_to :user
 
   validates_format_of :source_url, with: URI::regexp(%w(http https))
-  validates_presence_of :source_url
-  validates_presence_of :user_id
+  validates :source_url, presence: true
+  validates :user_id, presence: true
 
   def store!
     self.update_attributes!(url: ImageMover.new(self).move!)

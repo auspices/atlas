@@ -13,22 +13,13 @@ class ImagesController < ApplicationController
     @image = @user.images.find(params[:id])
   end
 
-  # GET /users/:user_id/images/new
-  def new
-    @image = current_user.images.build
-  end
-
   # POST /users/:user_id/images
   def create
     @image = current_user.images.build(image_params)
-    respond_to do |format|
-      if @image.save
-        format.html { redirect_to [current_user, @image], notice: 'Image was successfully created.' }
-        format.json { render :show, status: :created, location: @image }
-      else
-        format.html { render :new }
-        format.json { render json: @image.errors, status: :unprocessable_entity }
-      end
+    if @image.save
+      redirect_to [current_user, @image], notice: 'Image was successfully created.'
+    else
+      redirect_to :back
     end
   end
 
@@ -36,10 +27,7 @@ class ImagesController < ApplicationController
   def destroy
     @image = current_user.images.find(params[:id])
     @image.destroy
-    respond_to do |format|
-      format.html { redirect_to :root, notice: 'Image was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to :root, notice: 'Image was successfully destroyed.'
   end
 
   private
