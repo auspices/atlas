@@ -1,0 +1,14 @@
+<% if logged_in? %>
+  <%= render 'form' %>
+<% end %>
+
+<div class='collections'>
+  <% @collections.each do |collection| %>
+    <%= link_to vanity_user_collections_images_path(current_user, collection), class: :collection do %>
+      <%= collection.title %> -
+      <em><%= collection.display_size %></em>
+    <% end %>
+  <% end %>
+</div>
+
+<%= paginate @collections %>

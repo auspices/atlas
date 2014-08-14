@@ -6,10 +6,6 @@ RSpec.describe ImagesController, type: :routing do
       expect(get: '/users/1/images').to route_to('images#index', user_id: '1')
     end
 
-    it 'routes to #new' do
-      expect(get: '/users/1/images/new').to route_to('images#new', user_id: '1')
-    end
-
     it 'routes to #show' do
       expect(get: '/users/1/images/1').to route_to('images#show', user_id: '1', id: '1')
     end

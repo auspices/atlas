@@ -14,8 +14,12 @@
   // Reset font-size
   font-size: $baseFontSize
   margin: 0 ($unit * 2) ($unit * 2) 0
+  @media screen and (max-width: $mobileBreakpoint)
+    &, img
+      width: 100%
   & > a
     display: block
+
   &:hover
     .image-delete-link
       opacity: 1

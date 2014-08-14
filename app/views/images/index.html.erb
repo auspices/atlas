@@ -1,26 +1,7 @@
-<%= paginate @images %>
-
 <% if logged_in? %>
-  <%= form_for([current_user, @image = Image.new]) do |f| %>
-    <%= render 'common/errors', resource: @image %>
-    <%= f.text_field :source_url, placeholder: 'http://', required: true, autofocus: true %>
-  <% end %>
+  <%= render 'images/form' %>
 <% end %>
 
-<div class='images'>
-  <%= content_tag_for :figure, @images do |image| %>
-    <%= link_to [image.user, image] do %>
-      <%= image_tag resize(url: image.url, width: 300, height: 300) %>
-    <% end %>
-
-    <% if logged_in? %>
-      <%= link_to '&times;'.html_safe, [current_user, image], method: :delete, data: { confirm: 'Are you sure?' }, class: 'image-delete-link' %>
-    <% end %>
-  <% end %>
-</div>
+<%= render 'images/images', images: @images %>
 
 <%= paginate @images %>
-
-<% if logged_in? %>
-  <%= link_to "Logged in as #{current_user.username} — Logout?", logout_path, class: 'button is-block' %>
-<% end %>

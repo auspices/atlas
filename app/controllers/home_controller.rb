@@ -1,6 +1,5 @@
 class HomeController < ApplicationController
   def index
-    @images = current_user.images.page(params[:page])
-    render template: 'images/index'
+    redirect_to vanity_user_collections_path(current_user)
   end
 end

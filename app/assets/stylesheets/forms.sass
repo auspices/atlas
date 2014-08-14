@@ -1,7 +1,12 @@
 @import './common'
 
 form
-  margin: $unit auto
+  width: 60%
+  margin: $unit 0
+  @media screen and (max-width: $smallScreenBreakpoint)
+    width: 100%
+  @media screen and (max-width: $mobileBreakpoint)
+    width: 100%
   input
     display: block
     width: 100%
@@ -13,9 +18,10 @@ input
   margin: 0
   padding: 10px
   border: 2px solid $borderColor
-  border-radius: 0
+  border-radius: 2px
   box-shadow: none
   @include serif-font()
+  @include vendor(transition, all 0.125s)
   background-color: transparent
   &:focus,
   &:active

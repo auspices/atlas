@@ -49,13 +49,6 @@ RSpec.describe ImagesController, type: :controller do
       login_user @current_user
     end
 
-    describe 'GET new' do
-      it 'assigns a new image as @image' do
-        get :new, user_id: @current_user.id
-        expect(assigns(:image)).to be_a_new(Image)
-      end
-    end
-
     describe 'POST create' do
       describe 'with valid params' do
         it 'creates a new Image' do
@@ -83,14 +76,18 @@ RSpec.describe ImagesController, type: :controller do
       end
 
       describe 'with invalid params' do
+        before(:each) do
+          request.env['HTTP_REFERER'] = '/referer'
+        end
+
         it 'assigns a newly created but unsaved image as @image' do
           post :create, user_id: @current_user.id, image: invalid_attributes
           expect(assigns(:image)).to be_a_new(Image)
         end
 
-        it 're-renders the "new" template' do
+        it 'redirects back' do
           post :create, user_id: @current_user.id, image: invalid_attributes
-          expect(response).to render_template('new')
+          expect(response).to redirect_to('/referer')
         end
       end
     end

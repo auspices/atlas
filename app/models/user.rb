@@ -26,6 +26,7 @@ class User < ActiveRecord::Base
   validates :password, confirmation: true
   validates :username, presence: true, format: { with: /\A[a-z0-9_-]+\z/ }, length: { maximum: 15 }
 
+  has_many :collections, -> { order created_at: :desc }, dependent: :destroy
   has_many :images, -> { order created_at: :desc }, dependent: :destroy
 
   def admin?
