@@ -1,14 +1,15 @@
 class ImagesController < ApplicationController
   skip_before_filter :require_login, only: [:index, :show]
-  before_action :set_user, only: [:index, :show]
 
   # GET /users/:user_id/images
   def index
+    @user = User.find(params[:user_id])
     @images = @user.images.page(params[:page])
   end
 
   # GET /users/:user_id/images/:id
   def show
+    @user = User.find(params[:user_id])
     @image = @user.images.find(params[:id])
   end
 
@@ -42,10 +43,6 @@ class ImagesController < ApplicationController
   end
 
   private
-
-  def set_user
-    @user = User.find(params[:user_id])
-  end
 
   def image_params
     params.require(:image).permit(:source_url)
