@@ -15,7 +15,8 @@ module Collections
       ActiveRecord::Base.transaction do
         @collection = current_user.collections.find(params[:collection_id])
         @image = current_user.images.create!(image_params)
-        @connection = Connector.new(current_user, @collection, @image).build.save
+        @connection = Connector.build(current_user, @collection, @image)
+        @connection.save
       end
       if @connection.persisted?
         redirect_to :back, notice: 'Image was successfully created.'

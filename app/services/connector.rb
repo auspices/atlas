@@ -14,4 +14,8 @@ class Connector
       image_id: @image.id
     )
   end
+
+  def self.build(user, collection, image)
+    self.new(user, collection, image).build
+  end
 end
