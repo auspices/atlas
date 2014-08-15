@@ -14,7 +14,7 @@ class Image < ActiveRecord::Base
   after_create :store!, if: proc { |image| image.url.blank? }
   before_destroy :remove_s3_object!, if: proc { |image| image.url.present? }
 
-  has_many :connections
+  has_many :connections, dependent: :destroy
   has_many :collections, through: :connections
   belongs_to :user
 
