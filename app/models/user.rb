@@ -14,22 +14,31 @@
 #  reset_password_token            :string(255)
 #  reset_password_token_expires_at :datetime
 #  reset_password_email_sent_at    :datetime
+#  slug                            :string(255)
 #
 
 class User < ActiveRecord::Base
+  include ActiveModel::Dirty
+
+  extend FriendlyId
+  friendly_id :username
+
   authenticates_with_sorcery!
 
-  validates_presence_of :password, on: :create
   validates :email, presence: true, uniqueness: true
-  validates :username, uniqueness: true
-  validates :password, length: { minimum: 3 }
-  validates :password, confirmation: true
-  validates :username, presence: true, format: { with: /\A[a-z0-9_-]+\z/ }, length: { maximum: 15 }
+  validates :username, uniqueness: true, presence: true, format: { with: /\A[a-z0-9_-]+\z/ }, length: { maximum: 15 }
+  validates :password, presence: true, confirmation: true, length: { minimum: 3 }, on: :create
+  validates :password, confirmation: true, length: { minimum: 3 }, on: :update, unless: ->(user) { user.password.blank? }
 
   has_many :collections, -> { order created_at: :desc }, dependent: :destroy
   has_many :images, -> { order created_at: :desc }, dependent: :destroy
 
+  def to_s
+    username
+  end
+
   def admin?
-    username == 'damon'
+    id == 1
   end
 end
+

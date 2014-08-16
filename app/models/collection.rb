@@ -8,9 +8,13 @@
 #  user_id           :integer          not null
 #  created_at        :datetime
 #  updated_at        :datetime
+#  slug              :string(255)
 #
 
 class Collection < ActiveRecord::Base
+  extend FriendlyId
+  friendly_id :title, use: :scoped, scope: :user
+
   validates :title, presence: true
   validates :user_id, presence: true
 
@@ -18,7 +22,7 @@ class Collection < ActiveRecord::Base
   has_many :connections, -> { order created_at: :desc }, dependent: :destroy
   has_many :images, through: :connections
 
-  def display_size
-    connections.size == 0 ? 'Empty' : connections.size
+  def to_s
+    title
   end
 end
