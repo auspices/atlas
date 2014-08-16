@@ -71,7 +71,11 @@ GEM
       multipart-post (>= 1.2, < 3)
     friendly_id (5.0.4)
       activerecord (>= 4.0.0)
+    hashie (3.2.0)
     hike (1.2.3)
+    httparty (0.13.1)
+      json (~> 1.8)
+      multi_xml (>= 0.5.2)
     i18n (0.6.11)
     jquery-rails (3.1.1)
       railties (>= 3.0, < 5.0)
@@ -220,6 +224,8 @@ DEPENDENCIES
   coffee-rails (~> 4.0.0)
   fabrication
   friendly_id (~> 5.0.4)
+  hashie
+  httparty
   jquery-rails
   kaminari (~> 0.16.1)
   pg
