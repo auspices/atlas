@@ -1,19 +1,19 @@
 class ImagesController < ApplicationController
   skip_before_filter :require_login, only: [:index, :show]
 
-  # GET /users/:user_id/images
+  # GET /:user_id/images
   def index
     @user = User.find(params[:user_id])
     @images = @user.images.page(params[:page])
   end
 
-  # GET /users/:user_id/images/:id
+  # GET /:user_id/images/:id
   def show
     @user = User.find(params[:user_id])
     @image = @user.images.find(params[:id])
   end
 
-  # POST /users/:user_id/images
+  # POST /:user_id/images
   def create
     @image = current_user.images.build(image_params)
     if @image.save
@@ -23,7 +23,7 @@ class ImagesController < ApplicationController
     end
   end
 
-  # DELETE /users/:user_id/images/1
+  # DELETE /:user_id/images/1
   def destroy
     @image = current_user.images.find(params[:id])
     @image.destroy

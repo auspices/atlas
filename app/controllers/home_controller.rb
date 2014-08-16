@@ -1,5 +1,6 @@
 class HomeController < ApplicationController
+  # GET /
   def index
-    redirect_to vanity_user_collections_path(current_user)
+    redirect_to user_collections_path(current_user)
   end
 end

@@ -1,15 +1,5 @@
 module Collections
   class ImagesController < ApplicationController
-    skip_before_filter :require_login, only: :index
-
-    # GET /users/:user_id/collections/:collection_id/images
-    def index
-      @user = User.find(params[:user_id])
-      @collection = @user.collections.find(params[:collection_id])
-      @images = @collection.images.page(params[:page])
-      render 'images/index'
-    end
-
     # POST /users/:user_id/collections/:collection_id/images
     def create
       ActiveRecord::Base.transaction do

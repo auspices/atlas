@@ -1,40 +1,35 @@
 class CollectionsController < ApplicationController
   skip_before_filter :require_login, only: [:index, :show]
 
-  # GET /users/:user_id/collections
+  # GET /:user_id
   def index
     @user = User.find(params[:user_id])
     @collections = @user.collections.page(params[:page])
   end
 
-  # GET /users/:user_id/collections/:id
+  # GET /:user_id/:id
   def show
     @user = User.find(params[:user_id])
     @collection = @user.collections.find(params[:id])
+    @images = @collection.images.page(params[:page])
+    render 'images/index'
   end
 
-  # POST /users/:user_id/collections
+  # POST /:user_id/collections
   def create
     @collection = current_user.collections.build(collection_params)
-    respond_to do |format|
-      if @collection.save
-        format.html { redirect_to [current_user, @collection], notice: 'Collection was successfully created.' }
-        format.json { render :show, status: :created, location: @collection }
-      else
-        format.html { render :new }
-        format.json { render json: @collection.errors, status: :unprocessable_entity }
-      end
+    if @collection.save
+      redirect_to :back, notice: 'Collection was successfully created.'
+    else
+      redirect_to :back
     end
   end
 
-  # DELETE /users/:user_id/collections/1
+  # DELETE /:user_id/collections/1
   def destroy
     @collection = current_user.collections.find(params[:id])
     @collection.destroy
-    respond_to do |format|
-      format.html { redirect_to :root, notice: 'Collection was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to :back, notice: 'Collection was successfully destroyed.'
   end
 
   private
