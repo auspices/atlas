@@ -14,6 +14,7 @@
 #  reset_password_token            :string(255)
 #  reset_password_token_expires_at :datetime
 #  reset_password_email_sent_at    :datetime
+#  slug                            :string(255)
 #
 
 require 'rails_helper'
@@ -22,6 +23,6 @@ RSpec.describe User, type: :model do
   let(:user) { Fabricate(:user) }
 
   it 'has a valid fabricator' do
-    skip
+    expect(user).to be_valid
   end
 end

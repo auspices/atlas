@@ -13,5 +13,9 @@
 require 'rails_helper'
 
 RSpec.describe Connection, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  let(:connection) { Fabricate(:connection) }
+
+  it 'has a valid fabricator' do
+    expect(connection).to be_valid
+  end
 end

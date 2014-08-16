@@ -8,10 +8,15 @@
 #  user_id           :integer          not null
 #  created_at        :datetime
 #  updated_at        :datetime
+#  slug              :string(255)
 #
 
 require 'rails_helper'
 
 RSpec.describe Collection, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  let(:collection) { Fabricate(:collection) }
+
+  it 'has a valid fabricator' do
+    expect(collection).to be_valid
+  end
 end
