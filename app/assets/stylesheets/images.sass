@@ -1,49 +1,5 @@
 @import './common'
 
-// Index
-// -----
-.images
-  font-size: 0
-  margin: ($unit * 4) 0
-
-.image
-  display: inline-block
-  position: relative
-  vertical-align: bottom
-  text-align: center
-  // Reset font-size
-  font-size: $baseFontSize
-  margin: 0 ($unit * 2) ($unit * 2) 0
-  @media screen and (max-width: $mobileBreakpoint)
-    &, img
-      width: 100%
-  & > a
-    display: block
-
-  &:hover
-    .image-delete-link
-      opacity: 1
-
-.image-delete-link
-  position: absolute
-  display: block
-  top: 0
-  right: 0
-  width: ($unit * 2)
-  height: ($unit * 2)
-  line-height: ($unit * 2)
-  text-align: center
-  color: white
-  text-shadow: 0 0 3px rgba(black, 0.75)
-  font-size: $unit
-  opacity: 0
-  @include vendor(transition, all 0.125s)
-  &:hover
-    text-shadow: none
-    background-color: red
-
-// Show
-// ----
 .image-show-stage
   z-index: -1
   position: absolute

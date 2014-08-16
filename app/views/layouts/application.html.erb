@@ -5,11 +5,12 @@
     <%= stylesheet_link_tag 'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
     <%= csrf_meta_tags %>
+    <meta name='viewport' content='width=device-width, user-scalable=no'>
   </head>
   <body>
-    <div class='l-alerts'>
-      <%= flash[:notice] || flash[:alert] %>
-    </div>
+    <% if alert = flash[:notice] || flash[:alert] %>
+      <div class='l-alerts'><%= alert %></div>
+    <% end %>
     <div class='l-container'>
       <%= yield %>
     </div>

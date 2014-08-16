@@ -1,12 +1,16 @@
+<nav class='breadcrumb'>
+  <span class='breadcrumb-current'><%= @user %></span>
+</nav>
+
 <% if logged_in? %>
   <%= render 'form' %>
 <% end %>
 
-<div class='collections'>
+<div class='grid'>
   <% @collections.each do |collection| %>
-    <%= link_to vanity_user_collections_images_path(current_user, collection), class: :collection do %>
+    <%= link_to user_collection_path(@user, collection), class: 'grid-item' do %>
       <%= collection.title %> -
-      <em><%= collection.display_size %></em>
+      <em><%= collection.connections.size == 0 ? 'Nothing yet' : collection.connections.size %></em>
     <% end %>
   <% end %>
 </div>

@@ -12,9 +12,11 @@
   position: fixed
   top: 0
   right: 0
+  padding: $unit
   pointer-events: none
   color: black
   background-color: yellow
+  text-transform: uppercase
   @include sans-serif-font()
   @include vendor(animation, fade-out 1s normal forwards)
   @include vendor(animation-delay, 1s)
@@ -42,3 +44,16 @@
 .errors
   font-style: italic
   color: red
+
+.breadcrumb
+  white-space: nowrap
+.breadcrumb-current
+  font-style: italic
+.breadcrumb-separator
+  display: inline-block
+  margin: 0 ($unit / 2)
+  width: 1px
+  height: 1em
+  vertical-align: middle
+  @include vendor(transform, rotate(45deg))
+  background-color: black

@@ -1,0 +1,62 @@
+@import './common'
+
+@mixin grid-response()
+  @media screen and (max-width: $mobileBreakpoint)
+    &, img
+      display block
+      width: 100%
+      max-width: 100%
+      margin: 0 0 $unit 0
+    .grid-item-remove-link
+      opacity: 1
+
+.grid
+  font-size: 0
+  margin: ($unit * 2) 0
+
+.grid-item
+  display: inline-block
+  position: relative
+  width: $gridItemSize
+  height: $gridItemSize
+  max-width: $gridItemSize
+  max-height: $gridItemSize
+  margin: 0 ($unit * 2) ($unit * 2) 0
+  padding: $unit
+  border: 1px solid
+  vertical-align: bottom
+  font-size: $baseFontSize
+  @include grid-response()
+  & > a
+    display: block
+  // States
+  &:hover
+    .grid-item-remove-link
+      opacity: 1
+
+.inline-item
+  @extend .grid-item
+  width: inherit
+  height: inherit
+  margin: 0 ($unit * 2) ($unit * 2) 0
+  padding: 0
+  border: none
+  @include grid-response()
+
+.grid-item-remove-link
+  position: absolute
+  display: block
+  top: 0
+  right: 0
+  width: ($unit * 2)
+  height: ($unit * 2)
+  line-height: ($unit * 2)
+  text-align: center
+  color: white
+  text-shadow: 0 0 3px rgba(black, 0.75)
+  font-size: $unit
+  opacity: 0
+  @include vendor(transition, all 0.125s)
+  &:hover
+    text-shadow: none
+    background-color: red
