@@ -11,11 +11,20 @@ class ImageMover
     [
       image.id.to_s, '/',
       Digest::SHA256.hexdigest(url),
-      File.extname(url).downcase
+      extension
     ]
       .compact
       .reject(&:empty?)
       .join ''
+  end
+
+  def extension
+    ext = File.extname(URI.parse(url).path).downcase
+    ext.blank? ? fallback_extension : ext
+  end
+
+  def fallback_extension
+    ".#{FastImage.type(url)}"
   end
 
   def move!
