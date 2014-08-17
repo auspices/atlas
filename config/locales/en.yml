@@ -1,7 +1,7 @@
 en:
   views:
     pagination:
-      first: 'Begin'
+      first: 'A'
       previous: 'Previous'
       next: 'Next'
-      last: 'End'
+      last: 'Ω'
