@@ -24,12 +24,6 @@
 .l-container
   margin: ($unit * 2)
 
-.l-pagination
-  position: fixed
-  bottom: 0
-  right: 0
-  left: 0
-
 .pagination
   display: table
   width: 100%
@@ -58,6 +52,14 @@
     color: lighten(black, 50%)
   & > .current
     background-color: $borderColor
+  & > .first,
+  & > .prev,
+  & > .next,
+  & > .last
+    width: 10%
+  @media screen and (max-width: $mobileBreakpoint)
+    & > .page
+      display: none
 
 .errors
   font-style: italic
