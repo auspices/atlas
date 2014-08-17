@@ -2,7 +2,7 @@
   <span class='breadcrumb-current'><%= @user %></span>
 </nav>
 
-<% if logged_in? %>
+<% if authorable? %>
   <%= render 'form' %>
 <% end %>
 

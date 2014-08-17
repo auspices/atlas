@@ -4,7 +4,7 @@
   <span class='breadcrumb-current'><%= @collection || 'All images' %></span>
 </nav>
 
-<% if logged_in? %>
+<% if authorable? %>
   <%= render 'images/form' %>
 <% end %>
 
