@@ -17,14 +17,14 @@ RSpec.describe SessionsController, type: :controller do
       post :create, username: 'new_user', password: 'secret'
       expect(controller.logged_in?).to be(true)
       expect(response).to redirect_to(:root)
-      expect(flash[:notice]).to eql('Hello')
+      expect(flash[:success]).to eql('Hello')
     end
 
     it 're-renders the login form for failed logins' do
       post :create, username: 'new_user', password: 'bad_password'
       expect(controller.logged_in?).to be(false)
       expect(response.status).to be(200)
-      expect(flash[:alert]).to eql('Login failed')
+      expect(flash[:error]).to eql('Login failed')
     end
   end
 

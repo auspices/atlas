@@ -88,6 +88,10 @@ RSpec.describe ImagesController, type: :controller do
     end
 
     describe 'DELETE destroy' do
+      before(:each) do
+        request.env['HTTP_REFERER'] = '/referer'
+      end
+
       it 'destroys the requested image' do
         image = Fabricate(:image, user: @current_user)
         expect {
@@ -105,7 +109,7 @@ RSpec.describe ImagesController, type: :controller do
       it 'redirects to the root' do
         image = Fabricate(:image, user: @current_user)
         delete :destroy, user_id: @current_user.id, id: image.id
-        expect(response).to redirect_to(:root)
+        expect(response).to redirect_to('/referer')
       end
     end
   end
