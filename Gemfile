@@ -13,6 +13,7 @@ gem 'aws-s3'
 gem 'kaminari', '~> 0.16.1'
 gem 'sorcery'
 gem 'friendly_id', '~> 5.0.4'
+gem 'fastimage', '~> 1.6.3'
 
 group :development do
   gem 'spring'
