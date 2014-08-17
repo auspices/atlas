@@ -1,7 +1,7 @@
 class ImageMover
   attr_reader :image, :url
 
-  VALID_TYPES = %i(jpg gif png)
+  VALID_TYPES = %i(jpg jpeg gif png)
 
   def initialize(image)
     @image = image
