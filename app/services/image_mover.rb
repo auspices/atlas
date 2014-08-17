@@ -1,10 +1,11 @@
 class ImageMover
   attr_reader :image, :url
 
+  VALID_TYPES = %i(jpg gif png)
+
   def initialize(image)
     @image = image
     @url = image.source_url
-    raise 'Requires source_url' if @url.blank?
   end
 
   def key
@@ -19,12 +20,22 @@ class ImageMover
   end
 
   def extension
+    return nil unless url
     ext = File.extname(URI.parse(url).path).downcase
     ext.blank? ? fallback_extension : ext
   end
 
   def fallback_extension
-    ".#{FastImage.type(url)}"
+    ".#{type}"
+  end
+
+  # For the time being, trust the extension
+  def extension_valid?
+    VALID_TYPES.include?(extension && extension[1..-1].to_sym)
+  end
+
+  def type
+    @type ||= FastImage.type(url)
   end
 
   def move!

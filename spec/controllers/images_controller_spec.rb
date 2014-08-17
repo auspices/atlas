@@ -14,11 +14,11 @@ RSpec.describe ImagesController, type: :controller do
   }
 
   let(:valid_attributes) {
-    { source_url: 'http://source_url' }
+    { source_url: 'http://foo.com/bar.jpg' }
   }
 
   let(:invalid_attributes) {
-    { url: 'http://url' }
+    { url: 'http://bucket.com/1/bar.jpg' }
   }
 
   before(:each) do
@@ -78,11 +78,6 @@ RSpec.describe ImagesController, type: :controller do
       describe 'with invalid params' do
         before(:each) do
           request.env['HTTP_REFERER'] = '/referer'
-        end
-
-        it 'assigns a newly created but unsaved image as @image' do
-          post :create, user_id: @current_user.id, image: invalid_attributes
-          expect(assigns(:image)).to be_a_new(Image)
         end
 
         it 'redirects back' do

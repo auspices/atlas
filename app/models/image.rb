@@ -21,9 +21,18 @@ class Image < ActiveRecord::Base
   validates_format_of :source_url, with: URI::regexp(%w(http https))
   validates :source_url, presence: true
   validates :user_id, presence: true
+  validate :source_url_is_an_image
+
+  def mover
+    @mover ||= ImageMover.new(self)
+  end
 
   def store!
-    self.update_attributes!(url: ImageMover.new(self).move!)
+    self.update_attributes!(url: mover.move!)
+  end
+
+  def source_url_is_an_image
+    errors.add(:source_url, 'must be an image') unless mover.extension_valid?
   end
 
   def url_key
