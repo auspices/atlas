@@ -9,9 +9,13 @@
 <div class='grid'>
   <% @collections.each do |collection| %>
     <%= link_to user_collection_path(@user, collection), class: 'grid-item' do %>
-      <%= collection.title %> -
-      <em><%= collection.connections.size == 0 ? 'Nothing yet' : collection.connections.size %></em><br>
-      Updated <%= time_ago_in_words(collection.updated_at) %> ago
+      <div class='collection-title'>
+        <%= collection.title %> -
+        <em><%= collection.connections.size == 0 ? 'Nothing yet' : collection.connections.size %></em>
+      </div>
+      <div class='collection-timestamp'>
+        <%= time_ago_in_words(collection.updated_at) %> ago
+      </div>
     <% end %>
   <% end %>
 </div>
