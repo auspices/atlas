@@ -24,22 +24,40 @@
 .l-container
   margin: ($unit * 2)
 
+.l-pagination
+  position: fixed
+  bottom: 0
+  right: 0
+  left: 0
+
 .pagination
+  display: table
+  width: 100%
+  @include sans-serif-font()
+  font-size: 0
   & > span
-    display: inline-block
+    font-size: $baseFontSize
+    display: table-cell
+    text-align: center
+    background-color: white
+  & > .page,
+  & > .first,
+  & > .prev,
+  & > .next,
+  & > .last
     & > a
-      text-decoration: underline
+      display: block
+      width: 100%
+      padding: ($unit * 2) 0
       color: black
       &:hover
         background-color: $borderColor
         text-decoration: none
-    & > a,
-    &.current
-      display: inline-block
-      padding: ($unit / 2) ($unit / 1.5)
-    &.current
-      color: lighten(black, 50%)
-      background-color: $borderColor
+  & > .gap,
+  & > .current
+    color: lighten(black, 50%)
+  & > .current
+    background-color: $borderColor
 
 .errors
   font-style: italic
