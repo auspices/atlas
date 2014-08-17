@@ -4,7 +4,7 @@
       <%= link_to user_image_path(image.user, image) do %>
         <%= image_tag resize(url: image.url, width: 300, height: 300) %>
       <% end %>
-      <% if logged_in? %>
+      <% if authorable? %>
         <%= link_to '&times;'.html_safe, [current_user, image], method: :delete, data: { confirm: 'Are you sure?' }, class: 'grid-item-remove-link' %>
       <% end %>
     </div>
