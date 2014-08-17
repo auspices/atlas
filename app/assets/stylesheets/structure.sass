@@ -10,15 +10,25 @@
 // ------
 .l-alerts
   position: fixed
-  top: 0
-  right: 0
+  top: 50%
+  right: $unit
+  left: $unit
   padding: $unit
   pointer-events: none
   color: black
-  background-color: yellow
   @include sans-serif-font()
+  @include vendor(transform, translateY(-50%))
   @include vendor(animation, fade-out 1s normal forwards)
   @include vendor(animation-delay, 1s)
+  z-index: 1
+  &.is-error
+    background-color: $red
+    color: white
+  &.is-success
+    background-color: $green
+    color: white
+  &.is-notice
+    background-color: $yellow
 
 .l-container
   margin: ($unit * 2)
@@ -44,13 +54,13 @@
       padding: ($unit * 2) 0
       color: black
       &:hover
-        background-color: $borderColor
+        background-color: $lightGray
         text-decoration: none
   & > .gap,
   & > .current
     color: lighten(black, 50%)
   & > .current
-    background-color: $borderColor
+    background-color: $lightGray
   & > .first,
   & > .prev,
   & > .next,
@@ -68,7 +78,7 @@
   white-space: nowrap
   @include sans-serif-font()
 .breadcrumb-current
-  font-style: italic
+  font-weight: bold
 .breadcrumb-separator
   display: inline-block
   margin: 0 ($unit / 2)

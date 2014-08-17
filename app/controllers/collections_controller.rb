@@ -19,9 +19,9 @@ class CollectionsController < ApplicationController
   def create
     @collection = current_user.collections.build(collection_params)
     if @collection.save
-      redirect_to :back, notice: 'Collection was successfully created.'
+      redirect_to :back, success: 'Collection was added'
     else
-      redirect_to :back
+      redirect_to :back, error: @collection.errors.full_messages.join(', ')
     end
   end
 
@@ -29,7 +29,7 @@ class CollectionsController < ApplicationController
   def destroy
     @collection = current_user.collections.find(params[:id])
     @collection.destroy
-    redirect_to :back, notice: 'Collection was successfully destroyed.'
+    redirect_to :back, notice: 'Collection was deleted'
   end
 
   private

@@ -8,9 +8,7 @@
     <meta name='viewport' content='width=device-width, user-scalable=no'>
   </head>
   <body>
-    <% if alert = flash[:notice] || flash[:alert] %>
-      <div class='l-alerts'><%= alert %></div>
-    <% end %>
+    <%= render_flash %>
     <div class='l-container'>
       <%= yield %>
     </div>

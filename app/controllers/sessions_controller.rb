@@ -9,9 +9,9 @@ class SessionsController < ApplicationController
   # POST /sessions
   def create
     if @user = login(params[:username], params[:password])
-      redirect_back_or_to :root, notice: 'Hello'
+      redirect_back_or_to :root, success: 'Hello'
     else
-      flash.now[:alert] = 'Login failed'
+      flash.now[:error] = 'Login failed'
       render action: 'new'
     end
   end

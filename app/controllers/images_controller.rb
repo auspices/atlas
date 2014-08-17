@@ -17,9 +17,9 @@ class ImagesController < ApplicationController
   def create
     @image = current_user.images.build(image_params)
     if @image.save
-      redirect_to [current_user, @image], notice: 'Image was successfully created.'
+      redirect_to [current_user, @image], success: 'Image was added'
     else
-      redirect_to :back
+      redirect_to :back, error: @image.errors.full_messages.join(', ')
     end
   end
 
@@ -27,7 +27,7 @@ class ImagesController < ApplicationController
   def destroy
     @image = current_user.images.find(params[:id])
     @image.destroy
-    redirect_to :root, notice: 'Image was successfully destroyed.'
+    redirect_to :back, notice: 'Image was deleted'
   end
 
   private

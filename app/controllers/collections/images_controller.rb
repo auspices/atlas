@@ -9,9 +9,9 @@ module Collections
         @connection.save
       end
       if @connection.persisted?
-        redirect_to :back, notice: 'Image was successfully created.'
+        redirect_to :back, success: 'Image was added'
       else
-        redirect_to :back
+        redirect_to :back, error: @image.errors.full_messages.join(', ')
       end
     end
 
