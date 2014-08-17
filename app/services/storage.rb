@@ -24,17 +24,12 @@ module Storage
 
     def store(url, key)
       object = bucket.objects[key]
-      puts "Opening: #{url}"
       object.write(open(url).read, acl: :public_read)
       object.public_url.to_s
-    rescue => e
-      puts e
     end
 
     def delete(key)
       s3_object(key).delete
-    rescue => e
-      puts e
     end
   end
 end
