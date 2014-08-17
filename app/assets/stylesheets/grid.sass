@@ -6,6 +6,7 @@
       display block
       width: 100%
       max-width: 100%
+      max-height: inherit
       margin: 0 0 $unit 0
     .grid-item-remove-link
       opacity: 1
@@ -53,9 +54,9 @@
   line-height: ($unit * 2)
   text-align: center
   color: white
-  text-shadow: 0 0 3px rgba(black, 0.75)
   font-size: $unit
   opacity: 0
+  @include sans-serif-font()
   @include vendor(transition, all 0.125s)
   &:hover
     text-shadow: none
