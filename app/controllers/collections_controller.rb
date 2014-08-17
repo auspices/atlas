@@ -4,14 +4,14 @@ class CollectionsController < ApplicationController
   # GET /:user_id
   def index
     @user = User.find(params[:user_id])
-    @collections = @user.collections.page(params[:page])
+    @collections = @user.collections.page(params[:page]).per(params[:per])
   end
 
   # GET /:user_id/:id
   def show
     @user = User.find(params[:user_id])
     @collection = @user.collections.find(params[:id])
-    @images = @collection.images.page(params[:page])
+    @images = @collection.images.page(params[:page]).per(params[:per])
     render 'images/index'
   end
 
