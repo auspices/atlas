@@ -30,7 +30,7 @@ class User < ActiveRecord::Base
   validates :password, presence: true, confirmation: true, length: { minimum: 3 }, on: :create
   validates :password, confirmation: true, length: { minimum: 3 }, on: :update, unless: ->(user) { user.password.blank? }
 
-  has_many :collections, -> { order created_at: :desc }, dependent: :destroy
+  has_many :collections, -> { order updated_at: :desc }, dependent: :destroy
   has_many :images, -> { order created_at: :desc }, dependent: :destroy
 
   def to_s

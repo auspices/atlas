@@ -16,6 +16,6 @@ class Connection < ActiveRecord::Base
   validates :user_id, presence: true
 
   belongs_to :user
-  belongs_to :collection, counter_cache: :connections_count
+  belongs_to :collection, counter_cache: :connections_count, touch: true
   belongs_to :image
 end
