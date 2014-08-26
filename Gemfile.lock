@@ -253,6 +253,5 @@ DEPENDENCIES
   shoulda-matchers
   sorcery
   spring
-  sprockets-rails (= 3.0.0.beta1)
   uglifier (>= 1.3.0)
   webmock
