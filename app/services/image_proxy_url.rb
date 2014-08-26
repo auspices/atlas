@@ -1,39 +1,29 @@
 class ImageProxyUrl
-  attr_reader :method, :options
+  attr_reader :source_url, :options
 
-  QUERY_PARAMS = %i(url height width quality)
+  QUERY_PARAMS = %i(h w q fit fm)
 
   def initialize(options = {})
     raise 'Requires :url' if options[:url].blank?
-    options.reverse_merge!(method: :resize)
-    @method = options[:method]
+    @source_url = options[:url]
     @options = options
       .send(:extract!, *QUERY_PARAMS)
       .reverse_merge!(
-        height: 1000,
-        width: 1000,
-        quality: 95,
-        key: embedly_key
+        h: 1000,
+        w: 1000,
+        q: 95,
+        fit: :max,
+        fm: :pjpg
       )
   end
 
-  def cloudfront_url
-    ENV['CLOUDFRONT_URL']
-  end
-
-  def embedly_key
-    ENV['EMBEDLY_KEY']
-  end
-
-  def embedly_endpoint(method)
-    "/1/image/#{method}"
+  def uri
+    URI.parse(source_url).tap do |uri|
+      uri.host.gsub!('.s3.amazonaws.com', '.imgix.net')
+    end
   end
 
   def url
-    [
-      cloudfront_url,
-      embedly_endpoint(method),
-      '?', options.to_query
-    ].join ''
+    [uri.to_s, '?', options.to_query].join ''
   end
 end
