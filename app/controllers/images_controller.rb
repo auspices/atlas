@@ -3,13 +3,13 @@ class ImagesController < ApplicationController
 
   # GET /:user_id/images
   def index
-    @user = User.find(params[:user_id])
+    @user = User.friendly.find(params[:user_id])
     @images = @user.images.page(params[:page]).per(params[:per])
   end
 
   # GET /:user_id/images/:id
   def show
-    @user = User.find(params[:user_id])
+    @user = User.friendly.find(params[:user_id])
     @image = @user.images.find(params[:id])
   end
 

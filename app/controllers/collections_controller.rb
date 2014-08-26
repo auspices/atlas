@@ -3,14 +3,14 @@ class CollectionsController < ApplicationController
 
   # GET /:user_id
   def index
-    @user = User.find(params[:user_id])
+    @user = User.friendly.find(params[:user_id])
     @collections = @user.collections.page(params[:page]).per(params[:per])
   end
 
   # GET /:user_id/:id
   def show
-    @user = User.find(params[:user_id])
-    @collection = @user.collections.find(params[:id])
+    @user = User.friendly.find(params[:user_id])
+    @collection = @user.collections.friendly.find(params[:id])
     @images = @collection.images.page(params[:page]).per(params[:per])
     render 'images/index'
   end
@@ -27,7 +27,7 @@ class CollectionsController < ApplicationController
 
   # DELETE /:user_id/collections/1
   def destroy
-    @collection = current_user.collections.find(params[:id])
+    @collection = current_user.collections.friendly.find(params[:id])
     @collection.destroy
     redirect_to :back, notice: 'Collection was deleted'
   end
