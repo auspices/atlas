@@ -1,29 +1,23 @@
 class ImageProxyUrl
-  attr_reader :source_url, :options
+  attr_reader :options
 
-  QUERY_PARAMS = %i(h w q fit fm)
+  PROXY_URL = 'https://d1db8csqyunu31.cloudfront.net'
+
+  QUERY_PARAMS = %i(url h w q)
 
   def initialize(options = {})
     raise 'Requires :url' if options[:url].blank?
-    @source_url = options[:url]
+    options[:url] = URI::encode(options[:url])
     @options = options
       .send(:extract!, *QUERY_PARAMS)
       .reverse_merge!(
         h: 1000,
         w: 1000,
-        q: 95,
-        fit: :max,
-        fm: :pjpg
+        q: 90
       )
   end
 
-  def uri
-    URI.parse(source_url).tap do |uri|
-      uri.host.gsub!('.s3.amazonaws.com', '.imgix.net')
-    end
-  end
-
   def url
-    [uri.to_s, '?', options.to_query].join ''
+    [PROXY_URL, '/resize?', options.to_query].join ''
   end
 end

@@ -9,9 +9,7 @@ RSpec.describe ImageProxyUrl do
     url = ImageProxyUrl.new(url: 'http://foobar.s3.amazonaws.com/id/image.jpg')
     expect(url.options[:h]).to eql(1000)
     expect(url.options[:w]).to eql(1000)
-    expect(url.options[:q]).to eql(95)
-    expect(url.options[:fit]).to eql(:max)
-    expect(url.options[:fm]).to eql(:pjpg)
+    expect(url.options[:q]).to eql(90)
   end
 
   it 'sets options and ignores keys not represented in ImageProxyUrl::QUERY_PARAMS' do
@@ -21,6 +19,6 @@ RSpec.describe ImageProxyUrl do
 
   it 'returns a usuable url' do
     url = ImageProxyUrl.new(url: 'http://foobar.s3.amazonaws.com/id/image.jpg')
-    expect(url.url).to eql('http://foobar.imgix.net/id/image.jpg?fit=max&fm=pjpg&h=1000&q=95&w=1000')
+    expect(url.url).to eql('https://d1db8csqyunu31.cloudfront.net/resize?h=1000&q=90&url=http%3A%2F%2Ffoobar.s3.amazonaws.com%2Fid%2Fimage.jpg&w=1000')
   end
 end
