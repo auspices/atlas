@@ -22,9 +22,16 @@ module Storage
       bucket.objects[key]
     end
 
+    def mime_type(key)
+      MIME::Types.type_for(key).first.to_s
+    end
+
     def store(url, key)
       object = bucket.objects[key]
-      object.write(open(url).read, acl: :public_read)
+      open(url) { |f|
+        content_type = f.content_type.present? ? f.content_type : mime_type(key)
+        object.write(f.read, acl: :public_read, content_type: content_type)
+      }
       object.public_url.to_s
     end
 

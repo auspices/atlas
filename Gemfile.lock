@@ -239,6 +239,7 @@ DEPENDENCIES
   httparty
   jquery-rails
   kaminari (~> 0.16.1)
+  mime-types (~> 2.3)
   pg
   pry
   pry-debugger
