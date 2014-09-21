@@ -18,7 +18,7 @@ RSpec.describe Api::V1::ImagesController, type: :controller do
       expect(parsed['total_pages']).to be(1)
       expect(parsed['_embedded']['images']).to be_a(Array)
       expect(parsed['_embedded']['images'].first['id']).to eq(image.id)
-      expect(parsed['_links'].keys).to eq(['self', 'next', 'prev'])
+      expect(parsed['_links'].keys).to eq(%w(self next prev))
     end
   end
 
@@ -29,7 +29,7 @@ RSpec.describe Api::V1::ImagesController, type: :controller do
       parsed = JSON.parse(response.body)
       expect(parsed['id']).to eq(image.id)
       expect(parsed['url']).to eq(image.url)
-      expect(parsed['_links'].keys).to eq(['self', 'images', 'user'])
+      expect(parsed['_links'].keys).to eq(%w(self images user))
     end
   end
 end
