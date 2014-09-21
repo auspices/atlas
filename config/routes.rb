@@ -8,7 +8,12 @@ Rails.application.routes.draw do
   namespace :api, defaults: { format: 'json' } do
     scope module: :v1 do
       resources :status, only: :index
-      resources :users, only: :show
+      resources :users, only: :show do
+        resources :images, only: [:index, :show]
+        resources :collections, only: [:index, :show] do
+          resources :images, only: :index, controller: 'collections/images'
+        end
+      end
     end
   end
 
