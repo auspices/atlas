@@ -15,6 +15,7 @@ gem 'sorcery'
 gem 'friendly_id', '~> 5.0.4'
 gem 'fastimage', '~> 1.6.3'
 gem 'mime-types', '~> 2.3'
+gem 'active_model_serializers', '~> 0.9.0'
 
 group :development do
   gem 'spring'

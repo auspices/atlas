@@ -1,6 +1,6 @@
 module Api
   module V1
-    class StatusController < ActionController::Base
+    class StatusController < BaseController
       # GET /api/status
       def index
         render json: { up: true }
