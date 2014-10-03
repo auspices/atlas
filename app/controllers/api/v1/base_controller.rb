@@ -11,7 +11,16 @@ module Api
         render json: collection,
           serializer: PaginationSerializer,
           each_serializer: options[:serializer],
-          current_url: ->(params = {}) { url_for(params: params) }
+          current_url: ->(overrides = {}) { _current_url(overrides) }
+      end
+
+      def _current_url(overrides)
+        params.select do |k, _|
+          [:per].include? k.to_sym
+        end.symbolize_keys.tap do |plucked|
+          overrides.reverse_merge! plucked
+        end
+        CGI.unescape(url_for(params: overrides))
       end
     end
   end
