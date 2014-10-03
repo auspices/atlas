@@ -30,7 +30,11 @@ module Api
         {
           self: { href: current_url(page: self.object.current_page) },
           next: { href: current_url(page: self.object.next_page) },
-          prev: { href: current_url(page: self.object.prev_page) }
+          prev: { href: current_url(page: self.object.prev_page) },
+          page: {
+            href: current_url(page: '{page}', per: '{per}'),
+            templated: true
+          }
         }
       end
     end

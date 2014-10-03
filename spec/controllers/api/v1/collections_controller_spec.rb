@@ -18,7 +18,7 @@ RSpec.describe Api::V1::CollectionsController, type: :controller do
       expect(parsed['total_pages']).to be(1)
       expect(parsed['_embedded']['collections']).to be_a(Array)
       expect(parsed['_embedded']['collections'].first['id']).to eq(collection.id)
-      expect(parsed['_links'].keys).to eq(%w(self next prev))
+      expect(parsed['_links'].keys).to eq(%w(self next prev page))
     end
   end
 
