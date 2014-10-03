@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: { format: 'json' } do
     scope module: :v1 do
+      get '', to: 'root#index', as: :root
       resources :status, only: :index
       resources :users, only: :show do
         resources :images, only: [:index, :show]
