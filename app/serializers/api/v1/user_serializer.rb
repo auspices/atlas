@@ -7,7 +7,15 @@ module Api
         {
           self: { href: api_user_url(self.slug) },
           images: { href: api_user_images_url(self.slug) },
-          collections: { href: api_user_collections_url(self.slug) }
+          image: {
+            href: CGI.unescape(api_user_image_url(self.slug, '{id}')),
+            templated: true
+          },
+          collections: { href: api_user_collections_url(self.slug) },
+          collection: {
+            href: CGI.unescape(api_user_collection_url(self.slug, '{id}')),
+            templated: true
+          }
         }
       end
     end
