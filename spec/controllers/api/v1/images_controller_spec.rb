@@ -18,7 +18,7 @@ RSpec.describe Api::V1::ImagesController, type: :controller do
       expect(parsed['total_pages']).to be(1)
       expect(parsed['_embedded']['images']).to be_a(Array)
       expect(parsed['_embedded']['images'].first['id']).to eq(image.id)
-      expect(parsed['_links'].keys).to eq(%w(self next prev page))
+      expect(parsed['_links'].keys).to eq(%w(self first next prev last))
     end
   end
 
