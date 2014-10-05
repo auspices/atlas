@@ -29,12 +29,10 @@ module Api
       def _links
         {
           self: { href: current_url(page: self.object.current_page) },
+          first: { href: current_url(page: 1) },
           next: { href: current_url(page: self.object.next_page) },
           prev: { href: current_url(page: self.object.prev_page) },
-          page: {
-            href: current_url(page: '{page}', per: '{per}'),
-            templated: true
-          }
+          last: { href: current_url(page: self.object.total_pages) }
         }
       end
     end
