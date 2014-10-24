@@ -27,12 +27,14 @@ module Storage
     end
 
     def store(url, key)
-      object = bucket.objects[key]
-      open(url) { |f|
-        content_type = f.content_type.present? ? f.content_type : mime_type(key)
-        object.write(f.read, acl: :public_read, content_type: content_type)
+      open(url) { |io|
+        content_type = io.content_type.present? ? io.content_type : mime_type(key)
+        bucket.objects[key].tap do |object|
+          object.write(io.read, acl: :public_read, content_type: content_type)
+          io.rewind
+          yield io, object
+        end
       }
-      object.public_url.to_s
     end
 
     def delete(key)

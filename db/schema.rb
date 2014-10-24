@@ -17,12 +17,12 @@ ActiveRecord::Schema.define(version: 20140816170100) do
   enable_extension "plpgsql"
 
   create_table "collections", force: true do |t|
-    t.string   "title"
-    t.integer  "connections_count", default: 0
-    t.integer  "user_id",                       null: false
+    t.string   "title",             limit: 255
+    t.integer  "connections_count",             default: 0
+    t.integer  "user_id",                                   null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "slug"
+    t.string   "slug",              limit: 255
   end
 
   add_index "collections", ["slug"], name: "index_collections_on_slug", using: :btree
@@ -41,10 +41,10 @@ ActiveRecord::Schema.define(version: 20140816170100) do
   add_index "connections", ["user_id"], name: "index_connections_on_user_id", using: :btree
 
   create_table "friendly_id_slugs", force: true do |t|
-    t.string   "slug",                      null: false
-    t.integer  "sluggable_id",              null: false
+    t.string   "slug",           limit: 255, null: false
+    t.integer  "sluggable_id",               null: false
     t.string   "sluggable_type", limit: 50
-    t.string   "scope"
+    t.string   "scope",          limit: 255
     t.datetime "created_at"
   end
 
@@ -64,18 +64,18 @@ ActiveRecord::Schema.define(version: 20140816170100) do
   add_index "images", ["user_id"], name: "index_images_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
-    t.string   "email",                           null: false
-    t.string   "username",                        null: false
-    t.string   "crypted_password",                null: false
-    t.string   "salt",                            null: false
+    t.string   "email",                           limit: 255, null: false
+    t.string   "username",                        limit: 255, null: false
+    t.string   "crypted_password",                limit: 255, null: false
+    t.string   "salt",                            limit: 255, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "remember_me_token"
+    t.string   "remember_me_token",               limit: 255
     t.datetime "remember_me_token_expires_at"
-    t.string   "reset_password_token"
+    t.string   "reset_password_token",            limit: 255
     t.datetime "reset_password_token_expires_at"
     t.datetime "reset_password_email_sent_at"
-    t.string   "slug"
+    t.string   "slug",                            limit: 255
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
