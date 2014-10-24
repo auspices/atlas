@@ -4,7 +4,7 @@
 #
 #  id                :integer          not null, primary key
 #  title             :string(255)
-#  connections_count :integer          default(0)
+#  connections_count :integer          default("0")
 #  user_id           :integer          not null
 #  created_at        :datetime
 #  updated_at        :datetime
