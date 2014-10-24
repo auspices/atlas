@@ -1,7 +1,7 @@
 module Api
   module V1
     class ImageSerializer < BaseSerializer
-      attributes :id, :url, :source_url, :created_at, :updated_at, :user_id, :_links
+      attributes :id, :url, :width, :height, :source_url, :created_at, :updated_at, :user_id, :_links
 
       def _links
         {
