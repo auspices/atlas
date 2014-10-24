@@ -8,6 +8,8 @@
 #  created_at :datetime
 #  updated_at :datetime
 #  user_id    :integer
+#  width      :integer
+#  height     :integer
 #
 
 class Image < ActiveRecord::Base
@@ -28,7 +30,7 @@ class Image < ActiveRecord::Base
   end
 
   def store!
-    self.update_attributes!(url: mover.move!)
+    self.update_attributes!(mover.move!)
   end
 
   def source_url_is_an_image
