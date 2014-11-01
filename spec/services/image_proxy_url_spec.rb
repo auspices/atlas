@@ -7,8 +7,8 @@ RSpec.describe ImageProxyUrl do
 
   it 'sets some sensible defaults' do
     url = ImageProxyUrl.new(url: 'http://foobar.s3.amazonaws.com/id/image.jpg')
-    expect(url.options[:h]).to eql(1000)
-    expect(url.options[:w]).to eql(1000)
+    expect(url.options[:height]).to eql(1000)
+    expect(url.options[:width]).to eql(1000)
   end
 
   it 'sets options and ignores keys not represented in ImageProxyUrl::QUERY_PARAMS' do
