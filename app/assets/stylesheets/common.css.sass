@@ -1,3 +1,5 @@
+@import 'compass/css3'
+
 // Units
 $unit: 20px
 $baseFontSize: 16px
@@ -12,13 +14,6 @@ $red: #a00c0c
 $yellow: #f6db23
 
 // Mixins
-@mixin vendor($name, $argument)
-  -webkit-#{$name}: #{$argument}
-  -moz-#{$name}: #{$argument}
-  -ms-#{$name}: #{$argument}
-  -o-#{$name}: #{$argument}
-  #{$name}: #{$argument}
-
 @mixin serif-font()
   font-family: 'Times New Roman', times, serif
   font-size: $baseFontSize

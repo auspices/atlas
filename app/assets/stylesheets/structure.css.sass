@@ -17,9 +17,9 @@
   pointer-events: none
   color: black
   @include sans-serif-font()
-  @include vendor(transform, translateY(-50%))
-  @include vendor(animation, fade-out 1s normal forwards)
-  @include vendor(animation-delay, 1s)
+  +transform(translateY(-50%))
+  +animation(fade-out 1s normal forwards)
+  +animation-delay(1s)
   z-index: 1
   &.is-error
     background-color: $red
@@ -85,5 +85,5 @@
   width: 1px
   height: 1em
   vertical-align: middle
-  @include vendor(transform, rotate(45deg))
+  +transform(rotate(45deg))
   background-color: black

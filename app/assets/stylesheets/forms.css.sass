@@ -21,7 +21,7 @@ input
   border-radius: 2px
   box-shadow: none
   @include serif-font()
-  @include vendor(transition, all 0.125s)
+  +transition(all 0.125s)
   background-color: transparent
   &:focus,
   &:active
@@ -43,7 +43,7 @@ input[type='submit']
   background-color: $lightGray
   color: black
   text-align: center
-  @include vendor(transition, all 0.125s)
+  +transition(all 0.125s)
   &:hover,
   &:active,
   &:focus
