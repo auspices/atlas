@@ -2,7 +2,9 @@
   <% images.each do |image| %>
     <div class='inline-item'>
       <%= link_to user_image_path(image.user, image) do %>
-        <%= image_tag resize(url: image.url, w: 300, h: 300) %>
+        <% image.resized(width: 225, height: 225).tap do |image| %>
+          <%= image_tag image.url, width: image.width, height: image.height %>
+        <% end %>
       <% end %>
       <% if authorable? %>
         <%= link_to '&times;'.html_safe, [current_user, image], method: :delete, data: { confirm: 'Are you sure?' }, class: 'grid-item-remove-link' %>

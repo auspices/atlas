@@ -2,31 +2,30 @@
 
 @mixin grid-response()
   @media screen and (max-width: $mobileBreakpoint)
-    &, img
+    &
       display block
       width: 100%
       max-width: 100%
       max-height: inherit
       margin: 0 0 $unit 0
+      text-align: center
+      background-color: $lightGray
     .grid-item-remove-link
       opacity: 1
 
 .grid
-  font-size: 0
   margin: ($unit * 2) 0
+  +display-flex
+  +flex-wrap(wrap)
+  +justify-content(space-around)
+  +align-items(center)
 
 .grid-item
-  display: inline-block
   position: relative
-  width: $gridItemSize
-  height: $gridItemSize
-  max-width: $gridItemSize
-  max-height: $gridItemSize
   margin: 0 ($unit * 2) ($unit * 2) 0
   padding: $unit
   border: 1px solid
   vertical-align: bottom
-  font-size: $baseFontSize
   @include grid-response()
   & > a
     display: block
@@ -57,7 +56,7 @@
   font-size: $unit
   opacity: 0
   @include sans-serif-font()
-  @include vendor(transition, all 0.125s)
+  +transition(all 0.125s)
   &:hover
     text-shadow: none
     background-color: red

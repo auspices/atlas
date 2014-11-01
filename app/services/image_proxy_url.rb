@@ -3,7 +3,7 @@ class ImageProxyUrl
 
   PROXY_URL = 'http://pale.auspic.es'
 
-  QUERY_PARAMS = %i(url h w)
+  QUERY_PARAMS = %i(url height width)
 
   def initialize(options = {})
     raise 'Requires :url' if options[:url].blank?
@@ -11,12 +11,12 @@ class ImageProxyUrl
     @options = options
       .send(:extract!, *QUERY_PARAMS)
       .reverse_merge!(
-        h: 1000,
-        w: 1000
+        width: 1000,
+        height: 1000
       )
   end
 
   def url
-    "#{PROXY_URL}/resize/#{options[:w]}/#{options[:h]}/#{options[:url]}"
+    "#{PROXY_URL}/resize/#{options[:width]}/#{options[:height]}/#{options[:url]}"
   end
 end

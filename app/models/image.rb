@@ -44,4 +44,8 @@ class Image < ActiveRecord::Base
   def remove_s3_object!
     Storage.delete(url_key)
   end
+
+  def resized(options)
+    ImageResizer.new(self, options)
+  end
 end
