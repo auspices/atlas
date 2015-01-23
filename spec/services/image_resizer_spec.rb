@@ -23,6 +23,16 @@ RSpec.describe ImageResizer do
     expect(resized.height).to eql(25)
   end
 
+  it 'gracefully deals with nils' do
+    resized = ImageResizer.new(image, width: nil, height: nil)
+    expect(image.width).to eql(800)
+    expect(image.height).to eql(600)
+    expect(resized.target_width).to eql(0)
+    expect(resized.target_height).to eql(0)
+    expect(resized.width).to eql(0)
+    expect(resized.height).to eql(0)
+  end
+
   describe 'url' do
     it 'delegates to ImageProxyUrl with target options' do
       expect(ImageResizer.new(image, width: 300).url)

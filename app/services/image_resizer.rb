@@ -5,13 +5,15 @@ class ImageResizer
     options.reverse_merge!(width: 0, height: 0)
 
     @image = image
-    @target_width = options[:width]
-    @target_height = options[:height]
+    @target_width = options[:width] || 0
+    @target_height = options[:height] || 0
 
     options
       .map { |dimension, value| (value.to_f / image.send(dimension).to_f).nonzero? }
       .compact.min
       .tap { |ratio|
+        ratio ||= 0
+
         @width = (image.width * ratio).to_i
         @height = (image.height * ratio).to_i
       }
