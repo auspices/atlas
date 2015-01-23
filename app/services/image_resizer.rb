@@ -1,10 +1,18 @@
 class ImageResizer
   attr_reader :image, :width, :height, :target_width, :target_height
 
+  def self.valid_image?(image)
+    !(image.width.nil? || image.height.nil?) ||
+    image.width.try(:nonzero?) && image.height.try(:nonzero?)
+  end
+
   def initialize(image, options = {})
     options.reverse_merge!(width: 0, height: 0)
 
     @image = image
+
+    return unless self.class.valid_image?(image)
+
     @target_width = options[:width] || 0
     @target_height = options[:height] || 0
 
