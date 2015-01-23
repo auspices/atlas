@@ -2,8 +2,8 @@ class ImageResizer
   attr_reader :image, :width, :height, :target_width, :target_height
 
   def self.valid_image?(image)
-    !(image.width.nil? || image.height.nil?) ||
-    image.width.try(:nonzero?) && image.height.try(:nonzero?)
+    !(image.width.nil? || image.height.nil?) &&
+    image.width.nonzero? && image.height.nonzero?
   end
 
   def initialize(image, options = {})
