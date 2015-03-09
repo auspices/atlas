@@ -64,3 +64,9 @@ RedundantSelf:
 
 ParameterLists:
   Max: 7
+
+AbcSize:
+  Max: 25
+
+MultilineOperationIndentation:
+  Enabled: false

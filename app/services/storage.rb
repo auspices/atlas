@@ -36,7 +36,6 @@ module Storage
 
     def store(url, key)
       open(url) { |io|
-        content_type = io.content_type.present? ? io.content_type : mime_type(key)
         bucket.files.create(key: key, public: true, body: io.read).tap do |object|
           io.rewind
           yield io, object
