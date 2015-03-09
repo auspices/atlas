@@ -3,11 +3,15 @@ require 'open-uri'
 module Storage
   class << self
     def connection
-      @connection ||= AWS::S3.new
+      @connection ||= Fog::Storage.new(
+        aws_access_key_id: access_key_id,
+        aws_secret_access_key: secret_access_key,
+        provider: 'AWS'
+      )
     end
 
     def bucket
-      @bucket ||= connection.buckets[ENV['S3_BUCKET']]
+      @bucket ||= connection.directories.get(s3_bucket)
     end
 
     def s3_bucket
@@ -18,8 +22,12 @@ module Storage
       ENV['AWS_ACCESS_KEY_ID']
     end
 
+    def secret_access_key
+      ENV['AWS_SECRET_ACCESS_KEY']
+    end
+
     def s3_object(key)
-      bucket.objects[key]
+      bucket.files.get(key)
     end
 
     def mime_type(key)
@@ -29,8 +37,7 @@ module Storage
     def store(url, key)
       open(url) { |io|
         content_type = io.content_type.present? ? io.content_type : mime_type(key)
-        bucket.objects[key].tap do |object|
-          object.write(io.read, acl: :public_read, content_type: content_type)
+        bucket.files.create(key: key, public: true, body: io.read).tap do |object|
           io.rewind
           yield io, object
         end

@@ -1,16 +1,15 @@
-ruby '2.1.0'
+ruby '2.2.0'
 source 'https://rubygems.org'
 
 gem 'puma'
 gem 'pg'
-gem 'rails', '4.2.0.beta1'
-gem 'sass-rails', '5.0.0.beta1'
+gem 'rails', '~> 4.2.0'
+gem 'sass-rails', '~> 5.0.1'
 gem 'compass-rails'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails'
 gem 'jquery-rails'
-gem 'aws-sdk'
-gem 'aws-s3'
+gem 'fog', '~> 1.28.0'
 gem 'kaminari', '~> 0.16.1'
 gem 'sorcery'
 gem 'friendly_id', '~> 5.0.4'
@@ -26,10 +25,7 @@ end
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.0.0'
-  gem 'pry'
-  gem 'pry-remote'
-  gem 'pry-stack_explorer'
-  gem 'pry-debugger'
+  gem 'byebug'
 end
 
 group :test do
