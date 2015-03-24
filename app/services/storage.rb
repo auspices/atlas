@@ -44,7 +44,7 @@ module Storage
     end
 
     def delete(key)
-      s3_object(key).delete
+      s3_object(key).destroy
     end
   end
 end
