@@ -1,3 +1,8 @@
+<nav class='image-show-nav'>
+  <%= link_to 'Full', @image.url %>
+  <%= link_to 'Find', "https://www.google.com/searchbyimage?&image_url=#{@image.url}" %>
+</nav>
+
 <div class='image-show-stage'>
   <div class='image-show-stage-inner'>
     <%= link_to :back do %>

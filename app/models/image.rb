@@ -25,6 +25,10 @@ class Image < ActiveRecord::Base
   validates :user_id, presence: true
   validate :source_url_is_an_image
 
+  def to_s
+    File.basename(source_url)
+  end
+
   def mover
     @mover ||= ImageMover.new(self)
   end
