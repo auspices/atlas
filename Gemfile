@@ -16,6 +16,7 @@ gem 'friendly_id', '~> 5.0.4'
 gem 'fastimage', '~> 1.6.3'
 gem 'mime-types', '~> 2.3'
 gem 'active_model_serializers', '~> 0.9.0'
+gem 'rack-cors', require: 'rack/cors'
 
 group :development do
   gem 'spring'
