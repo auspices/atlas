@@ -219,6 +219,7 @@ GEM
     powerpack (0.1.1)
     puma (2.14.0)
     rack (1.6.4)
+    rack-cors (0.4.0)
     rack-test (0.6.3)
       rack (>= 1.0)
     rails (4.2.4)
@@ -335,6 +336,7 @@ DEPENDENCIES
   mime-types (~> 2.3)
   pg
   puma
+  rack-cors
   rails (~> 4.2.4)
   rails_12factor
   rspec-rails (~> 3.3.3)
