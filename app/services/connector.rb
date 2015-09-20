@@ -16,6 +16,6 @@ class Connector
   end
 
   def self.build(user, collection, image)
-    self.new(user, collection, image).build
+    new(user, collection, image).build
   end
 end

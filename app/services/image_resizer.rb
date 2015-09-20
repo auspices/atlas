@@ -3,7 +3,7 @@ class ImageResizer
 
   def self.valid_image?(image)
     !(image.width.nil? || image.height.nil?) &&
-    image.width.nonzero? && image.height.nonzero?
+      image.width.nonzero? && image.height.nonzero?
   end
 
   def initialize(image, options = {})
@@ -19,12 +19,12 @@ class ImageResizer
     options
       .map { |dimension, value| (value.to_f / image.send(dimension).to_f).nonzero? }
       .compact.min
-      .tap { |ratio|
+      .tap do |ratio|
         ratio ||= 0
 
         @width = (image.width * ratio).to_i
         @height = (image.height * ratio).to_i
-      }
+      end
   end
 
   def url

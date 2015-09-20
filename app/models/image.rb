@@ -20,7 +20,7 @@ class Image < ActiveRecord::Base
   has_many :collections, through: :connections
   belongs_to :user
 
-  validates_format_of :source_url, with: URI::regexp(%w(http https))
+  validates_format_of :source_url, with: URI.regexp(%w(http https))
   validates :source_url, presence: true
   validates :user_id, presence: true
   validate :source_url_is_an_image

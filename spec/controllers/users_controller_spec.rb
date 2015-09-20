@@ -1,23 +1,23 @@
 require 'rails_helper'
 
 RSpec.describe UsersController, type: :controller do
-  let(:valid_attributes) {
+  let(:valid_attributes) do
     {
       email: 'new@example.com',
       username: 'new_user',
       password: 'secret',
       password_confirmation: 'secret'
     }
-  }
+  end
 
-  let(:invalid_attributes) {
+  let(:invalid_attributes) do
     {
       email: 'new@example.com',
       username: 'new_user',
       password: 'secret',
       password_confirmation: 'whatever'
     }
-  }
+  end
 
   before(:each) do
     login_user Fabricate(:user, email: 'admin@example.com', username: 'admin', password: 'secret')
@@ -39,9 +39,9 @@ RSpec.describe UsersController, type: :controller do
   describe 'DELETE destroy' do
     it 'destroys the requested user' do
       user = User.create! valid_attributes
-      expect {
+      expect do
         delete :destroy, id: user.to_param
-      }.to change(User, :count).by(-1)
+      end.to change(User, :count).by(-1)
     end
 
     it 'redirects to the users list' do

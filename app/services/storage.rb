@@ -35,12 +35,12 @@ module Storage
     end
 
     def store(url, key)
-      open(url) { |io|
+      open(url) do |io|
         bucket.files.create(key: key, public: true, body: io.read).tap do |object|
           io.rewind
           yield io, object
         end
-      }
+      end
     end
 
     def delete(key)

@@ -1,11 +1,11 @@
-ruby '2.2.0'
+ruby '2.2.3'
 source 'https://rubygems.org'
 
 gem 'puma'
 gem 'pg'
-gem 'rails', '~> 4.2.0'
-gem 'sass-rails', '~> 5.0.1'
-gem 'compass-rails'
+gem 'rails', '~> 4.2.4'
+gem 'sass-rails', '~> 5.0'
+gem 'compass-rails', '~> 2.0.5'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails'
 gem 'jquery-rails'
@@ -24,7 +24,7 @@ group :development do
 end
 
 group :development, :test do
-  gem 'rspec-rails', '~> 3.0.0'
+  gem 'rspec-rails', '~> 3.3.3'
   gem 'byebug'
 end
 

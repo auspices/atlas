@@ -5,15 +5,15 @@ module Api
 
       def _links
         {
-          self: { href: api_user_url(self.slug) },
-          images: { href: api_user_images_url(self.slug) },
+          self: { href: api_user_url(slug) },
+          images: { href: api_user_images_url(slug) },
           image: {
-            href: CGI.unescape(api_user_image_url(self.slug, '{id}')),
+            href: CGI.unescape(api_user_image_url(slug, '{id}')),
             templated: true
           },
-          collections: { href: api_user_collections_url(self.slug) },
+          collections: { href: api_user_collections_url(slug) },
           collection: {
-            href: CGI.unescape(api_user_collection_url(self.slug, '{id}')),
+            href: CGI.unescape(api_user_collection_url(slug, '{id}')),
             templated: true
           }
         }

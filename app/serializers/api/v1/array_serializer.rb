@@ -1,7 +1,7 @@
 module Api
   module V1
-    class PaginationSerializer < BaseSerializer
-      attributes :_embedded, :_links, :total_count, :total_pages
+    class ArraySerializer < BaseSerializer
+      attributes :_embedded, :_links, :total_count
 
       def initialize(object, options = {})
         @current_url = options[:current_url]
@@ -11,11 +11,7 @@ module Api
       end
 
       def total_count
-        object.total_count
-      end
-
-      def total_pages
-        object.total_pages
+        object.size
       end
 
       def _embedded
@@ -28,11 +24,7 @@ module Api
 
       def _links
         {
-          self: { href: current_url(page: object.current_page) },
-          first: { href: current_url(page: 1) },
-          next: { href: current_url(page: object.next_page) },
-          prev: { href: current_url(page: object.prev_page) },
-          last: { href: current_url(page: object.total_pages) }
+          self: { href: current_url }
         }
       end
     end

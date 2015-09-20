@@ -14,6 +14,13 @@ module Api
           current_url: ->(overrides = {}) { _current_url(overrides) }
       end
 
+      def render_array(array, options = {})
+        render json: array,
+          serializer: ArraySerializer,
+          each_serializer: options[:serializer],
+          current_url: ->(overrides = {}) { _current_url(overrides) }
+      end
+
       def _current_url(overrides)
         params.select do |k, _|
           [:per].include? k.to_sym

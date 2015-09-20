@@ -5,9 +5,9 @@ module Api
 
       def _links
         {
-          self: { href: api_user_image_url(self.user_id, self.id) },
-          images: { href: api_user_images_url(self.user_id) },
-          user: { href: api_user_url(self.user_id) }
+          self: { href: api_user_image_url(user_id, id) },
+          images: { href: api_user_images_url(user_id) },
+          user: { href: api_user_url(user_id) }
         }
       end
     end
