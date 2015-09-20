@@ -39,13 +39,13 @@ class ImageMover
   end
 
   def move!
-    Storage.store(url, key) { |io, object|
+    Storage.store(url, key) do |io, object|
       width, height = FastImage.size(io)
       return {
         url: object.public_url.to_s,
         width: width,
         height: height
       }
-    }
+    end
   end
 end

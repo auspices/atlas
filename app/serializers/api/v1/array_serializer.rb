@@ -11,11 +11,11 @@ module Api
       end
 
       def total_count
-        self.object.size
+        object.size
       end
 
       def _embedded
-        ActiveModel::ArraySerializer.new(self.object, each_serializer: @each, root: @resource_name)
+        ActiveModel::ArraySerializer.new(object, each_serializer: @each, root: @resource_name)
       end
 
       def current_url(options = {})

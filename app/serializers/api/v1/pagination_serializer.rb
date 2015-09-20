@@ -11,15 +11,15 @@ module Api
       end
 
       def total_count
-        self.object.total_count
+        object.total_count
       end
 
       def total_pages
-        self.object.total_pages
+        object.total_pages
       end
 
       def _embedded
-        ActiveModel::ArraySerializer.new(self.object, each_serializer: @each, root: @resource_name)
+        ActiveModel::ArraySerializer.new(object, each_serializer: @each, root: @resource_name)
       end
 
       def current_url(options = {})
@@ -28,11 +28,11 @@ module Api
 
       def _links
         {
-          self: { href: current_url(page: self.object.current_page) },
+          self: { href: current_url(page: object.current_page) },
           first: { href: current_url(page: 1) },
-          next: { href: current_url(page: self.object.next_page) },
-          prev: { href: current_url(page: self.object.prev_page) },
-          last: { href: current_url(page: self.object.total_pages) }
+          next: { href: current_url(page: object.next_page) },
+          prev: { href: current_url(page: object.prev_page) },
+          last: { href: current_url(page: object.total_pages) }
         }
       end
     end

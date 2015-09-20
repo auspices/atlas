@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe Api::V1::UsersController, type: :controller do
-  let(:user) {
+  let(:user) do
     Fabricate(:user, slug: 'foobar')
-  }
+  end
 
   describe 'GET show' do
     it 'returns the JSON representation of the requested user' do

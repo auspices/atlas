@@ -1,13 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe Api::V1::CollectionsController, type: :controller do
-  let(:collection) {
+  let(:collection) do
     Fabricate(:collection)
-  }
+  end
 
-  let(:user) {
+  let(:user) do
     Fabricate(:user, collections: [collection])
-  }
+  end
 
   describe 'GET index' do
     it 'returns the JSON representation of a user\'s paginated collections' do

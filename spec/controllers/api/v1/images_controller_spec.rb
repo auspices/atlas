@@ -1,13 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe Api::V1::ImagesController, type: :controller do
-  let(:image) {
+  let(:image) do
     Fabricate(:image)
-  }
+  end
 
-  let(:user) {
+  let(:user) do
     Fabricate(:user, images: [image])
-  }
+  end
 
   describe 'GET index' do
     it 'returns the JSON representation of a user\'s paginated images' do

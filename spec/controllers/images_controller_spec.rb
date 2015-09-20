@@ -1,25 +1,25 @@
 require 'rails_helper'
 
 RSpec.describe ImagesController, type: :controller do
-  let(:user) {
+  let(:user) do
     Fabricate(:user)
-  }
+  end
 
-  let(:image) {
+  let(:image) do
     Fabricate(:image, user: user)
-  }
+  end
 
-  let(:another_image) {
+  let(:another_image) do
     Fabricate(:image)
-  }
+  end
 
-  let(:valid_attributes) {
+  let(:valid_attributes) do
     { source_url: 'http://foo.com/bar.jpg' }
-  }
+  end
 
-  let(:invalid_attributes) {
+  let(:invalid_attributes) do
     { url: 'http://bucket.com/1/bar.jpg' }
-  }
+  end
 
   before(:each) do
     allow_any_instance_of(Image).to receive(:store!)
@@ -52,9 +52,9 @@ RSpec.describe ImagesController, type: :controller do
     describe 'POST create' do
       describe 'with valid params' do
         it 'creates a new Image' do
-          expect {
+          expect do
             post :create, user_id: @current_user.id, image: valid_attributes
-          }.to change(Image, :count).by(1)
+          end.to change(Image, :count).by(1)
         end
 
         it 'assigns a newly created image as @image' do
@@ -94,16 +94,16 @@ RSpec.describe ImagesController, type: :controller do
 
       it 'destroys the requested image' do
         image = Fabricate(:image, user: @current_user)
-        expect {
+        expect do
           delete :destroy, user_id: @current_user.id, id: image.id
-        }.to change(Image, :count).by(-1)
+        end.to change(Image, :count).by(-1)
       end
 
       it 'prevents destruction of non-owned images' do
         image = Fabricate(:image, user: user)
-        expect {
+        expect do
           delete :destroy, user_id: user.id, id: image.id
-        }.to raise_error(ActiveRecord::RecordNotFound)
+        end.to raise_error(ActiveRecord::RecordNotFound)
       end
 
       it 'redirects to the root' do

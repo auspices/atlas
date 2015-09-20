@@ -6,7 +6,7 @@ class ImageProxyUrl
   QUERY_PARAMS = %i(url height width)
 
   def initialize(options = {})
-    raise 'Requires :url' if options[:url].blank?
+    fail 'Requires :url' if options[:url].blank?
     options[:url] = CGI.escape(options[:url])
     @options = options
       .send(:extract!, *QUERY_PARAMS)
