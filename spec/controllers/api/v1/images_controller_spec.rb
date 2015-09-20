@@ -32,4 +32,15 @@ RSpec.describe Api::V1::ImagesController, type: :controller do
       expect(parsed['_links'].keys).to eq(%w(self images user))
     end
   end
+
+  describe 'GET sample' do
+    it 'returns a sample of the user\'s images' do
+      get :sample, user_id: user.id
+      expect(response.status).to be(200)
+      parsed = JSON.parse(response.body)
+      expect(parsed['_embedded']['images']).to be_a(Array)
+      expect(parsed['_embedded']['images'].first['user_id']).to eq(user.id)
+      expect(parsed['_links'].keys).to eq(%w(self))
+    end
+  end
 end

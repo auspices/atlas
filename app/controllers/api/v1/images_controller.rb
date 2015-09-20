@@ -14,6 +14,13 @@ module Api
         @image = @user.images.find(params[:id])
         render_object @image, serializer: ImageSerializer
       end
+
+      # GET /api/:user_id/images/sample
+      def sample
+        @user = User.friendly.find(params[:user_id])
+        @images = @user.images.unscoped.order('RANDOM()').limit(params[:size] || 5)
+        render_array @images, serializer: ImageSerializer
+      end
     end
   end
 end

@@ -10,9 +10,17 @@ Rails.application.routes.draw do
       get '', to: 'root#index', as: :root
       resources :status, only: :index
       resources :users, only: :show do
-        resources :images, only: [:index, :show]
+        resources :images, only: [:index, :show] do
+          collection do
+            get 'sample'
+          end
+        end
         resources :collections, only: [:index, :show] do
-          resources :images, only: :index, controller: 'collections/images'
+          resources :images, only: :index, controller: 'collections/images' do
+            collection do
+              get 'sample'
+            end
+          end
         end
       end
     end
