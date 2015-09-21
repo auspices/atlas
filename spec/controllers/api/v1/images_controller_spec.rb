@@ -42,5 +42,13 @@ RSpec.describe Api::V1::ImagesController, type: :controller do
       expect(parsed['_embedded']['images'].first['user_id']).to eq(user.id)
       expect(parsed['_links'].keys).to eq(%w(self))
     end
+
+    it 'does not get anyone else\'s images' do
+      Fabricate(:user, images: [Fabricate(:image)])
+      user_without_images = Fabricate(:user)
+      get :sample, user_id: user_without_images.id
+      parsed = JSON.parse(response.body)
+      expect(parsed['total_count']).to eq(0)
+    end
   end
 end

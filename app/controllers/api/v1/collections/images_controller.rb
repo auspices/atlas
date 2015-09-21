@@ -13,7 +13,7 @@ module Api
         def sample
           @user = User.friendly.find(params[:user_id])
           @collection = @user.collections.find(params[:collection_id])
-          @images = @collection.images.unscoped.order('RANDOM()').limit(params[:size] || 5)
+          @images = @collection.images.unscope(:order).order('RANDOM()').limit(params[:size] || 5)
           render_array @images, serializer: ImageSerializer
         end
       end
