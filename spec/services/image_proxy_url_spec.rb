@@ -18,6 +18,6 @@ RSpec.describe ImageProxyUrl do
 
   it 'returns a usuable url' do
     url = ImageProxyUrl.new(url: 'http://foobar.s3.amazonaws.com/id/image.jpg')
-    expect(url.url).to eql('http://pale.auspic.es/resize/1000/1000/http%3A%2F%2Ffoobar.s3.amazonaws.com%2Fid%2Fimage.jpg')
+    expect(url.url).to include('/resize/1000/1000/http%3A%2F%2Ffoobar.s3.amazonaws.com%2Fid%2Fimage.jpg')
   end
 end

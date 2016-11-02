@@ -40,13 +40,13 @@ RSpec.describe ImageResizer do
     expect(image.height).to be_nil
     expect(resized.target_width).to be_nil
     expect(resized.target_height).to be_nil
-    expect(resized.url).to eql 'http://pale.auspic.es/resize///http%3A%2F%2Fbucket.com%2F1%2Fbar.jpg'
+    expect(resized.url).to include('/resize///http%3A%2F%2Fbucket.com%2F1%2Fbar.jpg')
   end
 
   describe 'url' do
     it 'delegates to ImageProxyUrl with target options' do
       expect(ImageResizer.new(image, width: 300).url)
-        .to eql 'http://pale.auspic.es/resize/300/0/http%3A%2F%2Fbucket.com%2F1%2Fbar.jpg'
+        .to include '/resize/300/0/http%3A%2F%2Fbucket.com%2F1%2Fbar.jpg'
     end
   end
 end
