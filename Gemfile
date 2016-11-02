@@ -22,6 +22,7 @@ group :development do
   gem 'spring'
   gem 'annotate'
   gem 'rubocop'
+  gem 'foreman'
 end
 
 group :development, :test do

@@ -1,8 +1,6 @@
 class ImageProxyUrl
   attr_reader :options
 
-  PROXY_URL = 'http://pale.auspic.es'
-
   QUERY_PARAMS = %i(url height width)
 
   def initialize(options = {})
@@ -17,6 +15,6 @@ class ImageProxyUrl
   end
 
   def url
-    "#{PROXY_URL}/resize/#{options[:width]}/#{options[:height]}/#{options[:url]}"
+    "#{ENV['PROXY_URL']}/resize/#{options[:width]}/#{options[:height]}/#{options[:url]}"
   end
 end
