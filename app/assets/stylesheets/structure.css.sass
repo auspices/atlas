@@ -31,7 +31,7 @@
     background-color: $yellow
 
 .l-container
-  margin: ($unit * 2)
+  //
 
 .pagination
   display: table
@@ -75,15 +75,33 @@
   color: red
 
 .breadcrumb
-  white-space: nowrap
+  display: flex
+  flex-direction: row
+  align-items: center
   @include sans-serif-font()
-.breadcrumb-current
-  font-weight: bold
-.breadcrumb-separator
-  display: inline-block
-  margin: 0 ($unit / 2)
-  width: 1px
-  height: 1em
-  vertical-align: middle
-  +transform(rotate(45deg))
-  background-color: black
+  padding: ($unit / 2) ($unit * 2)
+
+  > *
+    @include inline-block-margins($unit)
+
+  &__current
+    //
+
+  &__separator
+    display: inline-block
+    margin: 0 ($unit / 4)
+    width: 1px
+    height: 1em
+    vertical-align: middle
+    +transform(rotate(45deg))
+    background-color: black
+
+  > form
+    flex: 1
+    margin: 0
+    width: auto
+
+    > input
+      width: 100%
+      margin: 0
+      border: none

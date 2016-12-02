@@ -1,10 +1,12 @@
 <nav class='breadcrumb'>
-  <span class='breadcrumb-current'><%= @user %></span>
-</nav>
+  <span class='breadcrumb__current'>
+    <%= @user %>
+  </span>
 
-<% if authorable? %>
-  <%= render 'form' %>
-<% end %>
+  <% if authorable? %>
+    <%= render 'form' %>
+  <% end %>
+</nav>
 
 <div class='grid'>
   <% @collections.each do |collection| %>

@@ -4,13 +4,14 @@
 
 <nav class='breadcrumb'>
   <%= link_to @user, user_collections_path(@user) %>
-  <span class='breadcrumb-separator'></span>
-  <span class='breadcrumb-current'><%= @collection || 'All images' %></span>
+  <span class='breadcrumb__separator'></span>
+  <span class='breadcrumb__current'>
+    <%= @collection || 'All images' %>
+  </span>
+  <% if authorable? %>
+    <%= render 'images/form' %>
+  <% end %>
 </nav>
-
-<% if authorable? %>
-  <%= render 'images/form' %>
-<% end %>
 
 <%= render 'images/images', images: @images %>
 
