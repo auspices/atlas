@@ -16,4 +16,4 @@ deploy:
   app:
     master: auspices-atlas-production
   api_key:
-    secure: oiKeWk6WH3M3km3y3VB5IdfC+6z4vGoitlPrqWuEvv3IVWfW+SiACuU6dCQZn53TGD3BVAIflG/kd4EL2UfrCtRSSiv+A3ZTsHQijb2fWoPHvH4CD/lqEo7U7vndjL69u7satQt4gO4Vw46TqM6RJvPpCjRc3KII3OMiZw+sHA8=
+    secure: isA6G+pW7WqTI1oj+Rkdjbp3wig27a2Na3PoCfsMJQgSd5xTzo9yrwXLBQfGVJV1p2IV2TA9bxp5Ilu/QtMW1hPxQ+zWxyOnPY5+DtyfJNCXnPZYf+Cc1HktbUgLxcihvAhxvPPCeQJWxUezf3+YIAGkQbJem8De2R8MtgFBXj8=
