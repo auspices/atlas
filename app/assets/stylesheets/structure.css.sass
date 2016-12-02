@@ -10,14 +10,13 @@
 // ------
 .l-alerts
   position: fixed
-  top: 50%
-  right: $unit
-  left: $unit
-  padding: $unit
+  top: 0
+  right: 0
+  left: 0
+  padding: $unit ($unit * 2)
   pointer-events: none
   color: black
   @include sans-serif-font()
-  +transform(translateY(-50%))
   +animation(fade-out 1s normal forwards)
   +animation-delay(1s)
   z-index: 1
