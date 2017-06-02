@@ -36,6 +36,10 @@ class ImageResizer
   private
 
   def method_missing(method, *args, &block)
-    image.send(method, *args, &block)
+    image.send(method, *args, &block) || super
+  end
+
+  def respond_to_missing?(method)
+    image.respond_to?(method)
   end
 end

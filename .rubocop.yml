@@ -1,12 +1,13 @@
 inherit_from: .rubocop_todo.yml
 
 AllCops:
+  DisplayCopNames: true
   Exclude:
     - tmp/**/*
     - vendor/**/*
     - bin/**
+    - spec/**/*
     - db/schema.rb
-    - node_modules/**/*
 
 Lint/AssignmentInCondition:
   Enabled: false
@@ -22,3 +23,6 @@ Style/MultilineBlockChain:
 
 Style/MultilineOperationIndentation:
   Enabled: false
+
+Lint/EndAlignment:
+  EnforcedStyleAlignWith: variable
