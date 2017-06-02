@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Api::V1::ImagesController, type: :controller do
@@ -18,7 +20,7 @@ RSpec.describe Api::V1::ImagesController, type: :controller do
       expect(parsed['total_pages']).to be(1)
       expect(parsed['_embedded']['images']).to be_a(Array)
       expect(parsed['_embedded']['images'].first['id']).to eq(image.id)
-      expect(parsed['_links'].keys).to eq(%w(self first next prev last))
+      expect(parsed['_links'].keys).to eq(%w[self first next prev last])
     end
   end
 
@@ -29,7 +31,7 @@ RSpec.describe Api::V1::ImagesController, type: :controller do
       parsed = JSON.parse(response.body)
       expect(parsed['id']).to eq(image.id)
       expect(parsed['url']).to eq(image.url)
-      expect(parsed['_links'].keys).to eq(%w(self images user))
+      expect(parsed['_links'].keys).to eq(%w[self images user])
     end
   end
 
@@ -40,7 +42,7 @@ RSpec.describe Api::V1::ImagesController, type: :controller do
       parsed = JSON.parse(response.body)
       expect(parsed['_embedded']['images']).to be_a(Array)
       expect(parsed['_embedded']['images'].first['user_id']).to eq(user.id)
-      expect(parsed['_links'].keys).to eq(%w(self))
+      expect(parsed['_links'].keys).to eq(%w[self])
     end
 
     it 'does not get anyone else\'s images' do

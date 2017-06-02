@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class ImagesController < ApplicationController
-  skip_before_filter :require_login, only: [:index, :show]
+  skip_before_filter :require_login, only: %i[index show]
 
   # GET /:user_id/images
   def index
