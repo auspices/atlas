@@ -15,7 +15,7 @@ gem 'mime-types', '~> 2.3'
 gem 'pg'
 gem 'puma'
 gem 'rack-cors', require: 'rack/cors'
-gem 'rails', '~> 4.2.4'
+gem 'rails', '~> 4.2.8'
 gem 'sass-rails', '~> 5.0'
 gem 'sorcery'
 gem 'uglifier', '>= 1.3.0'
@@ -29,7 +29,7 @@ end
 
 group :development, :test do
   gem 'byebug'
-  gem 'rspec-rails', '~> 3.3.3'
+  gem 'rspec-rails', '~> 3.5'
 end
 
 group :test do
