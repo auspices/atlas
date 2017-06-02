@@ -40,9 +40,9 @@ GEM
       tzinfo (~> 1.1)
     addressable (2.5.1)
       public_suffix (~> 2.0, >= 2.0.2)
-    annotate (2.7.1)
+    annotate (2.7.2)
       activerecord (>= 3.2, < 6.0)
-      rake (>= 10.4, < 12.0)
+      rake (>= 10.4, < 13.0)
     arel (6.0.4)
     ast (2.3.0)
     bcrypt (3.1.11)
@@ -147,7 +147,7 @@ GEM
     pg (0.20.0)
     powerpack (0.1.1)
     public_suffix (2.0.5)
-    puma (3.8.2)
+    puma (3.9.0)
     rack (1.6.8)
     rack-cors (0.4.1)
     rack-test (0.6.3)
@@ -183,7 +183,7 @@ GEM
       thor (>= 0.18.1, < 2.0)
     rainbow (2.2.2)
       rake
-    rake (11.3.0)
+    rake (12.0.0)
     rb-fsevent (0.9.8)
     rb-inotify (0.9.8)
       ffi (>= 0.5.0)
@@ -272,7 +272,7 @@ DEPENDENCIES
   pg
   puma
   rack-cors
-  rails (~> 4.2.4)
+  rails (~> 4.2.8)
   rails_12factor
   rspec-rails (~> 3.3.3)
   rubocop
