@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 class ImageMover
   attr_reader :image, :url
 
-  VALID_TYPES = %i(jpg jpeg gif png)
+  VALID_TYPES = %i[jpg jpeg gif png].freeze
 
   def initialize(image)
     @image = image

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Collections
   class ImagesController < ApplicationController
     # POST /users/:user_id/collections/:collection_id/images

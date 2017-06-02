@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Connector
   attr_reader :user, :collection, :image, :connection
 

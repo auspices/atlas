@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Api::V1::CollectionsController, type: :controller do
@@ -18,7 +20,7 @@ RSpec.describe Api::V1::CollectionsController, type: :controller do
       expect(parsed['total_pages']).to be(1)
       expect(parsed['_embedded']['collections']).to be_a(Array)
       expect(parsed['_embedded']['collections'].first['id']).to eq(collection.id)
-      expect(parsed['_links'].keys).to eq(%w(self first next prev last))
+      expect(parsed['_links'].keys).to eq(%w[self first next prev last])
     end
   end
 
@@ -29,7 +31,7 @@ RSpec.describe Api::V1::CollectionsController, type: :controller do
       parsed = JSON.parse(response.body)
       expect(parsed['id']).to eq(collection.id)
       expect(parsed['title']).to eq(collection.title)
-      expect(parsed['_links'].keys).to eq(%w(self images user))
+      expect(parsed['_links'].keys).to eq(%w[self images user])
     end
   end
 end

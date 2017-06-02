@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SorceryCore < ActiveRecord::Migration
   def change
     create_table :users do |t|

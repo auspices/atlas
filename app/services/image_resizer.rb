@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ImageResizer
   attr_reader :image, :width, :height, :target_width, :target_height
 

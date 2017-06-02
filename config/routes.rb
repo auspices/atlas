@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
   root to: 'home#index'
 
@@ -10,12 +12,12 @@ Rails.application.routes.draw do
       get '', to: 'root#index', as: :root
       resources :status, only: :index
       resources :users, only: :show do
-        resources :images, only: [:index, :show] do
+        resources :images, only: %i[index show] do
           collection do
             get 'sample'
           end
         end
-        resources :collections, only: [:index, :show] do
+        resources :collections, only: %i[index show] do
           resources :images, only: :index, controller: 'collections/images' do
             collection do
               get 'sample'
@@ -26,12 +28,12 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :sessions, only: [:new, :create, :destroy]
+  resources :sessions, only: %i[new create destroy]
   resources :users
   resources :users, path: '' do
-    resources :images, except: [:new, :edit, :update]
-    resources :collections, except: [:new, :edit, :update], path: '' do
-      resources :images, only: [:index, :create], controller: 'collections/images'
+    resources :images, except: %i[new edit update]
+    resources :collections, except: %i[new edit update], path: '' do
+      resources :images, only: %i[index create], controller: 'collections/images'
     end
   end
 end

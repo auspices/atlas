@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 namespace :sync do
   desc 'Sync production database with local'
   task 'production_to_local' do

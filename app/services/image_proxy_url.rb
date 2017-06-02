@@ -1,17 +1,19 @@
+# frozen_string_literal: true
+
 class ImageProxyUrl
   attr_reader :options
 
-  QUERY_PARAMS = %i(url height width)
+  QUERY_PARAMS = %i[url height width].freeze
 
   def initialize(options = {})
-    fail 'Requires :url' if options[:url].blank?
+    raise 'Requires :url' if options[:url].blank?
     options[:url] = CGI.escape(options[:url])
     @options = options
-      .send(:extract!, *QUERY_PARAMS)
-      .reverse_merge!(
-        width: 1000,
-        height: 1000
-      )
+               .send(:extract!, *QUERY_PARAMS)
+               .reverse_merge!(
+                 width: 1000,
+                 height: 1000
+               )
   end
 
   def url
