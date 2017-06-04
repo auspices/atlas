@@ -1,10 +1,10 @@
-<nav class='image-show-nav'>
+<nav class='ImageShowNav'>
   <%= link_to 'Full', @image.url %>
   <%= link_to 'Find', "https://www.google.com/searchbyimage?&image_url=#{@image.url}" %>
 </nav>
 
-<div class='image-show-stage'>
-  <div class='image-show-stage-inner'>
+<div class='ImageShowStage'>
+  <div class='ImageShowStage__inner'>
     <%= link_to :back do %>
       <%= image_tag @image.resized(width: 900, height: 900).url %>
     <% end %>

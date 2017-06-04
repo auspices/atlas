@@ -14,7 +14,7 @@ module Atlas
     ]
 
     config.action_view.field_error_proc = proc { |tag|
-      "<span class='has-error'>#{tag}</span>".html_safe
+      "<span class='HasError'>#{tag}</span>".html_safe
     }
 
     config.generators do |generate|

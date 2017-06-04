@@ -1,0 +1,66 @@
+@import 'common'
+
+@mixin GridResponse()
+  @media screen and (max-width: $mobileBreakpoint)
+    &
+      display block
+      width: 100%
+      max-width: 100%
+      max-height: inherit
+      margin: 0 0 1em 0
+      text-align: center
+      background-color: $lightGray
+
+    .GridItemRemoveLink
+      opacity: 1
+
+.Grid
+  margin: 2em
+  display: flex
+  flex-wrap: wrap
+  justify-content: space-around
+  align-items: center
+
+.GridItem
+  position: relative
+  margin: 0 2em 2em 0
+  padding: 1em
+  border: 1px solid
+  vertical-align: bottom
+  +GridResponse()
+
+  & > a
+    display: block
+
+  // States
+  &:hover
+    .GridItemRemoveLink
+      opacity: 1
+
+.InlineItem
+  @extend .GridItem
+  width: inherit
+  height: inherit
+  margin: 0 2em 2em 0
+  padding: 0
+  border: none
+  +GridResponse()
+
+.GridItemRemoveLink
+  position: absolute
+  display: block
+  top: 0
+  right: 0
+  width: 2em
+  height: 2em
+  line-height: 2em
+  text-align: center
+  color: white
+  font-size: 1em
+  opacity: 0
+  +sans-serif-font()
+  transition: all 0.125s
+
+  &:hover
+    text-shadow: none
+    background-color: red

@@ -2,12 +2,15 @@
   <%= @collection %> /
 <% end %>
 
-<nav class='breadcrumb'>
+<nav class='Breadcrumb'>
   <%= link_to @user, user_collections_path(@user) %>
-  <span class='breadcrumb__separator'></span>
-  <span class='breadcrumb__current'>
+
+  <span class='Breadcrumb__separator'></span>
+
+  <span class='Breadcrumb__current'>
     <%= @collection || 'All images' %>
   </span>
+
   <% if authorable? %>
     <%= render 'images/form' %>
   <% end %>
@@ -15,6 +18,4 @@
 
 <%= render 'images/images', images: @images %>
 
-<div class='l-pagination'>
-  <%= paginate @images %>
-</div>
+<%= paginate @images %>

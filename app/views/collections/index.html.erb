@@ -1,5 +1,5 @@
-<nav class='breadcrumb'>
-  <span class='breadcrumb__current'>
+<nav class='Breadcrumb'>
+  <span class='Breadcrumb__current'>
     <%= @user %>
   </span>
 
@@ -8,20 +8,21 @@
   <% end %>
 </nav>
 
-<div class='grid'>
+<div class='List'>
   <% @collections.each do |collection| %>
-    <%= link_to user_collection_path(@user, collection), class: 'grid-item' do %>
-      <div class='collection-title'>
-        <%= collection.title %> -
-        <em><%= collection.connections.size == 0 ? 'empty' : collection.connections.size %></em>
+    <%= link_to user_collection_path(@user, collection), class: 'ListItem' do %>
+      <div class='ListTitle'>
+        <%= collection.title %>
+        <span>
+          <%= collection.connections.size == 0 ? 'empty' : "#{collection.connections.size} images" %>
+        </span>
       </div>
-      <div class='collection-timestamp'>
+
+      <div class='ListTimestamp'>
         <%= time_ago_in_words(collection.updated_at) %> ago
       </div>
     <% end %>
   <% end %>
 </div>
 
-<div class='l-pagination'>
-  <%= paginate @collections %>
-</div>
+<%= paginate @collections %>
