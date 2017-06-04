@@ -1,10 +1,14 @@
-<nav class='ImageShowNav'>
-  <%= link_to 'Full', @image.url %>
-  <%= link_to 'Find', "https://www.google.com/searchbyimage?&image_url=#{@image.url}" %>
-</nav>
+<div class='Image'>
+  <nav class='Breadcrumb'>
+    <%= link_to @user, user_collections_path(@user), class: 'Breadcrumb__crumb' %>
 
-<div class='ImageShowStage'>
-  <div class='ImageShowStage__inner'>
+    <span class='Breadcrumb__crumb'>
+      <%= link_to "Full (#{@image.width}×#{@image.height})", @image.url %>
+      <%= link_to 'Reverse Image Search', "https://www.google.com/searchbyimage?&image_url=#{@image.url}" %>
+    </span>
+  </nav>
+
+  <div class='Image__image'>
     <%= link_to :back do %>
       <%= image_tag @image.resized(width: 900, height: 900).url %>
     <% end %>
