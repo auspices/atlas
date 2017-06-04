@@ -4,6 +4,7 @@ ruby '2.4.0'
 source 'https://rubygems.org'
 
 gem 'active_model_serializers', '~> 0.9.0'
+gem 'autoprefixer-rails'
 gem 'coffee-rails'
 gem 'compass-rails', '~> 2.0.5'
 gem 'fastimage', '~> 1.6.3'

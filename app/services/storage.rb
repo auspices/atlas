@@ -38,7 +38,11 @@ module Storage
 
     def store(url, key)
       open(url) do |io|
-        bucket.files.create(key: key, public: true, body: io.read).tap do |object|
+        bucket.files.create(
+          key: key,
+          public: true,
+          body: io.read
+        ).tap do |object|
           io.rewind
           yield io, object
         end

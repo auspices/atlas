@@ -1,13 +1,17 @@
-@import './common'
+@import 'common'
+
+html
+  box-sizing: border-box
 
 *,
 *:before,
 *:after
-  +box-sizing(border-box)
+  box-sizing: inherit
 
 body
   background-color: white
-  @include serif-font()
+  +serif-font()
+  -webkit-font-smoothing: antialiased
 
 figure
   margin: 0
@@ -26,7 +30,7 @@ a
 p,
 ul,
 section
-  @include block-margins($unit)
+  +block-margins(1em)
 
 table
   width: 100%
@@ -41,8 +45,8 @@ h3
   font-size: $baseFontSize
 
 h1
-  @include block-margins($unit * 2)
+  +block-margins(2em)
 
 h2,
 h3
-  @include block-margins($unit)
+  +block-margins(1em)

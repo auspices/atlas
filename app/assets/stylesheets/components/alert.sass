@@ -1,0 +1,31 @@
+@import 'common'
+
++keyframes(fade-out)
+  0%
+    opacity: 1
+  100%
+    opacity: 0
+
+.Alert
+  position: fixed
+  top: 0
+  right: 0
+  left: 0
+  padding: 1em 2em
+  pointer-events: none
+  color: black
+  animation: fade-out 1s normal forwards
+  animation-delay: 1s
+  z-index: 1
+  +sans-serif-font()
+
+  &--error
+    background-color: $red
+    color: white
+
+  &--success
+    background-color: $green
+    color: white
+
+  &--notice
+    background-color: $yellow

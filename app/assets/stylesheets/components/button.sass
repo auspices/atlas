@@ -1,59 +1,45 @@
-@import './common'
+@import 'common'
 
-form
-  width: 60%
-  margin: $unit 0
-  @media screen and (max-width: $smallScreenBreakpoint)
-    width: 100%
-  @media screen and (max-width: $mobileBreakpoint)
-    width: 100%
-  input
-    display: block
-    width: 100%
-    margin: $unit 0
-
-.button,
-input
+.Button
   display: inline-block
   margin: 0
   padding: 10px
   border: 2px solid $lightGray
   border-radius: 2px
   box-shadow: none
-  @include serif-font()
-  +transition(all 0.125s)
+  transition: all 0.125s
   background-color: transparent
+  +serif-font()
+
   &:focus,
   &:active
     background-color: white
     border-color: black
     outline: none
-  &.is-block
+
+  &--block
     display: block
     width: 100%
-    margin: $unit 0
+    margin: 1em 0
 
-.has-error
-  input
-    border-color: red
-
-.button,
-button,
-input[type='submit']
+.Button
   background-color: $lightGray
   color: black
   text-align: center
   +transition(all 0.125s)
+
   &:hover,
   &:active,
   &:focus
     border-color: black
     background-color: black
     color: white
-  &.is-dangerous
+
+  &--dangerous
     border-color: red
     background-color: red
     color: white
+
     &:hover,
     &:active,
     &:focus
