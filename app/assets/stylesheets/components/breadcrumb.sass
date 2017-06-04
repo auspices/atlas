@@ -7,24 +7,14 @@
   padding: 1.75em 2em
   +sans-serif-font()
 
-  > *
-    +inline-block-margins($unit)
+  &__crumb
+    +inline-block-margins(1em)
 
-  &__current
-    //
+    > a + a
+      margin-left: 2em
 
-  &__separator
-    display: inline-block
-    margin: 0 0.25em
-    width: 1px
-    height: 1em
-    vertical-align: middle
-    transform: rotate(45deg)
-    background-color: black
-
-  > form
+  form
     flex: 1
-    margin: 0
     width: auto
 
     > input

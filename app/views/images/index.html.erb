@@ -3,19 +3,25 @@
 <% end %>
 
 <nav class='Breadcrumb'>
-  <%= link_to @user, user_collections_path(@user) %>
+  <%= link_to @user, user_collections_path(@user), class: 'Breadcrumb__crumb' %>
 
-  <span class='Breadcrumb__separator'></span>
-
-  <span class='Breadcrumb__current'>
-    <%= @collection || 'All images' %>
+  <span class='Breadcrumb__crumb'>
+    <% if @collection %>
+      <%= link_to @collection, [@user, @collection] %>
+    <% else %>
+      <%= link_to 'All images', user_images_path(@user) %>
+    <% end %>
   </span>
 
   <% if authorable? %>
-    <%= render 'images/form' %>
+    <span class='Breadcrumb__crumb'>
+      <%= render 'images/form' %>
+    </span>
   <% end %>
 </nav>
 
 <%= render 'images/images', images: @images %>
 
-<%= paginate @images %>
+<% content_for :footer do %>
+  <%= paginate @images %>
+<% end %>
