@@ -10,8 +10,7 @@ html
 
 body
   background-color: white
-  +serif-font()
-  -webkit-font-smoothing: antialiased
+  +sans-serif-font()
 
 figure
   margin: 0
@@ -49,4 +48,10 @@ h1
 
 h2,
 h3
+  +block-margins(1em)
+
+hr
+  height: 1px
+  border: none
+  background-color: $lightGray
   +block-margins(1em)

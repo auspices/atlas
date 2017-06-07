@@ -10,17 +10,20 @@
   &__crumb
     +inline-block-margins(1em)
 
+    &:last-child
+      flex: 1
+
     > a + a
       margin-left: 2em
 
-  form
-    flex: 1
-    width: auto
+    > form
+      flex: 1
 
-    > input
-      width: 100%
-      margin: 0
-      padding: 0
-      border: none
-      outline: none
-      +sans-serif-font()
+      > input
+        width: 100%
+        margin: 0
+        padding: 0
+        border: none
+        outline: none
+        +sans-serif-font()
+
