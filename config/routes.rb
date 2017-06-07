@@ -34,7 +34,13 @@ Rails.application.routes.draw do
   resources :users, path: '' do
     resources :images, except: %i[new edit update]
     resources :collections, except: %i[new edit update], path: '' do
-      resources :images, only: %i[index create], controller: 'collections/images'
+      resources :images, only: %i[create], controller: 'collections/images'
+
+      resources :images, only: [], path: '', controller: 'collections/images' do
+        collection do
+          get 'add/*source_url' => :add
+        end
+      end
     end
   end
 end

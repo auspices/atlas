@@ -1,39 +1,28 @@
 @import 'common'
 
 .Button
+  appearance: none
+  +sans-serif-font()
   display: inline-block
   margin: 0
-  padding: 10px
-  border: 2px solid $lightGray
-  border-radius: 2px
-  box-shadow: none
-  transition: all 0.125s
+  padding: 0.5em
+  line-height: 1
   background-color: transparent
-  +serif-font()
+  border: 1px solid
+  border-radius: 0.125em
+  cursor: pointer
+  // Hack to correctly set the height
+  height: calc(2em + 2px)
 
+  &:hover,
   &:focus,
   &:active
-    background-color: white
-    border-color: black
+    border-color: $lightGray
     outline: none
 
   &--block
     display: block
     width: 100%
-    margin: 1em 0
-
-.Button
-  background-color: $lightGray
-  color: black
-  text-align: center
-  +transition(all 0.125s)
-
-  &:hover,
-  &:active,
-  &:focus
-    border-color: black
-    background-color: black
-    color: white
 
   &--dangerous
     border-color: red
