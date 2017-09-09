@@ -31,6 +31,10 @@ class Image < ActiveRecord::Base
     File.basename(source_url)
   end
 
+  def title
+    to_s
+  end
+
   def mover
     @mover ||= ImageMover.new(self)
   end
