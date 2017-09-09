@@ -51,7 +51,7 @@ class Image < ActiveRecord::Base
     Storage.delete(url_key)
   end
 
-  def resized(options)
-    ImageResizer.new(self, options)
+  def resized(options = {})
+    ResizedImage.new(self, options)
   end
 end

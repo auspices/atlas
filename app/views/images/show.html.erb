@@ -10,7 +10,15 @@
 
   <div class='Image__image'>
     <%= link_to :back do %>
-      <%= image_tag @image.resized(width: 900, height: 900).url %>
+      <% @image.resized(width: 900, height: 900).tap do |image| %>
+        <img
+          src='<%= image.size(1) %>'
+          srcset='<%= image.size(1) %> 1x, <%= image.size(2) %> 2x'
+          width='<%= image.width %>'
+          height='<%= image.height %>'
+          alt='<%= image.to_s %>'
+        >
+      <% end %>
     <% end %>
   </div>
 </div>

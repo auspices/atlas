@@ -3,7 +3,13 @@
     <div class='InlineItem'>
       <%= link_to user_image_path(image.user, image) do %>
         <% image.resized(width: 225, height: 225).tap do |image| %>
-          <%= image_tag image.url, width: image.width, height: image.height %>
+          <img
+            src='<%= image.size(1) %>'
+            srcset='<%= image.size(1) %> 1x, <%= image.size(2) %> 2x'
+            width='<%= image.width %>'
+            height='<%= image.height %>'
+            alt='<%= image.to_s %>'
+          >
         <% end %>
       <% end %>
 
