@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class ResizedImage
   attr_reader :image, :width, :height, :factor, :ratio
 
@@ -10,6 +11,7 @@ class ResizedImage
   DEFAULT_OP = 'resize'
   DEFAULT_QUALITY = 95
 
+  # rubocop:disable Metrics/AbcSize
   def initialize(image, options = {})
     scale = options[:scale] || DEFAULT_SCALE
     @image = image
@@ -21,6 +23,7 @@ class ResizedImage
     @height = ([(@image.height * factor), @image.height].min * scale).to_i
     @ratio = (@height.to_f / @width.to_f * 100.0)
   end
+  # rubocop:enable Metrics/AbcSize
 
   def size(factor = 1)
     keyed = key(factor)
@@ -54,6 +57,10 @@ class ResizedImage
   private
 
   def method_missing(method, *args, &block)
-    image.send(method, *args, &block)
+    image.send(method, *args, &block) || super
+  end
+
+  def respond_to_missing?(method_name, include_private = false)
+    super
   end
 end

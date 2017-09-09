@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class RetinaImage
   attr_reader :_1x, :_2x, :_3x
 
