@@ -6,9 +6,9 @@
   <%= link_to @user, user_collections_path(@user), class: 'Breadcrumb__crumb' %>
 
   <% if @collection %>
-    <%= link_to @collection, [@user, @collection], class: 'Breadcrumb__crumb' %>
+    <%= link_to @collection, [@user, @collection], class: 'Breadcrumb__crumb', data: { active: true } %>
   <% else %>
-    <%= link_to 'All images', user_images_path(@user), class: 'Breadcrumb__crumb' %>
+    <%= link_to 'All images', user_images_path(@user), class: 'Breadcrumb__crumb', data: { active: true } %>
   <% end %>
 
   <% if authorable? %>

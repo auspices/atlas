@@ -1,10 +1,8 @@
 <div class='Image'>
   <nav class='Breadcrumb'>
     <%= link_to @user, user_collections_path(@user), class: 'Breadcrumb__crumb' %>
-
-    <span class='Breadcrumb__crumb'>
-      <%= link_to "Full (#{@image.width}×#{@image.height})", @image.url %>
-      <%= link_to 'Reverse Image Search', "https://www.google.com/searchbyimage?&image_url=#{@image.url}" %>
+    <%= link_to "Full (#{@image.width}×#{@image.height})", @image.url, class: 'Breadcrumb__crumb'  %>
+      <%= link_to 'Reverse Image Search', "https://www.google.com/searchbyimage?&image_url=#{@image.url}", class: 'Breadcrumb__crumb'  %>
     </span>
   </nav>
 

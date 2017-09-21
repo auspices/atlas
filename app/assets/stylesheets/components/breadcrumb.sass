@@ -7,7 +7,7 @@
   margin: 1.25em
   line-height: 1.5
 
-  border: 1px solid $lightGray
+  border: 1px solid $middleGray
   border-radius: 0.125em
   +sans-serif-font()
 
@@ -15,10 +15,11 @@
     padding: 0.5em 1em
 
     &:hover
-      background-color: $lightGray
+      background-color: $middleGray
+      color: white
 
   &__crumb
-    border-left: 1px solid $lightGray
+    border-left: 1px solid $middleGray
 
     &:first-child
       border-left: 0
@@ -41,3 +42,5 @@
         background-color: transparent
         +sans-serif-font()
 
+    &[data-active]
+      text-decoration: underline
