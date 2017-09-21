@@ -11,14 +11,14 @@
 <div class='List'>
   <% @collections.each do |collection| %>
     <%= link_to user_collection_path(@user, collection), class: 'ListItem' do %>
-      <div class='ListTitle'>
+      <div class='ListItem__title'>
         <%= collection.title %>
-        <span>
+        <span class='ListItem__length'>
           <%= collection.connections.size == 0 ? 'empty' : "#{collection.connections.size} images" %>
         </span>
       </div>
 
-      <div class='ListTimestamp'>
+      <div class='ListItem__timestamp'>
         <%= time_ago_in_words(collection.updated_at) %> ago
       </div>
     <% end %>

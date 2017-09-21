@@ -8,17 +8,18 @@ $smallScreenBreakpoint: 800px
 $gridItemSize: 300px
 
 // Colors
+$highlightGray: #eee
 $lightGray: #ccc
 $green: #05600b
 $red: #a00c0c
 $yellow: #f6db23
 
 // Mixins
-@mixin sans-serif-font()
+=sans-serif-font()
   font-family: 'Helvetica Neue', sans-serif
   font-size: $baseFontSize
 
-@mixin keyframes($name)
+=keyframes($name)
   @-webkit-keyframes #{$name}
     @content
   @-moz-keyframes #{$name}
@@ -28,7 +29,7 @@ $yellow: #f6db23
   @keyframes #{$name}
     @content
 
-@mixin block-margins($size: $unit)
+=block-margins($size: $unit)
   margin: $size 0
 
   &:first-child
@@ -37,7 +38,7 @@ $yellow: #f6db23
   &:last-child
     margin-bottom: 0
 
-@mixin inline-block-margins($size: $unit)
+=inline-block-margins($size: $unit)
   margin: 0 $size
 
   &:first-child
@@ -45,3 +46,11 @@ $yellow: #f6db23
 
   &:last-child
     margin-right: 0
+
+=ellipsis ($max-width)
+  display: inline-block
+  max-width: $max-width
+  overflow-x: hidden
+  overflow-y: visible
+  text-overflow: ellipsis
+  white-space: nowrap
