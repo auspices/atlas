@@ -5,13 +5,11 @@
 <nav class='Breadcrumb'>
   <%= link_to @user, user_collections_path(@user), class: 'Breadcrumb__crumb' %>
 
-  <span class='Breadcrumb__crumb'>
-    <% if @collection %>
-      <%= link_to @collection, [@user, @collection] %>
-    <% else %>
-      <%= link_to 'All images', user_images_path(@user) %>
-    <% end %>
-  </span>
+  <% if @collection %>
+    <%= link_to @collection, [@user, @collection], class: 'Breadcrumb__crumb' %>
+  <% else %>
+    <%= link_to 'All images', user_images_path(@user), class: 'Breadcrumb__crumb' %>
+  <% end %>
 
   <% if authorable? %>
     <span class='Breadcrumb__crumb'>

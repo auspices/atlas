@@ -3,19 +3,22 @@
 .List
   flex: 1
   margin: 1em 2em
+
+.ListItems
   border-radius: 0.25em
+  margin: 0 -0.75em
+  border: 1px solid black
 
 .ListItem
   display: flex
   flex-direction: row
   justify-content: space-between
-  padding: 0.5em 0.75em
-  margin: 0 -0.75em
-  border-radius: 0.25em
+  padding: 0.5em 1em
   line-height: 1.5
+  border-top: 1px solid black
 
-  &:nth-child(even)
-    background-color: $highlightGray
+  &:first-child
+    border-top: 0
 
   &:hover
     background-color: black

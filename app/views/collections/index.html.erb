@@ -9,20 +9,22 @@
 </nav>
 
 <div class='List'>
-  <% @collections.each do |collection| %>
-    <%= link_to user_collection_path(@user, collection), class: 'ListItem' do %>
-      <div class='ListItem__title'>
-        <%= collection.title %>
-        <span class='ListItem__length'>
-          <%= collection.connections.size == 0 ? 'empty' : "#{collection.connections.size} images" %>
-        </span>
-      </div>
+  <div class='ListItems'>
+    <% @collections.each do |collection| %>
+      <%= link_to user_collection_path(@user, collection), class: 'ListItem' do %>
+        <div class='ListItem__title'>
+          <%= collection.title %>
+          <span class='ListItem__length'>
+            <%= collection.connections.size == 0 ? 'empty' : "#{collection.connections.size} images" %>
+          </span>
+        </div>
 
-      <div class='ListItem__timestamp'>
-        <%= time_ago_in_words(collection.updated_at) %> ago
-      </div>
+        <div class='ListItem__timestamp'>
+          <%= time_ago_in_words(collection.updated_at) %> ago
+        </div>
+      <% end %>
     <% end %>
-  <% end %>
+  </div>
 </div>
 
 <% content_for :footer do %>
