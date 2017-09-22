@@ -8,8 +8,8 @@
   +sans-serif-font()
 
   & > span
-    font-size: $baseFontSize
     display: table-cell
+    font-size: $baseFontSize
     text-align: center
 
   &__page,
@@ -30,6 +30,7 @@
   &__gap,
   &__current
     color: lighten(black, 50%)
+    padding: 2em 0.5em
 
   &__current
     background-color: $lightGray
@@ -42,5 +43,17 @@
 
 @media screen and (max-width: $mobileBreakpoint)
   .Pagination
+    display: block
+
+    & > span
+      display: block
+      border-top: 1px solid $lightGray
+
     &__page
       display: none
+
+    &__first,
+    &__prev,
+    &__next,
+    &__last
+      width: 100%

@@ -6,7 +6,6 @@
   align-items: stretch
   margin: 1.25em
   line-height: 1.5
-
   border: 1px solid $middleGray
   border-radius: 0.125em
   +sans-serif-font()
@@ -44,3 +43,19 @@
 
     &[data-active]
       text-decoration: underline
+
+@media screen and (max-width: $mobileBreakpoint)
+  .Breadcrumb
+    display: block
+
+    &__crumb
+      display: block
+      width: 100%
+      border-left: 0
+      border-top: 1px solid $middleGray
+
+      &:first-child
+        border-top: 0
+
+      > form > input
+        padding: 0.66em 1em
