@@ -46,6 +46,7 @@ class UsersController < ApplicationController
   def destroy
     @user = User.friendly.find(params[:id])
     return redirect_to users_url, notice: 'User is an admin.' if @user.admin?
+
     @user.destroy
     redirect_to users_url, notice: 'User was destroyed.'
   end

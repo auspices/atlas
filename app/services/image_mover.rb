@@ -23,6 +23,7 @@ class ImageMover
 
   def extension
     return nil unless url
+
     ext = File.extname(URI.parse(url).path).downcase
     ext.blank? ? fallback_extension : ext
   end
