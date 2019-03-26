@@ -42,4 +42,7 @@ class User < ActiveRecord::Base
   def admin?
     id == 1
   end
+
+  # TODO: Aliases `contents` to `images` as we do not have distinct content types yet.
+  alias contents images
 end

@@ -13,5 +13,19 @@ module Types
     def images
       object.images
     end
+
+    field :contents, [Types::ContentType], null: true
+
+    def contents
+      object.contents
+    end
+
+    field :sample, [Types::ContentType], null: true do
+      argument :amount, Int, required: false
+    end
+
+    def sample(amount: 1)
+      object.contents.unscope(:order).order('RANDOM()').limit(amount)
+    end
   end
 end
