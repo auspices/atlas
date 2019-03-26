@@ -41,7 +41,3 @@ end
 group :production do
   gem 'rails_12factor'
 end
-
-# Temporary
-gem 'hashie'
-gem 'httparty'
