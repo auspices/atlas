@@ -111,6 +111,13 @@ GEM
       activerecord (>= 4.0.0)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
+    graphiql-rails (1.4.10)
+      railties
+      sprockets-rails
+    graphql (1.9.3)
+    graphql-batch (0.3.10)
+      graphql (>= 0.8, < 2)
+      promise.rb (~> 0.7.2)
     hashdiff (0.3.8)
     hashie (3.6.0)
     hike (1.2.3)
@@ -153,6 +160,7 @@ GEM
     parser (2.6.2.0)
       ast (~> 2.4.0)
     pg (0.21.0)
+    promise.rb (0.7.4)
     psych (3.1.0)
     public_suffix (3.0.3)
     puma (3.12.1)
@@ -273,6 +281,9 @@ DEPENDENCIES
   fog-aws
   foreman
   friendly_id (~> 5.0.4)
+  graphiql-rails
+  graphql
+  graphql-batch
   hashie
   httparty
   jquery-rails

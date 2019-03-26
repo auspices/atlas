@@ -10,6 +10,8 @@ gem 'compass-rails', '~> 2.0.5'
 gem 'fastimage', '~> 1.6.3'
 gem 'fog-aws'
 gem 'friendly_id', '~> 5.0.4'
+gem 'graphql'
+gem 'graphql-batch'
 gem 'jquery-rails'
 gem 'kaminari', '~> 0.16.1'
 gem 'mime-types', '~> 2.3'
@@ -24,6 +26,7 @@ gem 'uglifier', '>= 1.3.0'
 group :development do
   gem 'annotate'
   gem 'foreman'
+  gem 'graphiql-rails'
   gem 'rubocop'
 end
 
