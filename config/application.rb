@@ -28,6 +28,11 @@ module Atlas
         origins '*'
         resource '/api/*', headers: :any, methods: %i[options get put post]
       end
+
+      allow do
+        origins '*'
+        resource '/graphql', headers: :any, methods: %i[options get put post]
+      end
     end
   end
 end
