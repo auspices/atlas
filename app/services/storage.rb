@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'open-uri'
-
 module Storage
   class << self
     def connection
@@ -37,7 +35,7 @@ module Storage
     end
 
     def store(url, key)
-      open(url) do |io|
+      URI.parse(url).open do |io|
         bucket.files.create(
           key: key,
           public: true,

@@ -43,7 +43,7 @@ class ResizedImage
   end
 
   def encode_uri_component(url)
-    URI.escape(url, Regexp.new("[^#{URI::PATTERN::UNRESERVED}]"))
+    URI.encode_www_form_component(url)
   end
 
   def tokenize(data)
