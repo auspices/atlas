@@ -2,6 +2,7 @@
 
 class GraphqlController < ApplicationController
   protect_from_forgery with: :null_session
+  skip_before_filter :require_login
 
   def execute
     variables = ensure_hash(params[:variables])
