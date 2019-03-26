@@ -27,4 +27,7 @@ class Collection < ActiveRecord::Base
   def to_s
     title
   end
+
+  # TODO: Aliases `contents` to `images` as we do not have distinct content types yet.
+  alias contents images
 end

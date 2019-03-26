@@ -21,5 +21,13 @@ module Types
     def collections
       object.collections
     end
+
+    field :sample, [Types::ContentType], null: true do
+      argument :amount, Int, required: false
+    end
+
+    def sample(amount: 1)
+      object.contents.unscope(:order).order('RANDOM()').limit(amount)
+    end
   end
 end
