@@ -10,13 +10,15 @@ gem 'compass-rails', '~> 2.0.5'
 gem 'fastimage', '~> 1.6.3'
 gem 'fog-aws'
 gem 'friendly_id', '~> 5.0.4'
+gem 'graphql'
+gem 'graphql-batch'
 gem 'jquery-rails'
 gem 'kaminari', '~> 0.16.1'
 gem 'mime-types', '~> 2.3'
-gem 'pg'
+gem 'pg', '~> 0.11'
 gem 'puma'
 gem 'rack-cors', require: 'rack/cors'
-gem 'rails', '~> 4.2.8'
+gem 'rails', '4.2.11.1'
 gem 'sass-rails', '~> 5.0'
 gem 'sorcery'
 gem 'uglifier', '>= 1.3.0'
@@ -24,8 +26,8 @@ gem 'uglifier', '>= 1.3.0'
 group :development do
   gem 'annotate'
   gem 'foreman'
+  gem 'graphiql-rails'
   gem 'rubocop'
-  gem 'spring'
 end
 
 group :development, :test do
@@ -42,7 +44,3 @@ end
 group :production do
   gem 'rails_12factor'
 end
-
-# Temporary
-gem 'hashie'
-gem 'httparty'

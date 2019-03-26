@@ -3,8 +3,8 @@
 class ResizedImage
   attr_reader :image, :width, :height, :factor, :ratio
 
-  ENDPOINT = ENV['IMAGE_RESIZING_PROXY_ENDPOINT'].freeze
-  CANCER_SECRET_KEY = ENV['CANCER_SECRET_KEY'].freeze
+  ENDPOINT = ENV['IMAGE_RESIZING_PROXY_ENDPOINT']
+  CANCER_SECRET_KEY = ENV['CANCER_SECRET_KEY']
   KEY_TEMPLATE = '<OP>/<WIDTH>x<HEIGHT>/<QUALITY>/<URL>'
   REQUEST_TEMPLATE = '<ENDPOINT>/<TOKEN>/<KEY>'
   DEFAULT_SCALE = 1.0
@@ -43,7 +43,7 @@ class ResizedImage
   end
 
   def encode_uri_component(url)
-    URI.escape(url, Regexp.new("[^#{URI::PATTERN::UNRESERVED}]"))
+    URI.encode_www_form_component(url)
   end
 
   def tokenize(data)
