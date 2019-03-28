@@ -8,16 +8,13 @@ module Types
     field :created_at, String, null: false
     field :updated_at, String, null: false
 
-    field :images, [Types::ImageType], null: true
-
-    def images
-      object.images
+    field :contents, [Types::ContentType], null: true do
+      argument :page, Int, required: false
+      argument :per, Int, required: false
     end
 
-    field :contents, [Types::ContentType], null: true
-
-    def contents
-      object.contents
+    def contents(page: nil, per: nil)
+      object.contents.page(page).per(per)
     end
 
     field :sample, [Types::ContentType], null: true do

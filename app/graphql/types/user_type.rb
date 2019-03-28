@@ -16,10 +16,13 @@ module Types
       object.collections.friendly.find(id)
     end
 
-    field :collections, [Types::CollectionType], null: true
+    field :collections, [Types::CollectionType], null: true do
+      argument :page, Int, required: false
+      argument :per, Int, required: false
+    end
 
-    def collections
-      object.collections
+    def collections(page: nil, per: nil)
+      object.collections.page(page).per(per)
     end
 
     field :sample, [Types::ContentType], null: true do
