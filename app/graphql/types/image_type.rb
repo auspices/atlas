@@ -18,6 +18,7 @@ module Types
     end
 
     def resized(width: nil, height: nil, scale: nil)
+      # TODO: Validate that either width or height is present
       object.resized(width: width, height: height, scale: scale)
     end
   end
