@@ -8,6 +8,12 @@ module Types
     field :created_at, String, null: false
     field :updated_at, String, null: false
 
+    field :counts, Types::CollectionCountsType, null: false
+
+    def counts
+      object
+    end
+
     field :contents, [Types::ContentType], null: true do
       argument :page, Int, required: false
       argument :per, Int, required: false
