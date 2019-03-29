@@ -9,5 +9,22 @@ module Types
     def user(id:)
       User.friendly.find(id)
     end
+
+    field :collection, Types::CollectionType, null: true do
+      argument :id, ID, required: true
+    end
+
+    def collection(id:)
+      Collection.friendly.find(id)
+    end
+
+    field :content, Types::ContentType, null: true do
+      argument :id, ID, required: true
+      argument :type, Types::ContentTypes, required: true
+    end
+
+    def content(id:, type:)
+      type.find(id)
+    end
   end
 end
