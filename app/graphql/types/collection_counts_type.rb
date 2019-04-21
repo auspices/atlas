@@ -5,7 +5,7 @@ module Types
     field :contents, Int, null: false
 
     def contents
-      object.contents.size
+      object.connections.size
     end
   end
 end

@@ -20,4 +20,7 @@ class Connection < ActiveRecord::Base
   belongs_to :user
   belongs_to :collection, counter_cache: :connections_count, touch: true
   belongs_to :image
+
+  # TODO: Aliases `content` to `image` as we do not have distinct content types yet.
+  alias content image
 end
