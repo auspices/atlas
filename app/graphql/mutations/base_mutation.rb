@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-module Types
-  class BaseObject < GraphQL::Schema::Object
+module Mutations
+  class BaseMutation < GraphQL::Schema::RelayClassicMutation
     def current_user
       user = context[:current_user]
 
