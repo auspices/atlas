@@ -38,7 +38,7 @@ module Storage
 
     def store(url, key)
       uri = Addressable::URI.heuristic_parse(url)
-      open(uri) do |io|
+      OpenURI.open_uri(uri) do |io|
         bucket.files.create(
           key: key,
           public: true,
