@@ -1,3 +1,0 @@
-<span class='Pagination__page<%= ' Pagination__current' if page.current? %>'>
-  <%= link_to_unless page.current?, page, url, { remote: remote, rel: page.next? ? 'next' : page.prev? ? 'prev' : nil } %>
-</span>

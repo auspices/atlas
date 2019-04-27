@@ -13,10 +13,6 @@ module Atlas
       #{config.root}/app/services
     ]
 
-    config.action_view.field_error_proc = proc { |tag|
-      "<span class='HasError'>#{tag}</span>".html_safe
-    }
-
     config.generators do |generate|
       generate.stylesheets false
       generate.javascripts false
@@ -24,11 +20,6 @@ module Atlas
     end
 
     config.middleware.insert_before 0, 'Rack::Cors' do
-      allow do
-        origins '*'
-        resource '/api/*', headers: :any, methods: %i[options get put post]
-      end
-
       allow do
         origins '*'
         resource '/graphql', headers: :any, methods: %i[options get put post]

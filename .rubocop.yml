@@ -12,7 +12,7 @@ AllCops:
 Lint/AssignmentInCondition:
   Enabled: false
 
-Style/AlignHash:
+Layout/AlignHash:
   Enabled: false
 
 Style/Documentation:
@@ -21,8 +21,8 @@ Style/Documentation:
 Style/MultilineBlockChain:
   Enabled: false
 
-Style/MultilineOperationIndentation:
+Layout/MultilineOperationIndentation:
   Enabled: false
 
-Lint/EndAlignment:
+Layout/EndAlignment:
   EnforcedStyleAlignWith: variable
