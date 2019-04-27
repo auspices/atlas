@@ -15,10 +15,10 @@ class GraphqlController < ApplicationController
                                  context: context,
                                  operation_name: operation_name)
     render json: result
-  rescue StandardError => err
-    raise err unless Rails.env.development?
+  rescue StandardError => e
+    raise e unless Rails.env.development?
 
-    handle_error_in_development(err)
+    handle_eor_in_development(err)
   end
 
   private

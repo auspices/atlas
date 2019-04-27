@@ -8,6 +8,8 @@ Bundler.require(*Rails.groups)
 
 module Atlas
   class Application < Rails::Application
+    config.assets.enabled = false
+
     config.autoload_paths += %W[
       #{config.root}/lib
       #{config.root}/app/services

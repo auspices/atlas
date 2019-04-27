@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-ruby '2.4.0'
+ruby '2.6.3'
 source 'https://rubygems.org'
 
 gem 'fastimage', '~> 1.6.3'
@@ -23,6 +23,7 @@ group :development do
   gem 'foreman'
   gem 'graphiql-rails'
   gem 'rubocop'
+  gem 'rubocop-performance'
 end
 
 group :development, :test do

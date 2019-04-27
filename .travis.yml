@@ -2,15 +2,15 @@ language: ruby
 cache: bundler
 sudo: false
 rvm:
-- 2.4.0
+  - 2.6.3
 addons:
-  postgresql: '9.3'
+  postgresql: "9.3"
 before_script:
-- psql -c 'create database travis_ci_test;' -U postgres
-- cp config/database.yml.travis config/database.yml
+  - psql -c 'create database travis_ci_test;' -U postgres
+  - cp config/database.yml.travis config/database.yml
 script:
-- bundle exec rubocop
-- bundle exec rspec
+  - bundle exec rubocop
+  - bundle exec rspec
 deploy:
   provider: heroku
   app:
