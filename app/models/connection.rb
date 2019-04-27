@@ -12,7 +12,7 @@
 #  updated_at    :datetime
 #
 
-class Connection < ActiveRecord::Base
+class Connection < ApplicationRecord
   validates :collection_id, presence: true
   validates :image_id, presence: true
   validates :user_id, presence: true

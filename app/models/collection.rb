@@ -13,7 +13,7 @@
 #  slug              :string(255)
 #
 
-class Collection < ActiveRecord::Base
+class Collection < ApplicationRecord
   extend FriendlyId
   friendly_id :title, use: :scoped, scope: :user
 

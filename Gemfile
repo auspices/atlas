@@ -15,7 +15,7 @@ gem 'mime-types', '~> 2.3'
 gem 'pg', '~> 0.11'
 gem 'puma'
 gem 'rack-cors', require: 'rack/cors'
-gem 'rails', '4.2.11.1'
+gem 'rails', '~> 5'
 gem 'sorcery'
 
 group :development do

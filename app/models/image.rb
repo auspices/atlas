@@ -14,7 +14,7 @@
 #  height     :integer
 #
 
-class Image < ActiveRecord::Base
+class Image < ApplicationRecord
   after_create :store!, if: proc { |image| image.url.blank? }
   before_destroy :remove_s3_object!, if: proc { |image| image.url.present? }
 
