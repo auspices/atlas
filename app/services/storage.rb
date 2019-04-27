@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'open-uri'
+
 module Storage
   class << self
     def connection
@@ -35,7 +37,8 @@ module Storage
     end
 
     def store(url, key)
-      URI.parse(url).open do |io|
+      uri = Addressable::URI.heuristic_parse(url)
+      OpenURI.open_uri(uri) do |io|
         bucket.files.create(
           key: key,
           public: true,

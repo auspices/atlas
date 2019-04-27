@@ -19,7 +19,7 @@
 #  slug                            :string(255)
 #
 
-class User < ActiveRecord::Base
+class User < ApplicationRecord
   include ActiveModel::Dirty
 
   extend FriendlyId
