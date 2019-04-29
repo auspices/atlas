@@ -15,8 +15,7 @@
 #
 
 class Image < ApplicationRecord
-  after_create :store!, if: proc { |image| image.url.blank? }
-  before_destroy :remove_s3_object!, if: proc { |image| image.url.present? }
+  include Uploadable
 
   has_many :connections, dependent: :destroy
   has_many :collections, through: :connections
@@ -25,7 +24,6 @@ class Image < ApplicationRecord
   validates_format_of :source_url, with: URI.regexp(%w[http https])
   validates :source_url, presence: true
   validates :user_id, presence: true
-  validate :source_url_is_an_image
 
   def to_s
     File.basename(source_url)
@@ -33,26 +31,6 @@ class Image < ApplicationRecord
 
   def title
     to_s
-  end
-
-  def mover
-    @mover ||= ImageMover.new(self)
-  end
-
-  def store!
-    update_attributes!(mover.move!)
-  end
-
-  def source_url_is_an_image
-    errors.add(:source_url, 'must be an image') unless mover.extension_valid?
-  end
-
-  def url_key
-    URI.parse(url).path[1..-1]
-  end
-
-  def remove_s3_object!
-    Storage.delete(url_key)
   end
 
   def resized(options = {})
