@@ -30,5 +30,17 @@ module Types
     def sample(amount: 1)
       object.contents.unscope(:order).order('RANDOM()').limit(amount)
     end
+
+    field :presigned_upload_url, String, null: false do
+      argument :type, Types::SupportedMimeTypes, required: true
+    end
+
+    def presigned_upload_url(type:)
+      UploadManager.presigned_url(
+        type: :image,
+        user_id: current_user.id,
+        filename: "#{UploadManager.token}.#{type}"
+      )
+    end
   end
 end

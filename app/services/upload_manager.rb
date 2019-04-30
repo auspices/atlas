@@ -69,5 +69,15 @@ class UploadManager
     def key(type:, user_id:, filename:)
       [TYPES[type], user_id, filename].join('/')
     end
+
+    def presigned_url(type:, user_id:, filename:)
+      new(
+        key(
+          type: type,
+          user_id: user_id,
+          filename: filename
+        )
+      ).presigned_url
+    end
   end
 end
