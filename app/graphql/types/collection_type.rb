@@ -32,14 +32,16 @@ module Types
     end
 
     field :presigned_upload_url, String, null: false do
-      argument :type, Types::SupportedMimeTypes, required: true
+      argument :type, Types::SupportedUploadTypes, required: true
     end
 
     def presigned_upload_url(type:)
+      ext, mime_type = type.values_at(:ext, :mime_type)
+
       UploadManager.presigned_url(
-        type: :image,
+        mime_type: mime_type,
         user_id: current_user.id,
-        filename: "#{UploadManager.token}.#{type}"
+        filename: "#{UploadManager.token}.#{ext}"
       )
     end
   end

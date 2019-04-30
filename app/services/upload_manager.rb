@@ -34,10 +34,6 @@ class UploadManager
     obj.delete
   end
 
-  def presigned_url
-    obj.presigned_url(:put, acl: 'public-read')
-  end
-
   def public_url
     obj.public_url(secure: true)
   end
@@ -59,25 +55,17 @@ class UploadManager
     end
 
     def token
-      rand(36**8).to_s(36)
+      SecureRandom.alphanumeric
     end
 
-    TYPES = {
-      image: 'images'
-    }.freeze
-
-    def key(type:, user_id:, filename:)
-      [TYPES[type], user_id, filename].join('/')
+    def key(user_id:, filename:)
+      [user_id, filename].join('/')
     end
 
-    def presigned_url(type:, user_id:, filename:)
+    def presigned_url(mime_type:, user_id:, filename:)
       new(
-        key(
-          type: type,
-          user_id: user_id,
-          filename: filename
-        )
-      ).presigned_url
+        key(user_id: user_id, filename: filename)
+      ).obj.presigned_url(:put, acl: 'public-read', content_type: mime_type)
     end
   end
 end

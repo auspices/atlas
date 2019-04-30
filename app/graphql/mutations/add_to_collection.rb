@@ -23,7 +23,6 @@ module Mutations
           image.assign_attributes(width: width, height: height)
 
           UploadManager.key(
-            type: :image,
             user_id: current_user.id,
             filename: "#{UploadManager.token}.#{type}"
           )
