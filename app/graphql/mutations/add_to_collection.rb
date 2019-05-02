@@ -8,34 +8,43 @@ module Mutations
     field :collection, Types::CollectionType, null: false
     field :content, Types::ContentType, null: false
 
-    def resolve(id:, url:) # rubocop:disable Metrics/AbcSize
+    def build_image_with_direct_upload(url)
+      width, height = FastImage.size(url)
+      current_user.images.build(
+        url: url,
+        width: width,
+        height: height
+      )
+    end
+
+    def build_image_with_source_url(source_url)
+      image = current_user.images.build(source_url: source_url)
+
+      image.url = UploadManager.upload_from_source_url(source_url) do |io|
+        type = FastImage.type(io)
+
+        raise Errors::BadRequestError, '`source_url` must be an image' if type.nil?
+
+        width, height = FastImage.size(io)
+        image.assign_attributes(width: width, height: height)
+
+        UploadManager.key(
+          user_id: current_user.id,
+          filename: "#{UploadManager.token}.#{type}"
+        )
+      end
+
+      image
+    end
+
+    def resolve(id:, url:)
       collection = current_user.collections.find(id)
 
       ActiveRecord::Base.transaction do
-        if UploadManager.internal_url?(url)
-          width, height = FastImage.size(url)
-          image = current_user.images.build(
-            url: url,
-            width: width,
-            height: height
-          )
+        image = if UploadManager.internal_url?(url, treat_duplicates_as_external: true)
+          build_image_with_direct_upload(url)
         else
-          source_url = url
-          image = current_user.images.build(source_url: source_url)
-
-          image.url = UploadManager.upload_from_source_url(source_url) do |io|
-            type = FastImage.type(io)
-
-            raise Errors::BadRequestError, '`source_url` must be an image' if type.nil?
-
-            width, height = FastImage.size(io)
-            image.assign_attributes(width: width, height: height)
-
-            UploadManager.key(
-              user_id: current_user.id,
-              filename: "#{UploadManager.token}.#{type}"
-            )
-          end
+          build_image_with_source_url(url)
         end
 
         image.save!

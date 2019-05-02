@@ -68,9 +68,15 @@ class UploadManager
       ).obj.presigned_url(:put, acl: 'public-read', content_type: mime_type)
     end
 
-    def internal_url?(url)
+    def internal_url?(url, treat_duplicates_as_external: false)
       uri = Addressable::URI.heuristic_parse(url)
-      uri.host == "#{S3_BUCKET}.s3.amazonaws.com"
+      is_internal = uri.host == "#{S3_BUCKET}.s3.amazonaws.com"
+
+      return is_internal if is_internal == false
+
+      return is_internal unless treat_duplicates_as_external
+
+      is_internal && !Image.exists?(url: url)
     rescue Addressable::URI::InvalidURIError
       false
     end
