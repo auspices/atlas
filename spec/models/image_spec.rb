@@ -22,8 +22,4 @@ RSpec.describe Image, type: :model do
   it 'has a valid fabricator' do
     expect(image).to be_valid
   end
-
-  it 'returns the key of the s3 object for the stored url' do
-    expect(image.key).to eql('1/bar.jpg')
-  end
 end
