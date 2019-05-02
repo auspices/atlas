@@ -9,5 +9,10 @@ module Types
 
       user
     end
+
+    def require_login!
+      current_user
+      nil
+    end
   end
 end
