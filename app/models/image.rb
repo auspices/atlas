@@ -21,12 +21,12 @@ class Image < ApplicationRecord
   has_many :collections, through: :connections
   belongs_to :user
 
-  validates_format_of :source_url, with: URI.regexp(%w[http https])
-  validates :source_url, presence: true
+  validates_format_of :source_url, with: URI.regexp(%w[http https]), allow_blank: true
+  validates_format_of :url, with: URI.regexp(%w[https]), allow_blank: true
   validates :user_id, presence: true
 
   def to_s
-    File.basename(source_url)
+    File.basename(source_url || url) if source_url.present? || url.present?
   end
 
   def title

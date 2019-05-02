@@ -67,5 +67,12 @@ class UploadManager
         key(user_id: user_id, filename: filename)
       ).obj.presigned_url(:put, acl: 'public-read', content_type: mime_type)
     end
+
+    def internal_url?(url)
+      uri = Addressable::URI.heuristic_parse(url)
+      uri.host == "#{S3_BUCKET}.s3.amazonaws.com"
+    rescue Addressable::URI::InvalidURIError
+      false
+    end
   end
 end
