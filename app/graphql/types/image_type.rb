@@ -2,10 +2,10 @@
 
 module Types
   class ImageType < Types::BaseObject
+    include Shared::Timestamps
+
     field :id, Int, null: false
     field :title, String, null: false
-    field :created_at, String, null: false
-    field :updated_at, String, null: false
     field :source_url, String, null: true
     field :width, Int, null: true
     field :height, Int, null: true
