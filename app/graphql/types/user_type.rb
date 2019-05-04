@@ -9,6 +9,12 @@ module Types
     field :created_at, String, null: false
     field :updated_at, String, null: false
 
+    field :counts, Types::UserCountsType, null: false
+
+    def counts
+      object
+    end
+
     field :collection, Types::CollectionType, null: true do
       argument :id, ID, required: true
     end
