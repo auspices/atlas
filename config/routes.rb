@@ -6,4 +6,6 @@ Rails.application.routes.draw do
   post '/graphql', to: 'graphql#execute'
 
   root to: 'home#index'
+
+  match '/*path', to: 'errors#not_found', via: :all
 end
