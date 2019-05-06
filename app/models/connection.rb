@@ -21,6 +21,8 @@ class Connection < ApplicationRecord
   belongs_to :collection, counter_cache: :connections_count, touch: true
   belongs_to :image
 
+  acts_as_list scope: :collection, top_of_list: 0, add_new_at: :top
+
   # TODO: Aliases `content` to `image` as we do not have distinct content types yet.
   alias content image
 end
