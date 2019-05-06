@@ -21,7 +21,7 @@ class Collection < ApplicationRecord
   validates :user_id, presence: true
 
   belongs_to :user
-  has_many :connections, -> { order created_at: :desc }, dependent: :destroy
+  has_many :connections, -> { order position: :asc }, dependent: :destroy
   has_many :images, through: :connections
 
   def to_s
