@@ -5,12 +5,13 @@
 # Table name: collections
 #
 #  id                :integer          not null, primary key
-#  title             :string(255)
-#  connections_count :integer          default("0")
+#  title             :string
+#  connections_count :integer          default(0)
 #  user_id           :integer          not null
 #  created_at        :datetime
 #  updated_at        :datetime
-#  slug              :string(255)
+#  slug              :string
+#  metadata          :jsonb            not null
 #
 
 class Collection < ApplicationRecord
