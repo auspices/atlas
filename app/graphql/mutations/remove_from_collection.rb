@@ -2,25 +2,23 @@
 
 module Mutations
   class RemoveFromCollection < BaseMutation
-    argument :connection, Types::ConnectionInput, required: true
+    argument :content_id, ID, required: true
 
+    field :content, Types::ContentType, null: false
     field :collection, Types::CollectionType, null: false
 
-    def resolve(connection:)
-      collection = current_user.collections.find(connection.collection_id)
-      content_connection = collection.connections.find_by!(
-        image_id: connection.content_id
-      )
+    def resolve(content_id:)
+      content = Content.find(content_id)
 
-      content_or_connection = if content_connection.content.collections.size == 1
-        content_connection.content
+      entity_or_content = if content.entity.collections.size == 1
+        content.entity
       else
-        content_connection
+        content
       end
 
-      content_or_connection.destroy
+      entity_or_content.destroy
 
-      { collection: collection }
+      { content: content, collection: content.collection }
     end
   end
 end

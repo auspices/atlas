@@ -10,14 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_20_114438) do
+ActiveRecord::Schema.define(version: 2019_06_01_210004) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "collections", id: :serial, force: :cascade do |t|
     t.string "title"
-    t.integer "connections_count", default: 0
+    t.integer "contents_count", default: 0
     t.integer "user_id", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -27,16 +27,17 @@ ActiveRecord::Schema.define(version: 2019_05_20_114438) do
     t.index ["user_id"], name: "index_collections_on_user_id"
   end
 
-  create_table "connections", id: :serial, force: :cascade do |t|
+  create_table "contents", id: :serial, force: :cascade do |t|
     t.integer "collection_id", null: false
-    t.integer "image_id", null: false
     t.integer "user_id", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer "position"
-    t.index ["collection_id"], name: "index_connections_on_collection_id"
-    t.index ["image_id"], name: "index_connections_on_image_id"
-    t.index ["user_id"], name: "index_connections_on_user_id"
+    t.string "entity_type"
+    t.bigint "entity_id"
+    t.index ["collection_id"], name: "index_contents_on_collection_id"
+    t.index ["entity_type", "entity_id"], name: "index_contents_on_entity_type_and_entity_id"
+    t.index ["user_id"], name: "index_contents_on_user_id"
   end
 
   create_table "friendly_id_slugs", id: :serial, force: :cascade do |t|

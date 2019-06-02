@@ -7,6 +7,7 @@ module Mutations
 
     field :collection, Types::CollectionType, null: false
     field :content, Types::ContentType, null: false
+    field :entity, Types::EntityType, null: false
 
     def build_image_with_direct_upload(url)
       width, height = FastImage.size(url)
@@ -49,10 +50,9 @@ module Mutations
 
         image.save!
 
-        connection = Connector.build(current_user, collection, image)
-        connection.save!
+        content = collection.contents.create!(user: current_user, entity: image)
 
-        return { collection: collection, content: image }
+        return { collection: collection, content: content, entity: image }
       end
     end
   end

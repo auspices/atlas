@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-Fabricator(:connection, from: 'Connection') do
+Fabricator(:content, from: 'Content') do
   user { Fabricate(:user) }
   collection { Fabricate(:collection) }
-  image { Fabricate(:image) }
+  entity { Fabricate(:image) }
 end
