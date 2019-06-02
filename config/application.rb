@@ -27,5 +27,7 @@ module Atlas
         resource '/graphql', headers: :any, methods: %i[options get put post]
       end
     end
+
+    config.middleware.use BatchLoader::Middleware
   end
 end

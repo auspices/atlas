@@ -2,23 +2,24 @@
 
 # == Schema Information
 #
-# Table name: connections
+# Table name: contents
 #
 #  id            :integer          not null, primary key
 #  collection_id :integer          not null
-#  image_id      :integer          not null
 #  user_id       :integer          not null
 #  created_at    :datetime
 #  updated_at    :datetime
 #  position      :integer
+#  entity_type   :string
+#  entity_id     :bigint
 #
 
 require 'rails_helper'
 
-RSpec.describe Connection, type: :model do
-  let(:connection) { Fabricate(:connection) }
+RSpec.describe Content, type: :model do
+  let(:content) { Fabricate(:content) }
 
   it 'has a valid fabricator' do
-    expect(connection).to be_valid
+    expect(content).to be_valid
   end
 end

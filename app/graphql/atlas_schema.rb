@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 class AtlasSchema < GraphQL::Schema
-  mutation(Types::MutationType)
-  query(Types::QueryType)
-  use GraphQL::Batch
+  mutation Types::MutationType
+  query Types::QueryType
+  use BatchLoader::GraphQL
 end
 
 GraphQL::Errors.configure(AtlasSchema) do

@@ -26,11 +26,10 @@ module Types
 
     field :content, Types::ContentType, null: true do
       argument :id, ID, required: true
-      argument :type, Types::ContentTypes, required: true
     end
 
-    def content(id:, type:)
-      type.find(id)
+    def content(id:)
+      Content.find(id)
     end
   end
 end
