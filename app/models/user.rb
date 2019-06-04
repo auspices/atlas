@@ -35,6 +35,7 @@ class User < ApplicationRecord
   has_many :contents, dependent: :destroy
   has_many :collections, -> { order updated_at: :desc }, dependent: :destroy
   has_many :images, -> { order created_at: :desc }, dependent: :destroy
+  has_many :texts, -> { order created_at: :desc }, dependent: :destroy
 
   def to_s
     username
@@ -43,7 +44,4 @@ class User < ApplicationRecord
   def admin?
     id == 1
   end
-
-  # TODO: Aliases `contents` to `images` as we do not have distinct content types yet.
-  alias contents images
 end
