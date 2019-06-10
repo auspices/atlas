@@ -10,5 +10,6 @@ module Types
     field :add_to_collection, mutation: Mutations::AddToCollection
     field :remove_from_collection, mutation: Mutations::RemoveFromCollection
     field :reposition_collection_content, mutation: Mutations::RepositionCollectionContent
+    field :update_content, mutation: Mutations::UpdateContent
   end
 end

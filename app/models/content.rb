@@ -12,6 +12,7 @@
 #  position      :integer
 #  entity_type   :string
 #  entity_id     :bigint
+#  metadata      :jsonb            not null
 #
 
 class Content < ApplicationRecord

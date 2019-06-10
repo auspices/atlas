@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_02_212010) do
+ActiveRecord::Schema.define(version: 2019_06_10_140423) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(version: 2019_06_02_212010) do
     t.integer "position"
     t.string "entity_type"
     t.bigint "entity_id"
+    t.jsonb "metadata", default: {}, null: false
     t.index ["collection_id"], name: "index_contents_on_collection_id"
     t.index ["entity_type", "entity_id"], name: "index_contents_on_entity_type_and_entity_id"
     t.index ["user_id"], name: "index_contents_on_user_id"
