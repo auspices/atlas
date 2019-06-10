@@ -7,6 +7,7 @@ module Types
     field :id, Int, null: false
     field :slug, String, null: false
     field :title, String, null: false
+    field :name, String, null: false, method: :title
     field :metadata, Types::RawJson, null: false
 
     field :value, String, null: true, extras: [:irep_node] do

@@ -6,6 +6,7 @@ module Types
 
     field :id, Int, null: false
     field :title, String, null: false
+    field :name, String, null: false, method: :title
     field :source_url, String, null: true
     field :width, Int, null: true
     field :height, Int, null: true
