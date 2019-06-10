@@ -3,20 +3,12 @@
 module Types
   class CollectionType < Types::BaseObject
     include Shared::Timestamps
+    include Shared::Metadata
 
     field :id, Int, null: false
     field :slug, String, null: false
     field :title, String, null: false
     field :name, String, null: false, method: :title
-    field :metadata, Types::RawJson, null: false
-
-    field :value, String, null: true, extras: [:irep_node] do
-      argument :key, String, required: false
-    end
-
-    def value(irep_node:, key: nil)
-      object.metadata[key || irep_node.name]
-    end
 
     field :counts, Types::CollectionCountsType, null: false
 
