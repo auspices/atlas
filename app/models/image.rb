@@ -27,11 +27,7 @@ class Image < ApplicationRecord
   validates :user, presence: true
 
   def to_s
-    File.basename(source_url || url) if source_url.present? || url.present?
-  end
-
-  def title
-    to_s
+    @to_s ||= File.basename(source_url || url) if source_url.present? || url.present?
   end
 
   def resized(options = {})
