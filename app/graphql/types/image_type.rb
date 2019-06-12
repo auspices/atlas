@@ -5,8 +5,8 @@ module Types
     include Shared::Timestamps
 
     field :id, Int, null: false
-    field :title, String, null: false
-    field :name, String, null: false, method: :title
+    field :title, String, null: false, method: :to_s
+    field :name, String, null: false, method: :to_s
     field :source_url, String, null: true
     field :width, Int, null: true
     field :height, Int, null: true

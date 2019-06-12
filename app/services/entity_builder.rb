@@ -12,26 +12,41 @@ class EntityBuilder
     @value = value
   end
 
+  def uri
+    @uri ||= Addressable::URI.heuristic_parse(value)
+  end
+
   def url?
-    uri = Addressable::URI.heuristic_parse(value)
     SUPPORTED_SCHEMES.include?(uri.scheme)
   rescue Addressable::URI::InvalidURIError
     false
   end
 
+  def image?
+    !FastImage.type(value).nil?
+  end
+
   def build
-    if url?
-      build_image(value)
+    if url? && image?
+      build_image
+    elsif url?
+      build_link
     else
-      build_text(value)
+      build_text
     end
   end
 
-  def build_text(body)
-    user.texts.build(body: body)
+  def build_text
+    user.texts.build(body: value)
   end
 
-  def build_image(url)
+  def build_link
+    user.links.build(url: uri.to_s)
+  end
+
+  def build_image
+    url = uri.to_s
+
     if UploadManager.internal_url?(url, treat_duplicates_as_external: true)
       build_image_with_direct_upload(url)
     else
