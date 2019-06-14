@@ -7,7 +7,7 @@
 # versions of RuboCop, may require this file to be generated again.
 
 Metrics/AbcSize:
-  Max: 22
+  Max: 30
 
 # Configuration parameters: AllowURI, URISchemes.
 Metrics/LineLength:

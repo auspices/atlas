@@ -23,11 +23,16 @@ class Link < ApplicationRecord
     @uri ||= URI.parse(url)
   end
 
+  def truncated_url(length: 25)
+    normalized = [uri.host, uri.path].reject(&:blank?).join('/').gsub(%r{\/+$}, '')
+    return normalized if normalized.length <= length
+
+    chars = normalized.gsub(/^www\./, '').chars
+    head, tail = chars.each_slice((chars.size / 2.0).round).to_a
+    head.join('').truncate(length / 2, separator: '…') + tail.last(length / 2).join('')
+  end
+
   def to_s
-    @to_s ||= begin
-      chars = [uri.host, uri.path].reject(&:blank?).join('/').chars
-      head, tail = chars.each_slice((chars.size / 2.0).round).to_a
-      head.join('').truncate(15) + tail.last(10).join('')
-    end
+    @to_s ||= truncated_url(length: 25)
   end
 end
