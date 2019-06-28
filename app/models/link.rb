@@ -20,7 +20,7 @@ class Link < ApplicationRecord
   validates_format_of :url, with: URI.regexp(%w[http https])
 
   def uri
-    @uri ||= URI.parse(url)
+    @uri ||= Addressable::URI.heuristic_parse(url)
   end
 
   def truncated_url(length: 25)
