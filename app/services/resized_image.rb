@@ -16,12 +16,12 @@ class ResizedImage
     scale = options[:scale] || DEFAULT_SCALE
     @image = image
     @factor = [
-      ((options[:width].to_f / @image.width.to_f) if options[:width]),
-      ((options[:height].to_f / @image.height.to_f) if options[:height])
+      ((options[:width] / @image.width.to_f) if options[:width]),
+      ((options[:height] / @image.height.to_f) if options[:height])
     ].compact.min
     @width = ([(@image.width * factor), @image.width].min * scale).to_i
     @height = ([(@image.height * factor), @image.height].min * scale).to_i
-    @ratio = (@height.to_f / @width.to_f * 100.0)
+    @ratio = (@height / @width.to_f * 100.0)
   end
   # rubocop:enable Metrics/AbcSize
 
