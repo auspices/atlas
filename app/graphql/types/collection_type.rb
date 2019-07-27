@@ -19,10 +19,13 @@ module Types
     field :contents, [Types::ContentType], null: true do
       argument :page, Int, required: false
       argument :per, Int, required: false
+      argument :metadata, Types::RawJson, required: false
     end
 
-    def contents(page: nil, per: nil)
-      object.contents.page(page).per(per)
+    def contents(page: nil, per: nil, metadata: nil)
+      results = object.contents
+      results = results.where('metadata @> ?', metadata.to_json) if metadata.present?
+      results.page(page).per(per)
     end
 
     field :sample, [Types::ContentType], null: true do
