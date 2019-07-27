@@ -4,9 +4,7 @@ module Mutations
   class UpdateCollection < BaseMutation
     argument :id, ID, required: true
     argument :title, String, required: false
-    argument :metadata, Types::RawJson, required: false, prepare: lambda { |metadata, _ctx|
-      JSON.parse(metadata)
-    }
+    argument :metadata, GraphQL::Types::JSON, required: false
     argument :replace, Boolean, required: false, default_value: false
 
     field :collection, Types::CollectionType, null: false

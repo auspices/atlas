@@ -3,7 +3,7 @@
 module Shared
   module Metadata
     def self.included(child_class)
-      child_class.field :metadata, Types::RawJson, null: false
+      child_class.field :metadata, GraphQL::Types::JSON, null: false
 
       child_class.field :value, String, null: true, extras: [:irep_node] do
         argument :key, String, required: false

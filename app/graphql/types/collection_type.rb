@@ -19,7 +19,7 @@ module Types
     field :contents, [Types::ContentType], null: true do
       argument :page, Int, required: false
       argument :per, Int, required: false
-      argument :metadata, Types::RawJson, required: false
+      argument :metadata, GraphQL::Types::JSON, required: false
     end
 
     def contents(page: nil, per: nil, metadata: nil)

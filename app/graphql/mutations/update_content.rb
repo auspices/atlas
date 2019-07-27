@@ -3,9 +3,7 @@
 module Mutations
   class UpdateContent < BaseMutation
     argument :id, ID, required: true
-    argument :metadata, Types::RawJson, required: false, prepare: lambda { |metadata, _ctx|
-      JSON.parse(metadata)
-    }
+    argument :metadata, GraphQL::Types::JSON, required: false
     argument :replace, Boolean, required: false, default_value: false
 
     field :content, Types::ContentType, null: false
