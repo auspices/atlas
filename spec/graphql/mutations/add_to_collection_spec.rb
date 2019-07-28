@@ -30,9 +30,28 @@ describe 'AddToCollection' do
   let!(:collection) { Fabricate(:collection, user: current_user) }
 
   let :response do
-    execute mutation, {
+    execute mutation,
       current_user: current_user,
-      variables: {
+      variables: variables
+  end
+
+  let :variables do
+    {
+      id: collection.id,
+      value: 'Goodbye world'
+    }
+  end
+
+  it 'adds to the collection' do
+    content = response['data']['addToCollection']['collection']['contents'].first
+    expect(content['entity']['__typename']).to eql('Text')
+    expect(content['entity']['body']).to eql('Goodbye world')
+  end
+
+
+  describe 'with metadata' do
+    let :variables do
+      {
         id: collection.id,
         value: 'Hello world',
         metadata: {
@@ -40,14 +59,14 @@ describe 'AddToCollection' do
           bar: 'baz'
         }.to_json
       }
-    }
-  end
+    end
 
-  it 'adds to the collection' do
-    content = response['data']['addToCollection']['collection']['contents'].first
-    expect(content['metadata']['foo']).to eql('bar')
-    expect(content['metadata']['bar']).to eql('baz')
-    expect(content['entity']['__typename']).to eql('Text')
-    expect(content['entity']['body']).to eql('Hello world')
+    it 'adds to the collection' do
+      content = response['data']['addToCollection']['collection']['contents'].first
+      expect(content['metadata']['foo']).to eql('bar')
+      expect(content['metadata']['bar']).to eql('baz')
+      expect(content['entity']['__typename']).to eql('Text')
+      expect(content['entity']['body']).to eql('Hello world')
+    end
   end
 end

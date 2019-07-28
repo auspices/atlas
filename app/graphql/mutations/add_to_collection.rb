@@ -19,7 +19,8 @@ module Mutations
         entity = EntityBuilder.build(user: current_user, value: value)
         entity.save!
 
-        content = collection.contents.create!(user: current_user, entity: entity, metadata: metadata)
+        options = { user: current_user, entity: entity, metadata: metadata }.compact
+        content = collection.contents.create!(options)
 
         return {
           collection: collection,
