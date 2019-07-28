@@ -4,19 +4,22 @@ module Mutations
   class AddToCollection < BaseMutation
     argument :id, ID, required: true, description: 'Collection ID'
     argument :value, String, required: true, description: 'URL or plain text'
+    argument :metadata, GraphQL::Types::JSON, required: false, prepare: lambda { |metadata, _ctx|
+      JSON.parse(metadata)
+    }
 
     field :collection, Types::CollectionType, null: false
     field :content, Types::ContentType, null: false
     field :entity, Types::EntityType, null: false
 
-    def resolve(id:, value:)
+    def resolve(id:, value:, metadata: nil)
       collection = current_user.collections.find(id)
 
       ActiveRecord::Base.transaction do
         entity = EntityBuilder.build(user: current_user, value: value)
         entity.save!
 
-        content = collection.contents.create!(user: current_user, entity: entity)
+        content = collection.contents.create!(user: current_user, entity: entity, metadata: metadata)
 
         return {
           collection: collection,

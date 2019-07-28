@@ -20,4 +20,5 @@ RSpec.configure do |config|
   config.infer_spec_type_from_file_location!
   config.include Sorcery::TestHelpers::Rails::Controller, type: :controller
   config.include Sorcery::TestHelpers::Rails::Integration, type: :feature
+  config.include GraphQLHelpers
 end
