@@ -20,10 +20,12 @@ module Types
       argument :page, Int, required: false
       argument :per, Int, required: false
       argument :metadata, GraphQL::Types::JSON, required: false
+      argument :sort_by, Types::ContentsSortType, required: false
     end
 
-    def contents(page: nil, per: nil, metadata: nil)
+    def contents(page: nil, per: nil, metadata: nil, sort_by: nil)
       results = object.contents
+      results = results.unscope(:order).order(sort_by) if sort_by.present?
       results = results.where('metadata @> ?', metadata.to_json) if metadata.present?
       results.page(page).per(per)
     end
