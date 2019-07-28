@@ -41,7 +41,7 @@ module Types
     end
 
     field :presigned_upload_urls, [String], null: false do
-      argument :types, [Types::SupportedUploadTypes], required: true
+      argument :types, [Types::SupportedUploadType], required: true
     end
 
     def presigned_upload_urls(types:)
