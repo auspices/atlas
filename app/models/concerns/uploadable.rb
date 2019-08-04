@@ -5,6 +5,10 @@ module Uploadable
 
   included do
     before_destroy :delete_upload, if: proc { |model| model.url.present? }
+
+    def self.key(url)
+      URI.parse(url).path[1..-1]
+    end
   end
 
   def key
@@ -17,9 +21,5 @@ module Uploadable
 
   def delete_upload
     upload.delete
-  end
-
-  def self.key(url)
-    URI.parse(url).path[1..-1]
   end
 end
