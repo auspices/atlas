@@ -11,5 +11,6 @@ module Types
     field :remove_from_collection, mutation: Mutations::RemoveFromCollection
     field :reposition_collection_content, mutation: Mutations::RepositionCollectionContent
     field :update_content, mutation: Mutations::UpdateContent
+    field :update_entity, mutation: Mutations::UpdateEntity
   end
 end

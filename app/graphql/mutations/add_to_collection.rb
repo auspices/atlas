@@ -16,7 +16,7 @@ module Mutations
       collection = current_user.collections.find(id)
 
       ActiveRecord::Base.transaction do
-        entity = EntityBuilder.build(user: current_user, value: value)
+        entity = Entity::Builder.build(user: current_user, value: value)
         entity.save!
 
         options = { user: current_user, entity: entity, metadata: metadata }.compact
