@@ -8,7 +8,7 @@ module Uploadable
   end
 
   def key
-    URI.parse(url).path[1..-1]
+    self.class.key(url)
   end
 
   def upload
@@ -17,5 +17,9 @@ module Uploadable
 
   def delete_upload
     upload.delete
+  end
+
+  def self.key(url)
+    URI.parse(url).path[1..-1]
   end
 end

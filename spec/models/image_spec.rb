@@ -22,4 +22,11 @@ RSpec.describe Image, type: :model do
   it 'has a valid fabricator' do
     expect(image).to be_valid
   end
+
+  describe 'managing uploads' do
+    it 'deletes an upload when the model is deleted' do
+      expect(image).to receive(:delete_upload)
+      image.destroy
+    end
+  end
 end
