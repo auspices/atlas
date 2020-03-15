@@ -2,8 +2,8 @@
 
 module Types
   class ResizedImageType < Types::BaseObject
-    field :width, Int, null: true
-    field :height, Int, null: true
+    field :width, Int, null: false
+    field :height, Int, null: false
 
     field :urls, Types::RetinaImageType, null: false
 

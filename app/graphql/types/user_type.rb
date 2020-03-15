@@ -15,7 +15,7 @@ module Types
       object
     end
 
-    field :collection, Types::CollectionType, null: true do
+    field :collection, Types::CollectionType, null: false do
       argument :id, ID, required: true
     end
 
@@ -23,7 +23,7 @@ module Types
       object.collections.friendly.find(id)
     end
 
-    field :collections, [Types::CollectionType], null: true do
+    field :collections, [Types::CollectionType], null: false do
       argument :page, Int, required: false
       argument :per, Int, required: false
     end
@@ -32,7 +32,7 @@ module Types
       object.collections.page(page).per(per)
     end
 
-    field :sample, [Types::ContentType], null: true do
+    field :sample, [Types::ContentType], null: false do
       argument :amount, Int, required: false
     end
 

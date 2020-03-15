@@ -7,12 +7,12 @@ module Types
     field :id, Int, null: false
     field :title, String, null: false, method: :to_s
     field :name, String, null: false, method: :to_s
-    field :source_url, String, null: true
-    field :width, Int, null: true
-    field :height, Int, null: true
-    field :url, String, null: true
+    field :source_url, String, null: false
+    field :width, Int, null: false
+    field :height, Int, null: false
+    field :url, String, null: false
 
-    field :resized, Types::ResizedImageType, null: true do
+    field :resized, Types::ResizedImageType, null: false do
       argument :width, Int, required: false
       argument :height, Int, required: false
       argument :scale, Float, required: false

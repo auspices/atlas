@@ -16,7 +16,7 @@ module Types
       object
     end
 
-    field :contents, [Types::ContentType], null: true do
+    field :contents, [Types::ContentType], null: false do
       argument :page, Int, required: false
       argument :per, Int, required: false
       argument :metadata, GraphQL::Types::JSON, required: false
@@ -30,7 +30,7 @@ module Types
       results.page(page).per(per)
     end
 
-    field :sample, [Types::ContentType], null: true do
+    field :sample, [Types::ContentType], null: false do
       argument :amount, Int, required: false
     end
 

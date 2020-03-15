@@ -2,13 +2,13 @@
 
 module Types
   class QueryType < Types::BaseObject
-    field :me, Types::UserType, null: true
+    field :me, Types::UserType, null: false
 
     def me
       current_user
     end
 
-    field :user, Types::UserType, null: true do
+    field :user, Types::UserType, null: false do
       argument :id, ID, required: true
     end
 
@@ -16,7 +16,7 @@ module Types
       User.friendly.find(id)
     end
 
-    field :collection, Types::CollectionType, null: true do
+    field :collection, Types::CollectionType, null: false do
       argument :id, ID, required: true
     end
 
@@ -24,7 +24,7 @@ module Types
       Collection.friendly.find(id)
     end
 
-    field :content, Types::ContentType, null: true do
+    field :content, Types::ContentType, null: false do
       argument :id, ID, required: true
     end
 
