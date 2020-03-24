@@ -26,10 +26,13 @@ module Types
     field :collections, [Types::CollectionType], null: false do
       argument :page, Int, required: false
       argument :per, Int, required: false
+      argument :query, String, required: false
     end
 
-    def collections(page: nil, per: nil)
-      object.collections.page(page).per(per)
+    def collections(page: nil, per: nil, query: nil)
+      results = object.collections
+      results = results.where('lower(title) like ?', "%#{query.downcase}%") if query.present?
+      results.page(page).per(per)
     end
 
     field :sample, [Types::ContentType], null: false do
