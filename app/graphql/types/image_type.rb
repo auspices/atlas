@@ -3,6 +3,7 @@
 module Types
   class ImageType < Types::BaseObject
     include Shared::Timestamps
+    include Shared::ToString
 
     field :id, Int, null: false
     field :title, String, null: false, method: :to_s

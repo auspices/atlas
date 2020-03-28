@@ -3,6 +3,7 @@
 module Types
   class LinkType < Types::BaseObject
     include Shared::Timestamps
+    include Shared::ToString
 
     field :id, Int, null: false
     field :url, String, null: false

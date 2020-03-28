@@ -4,6 +4,7 @@ module Types
   class CollectionType < Types::BaseObject
     include Shared::Timestamps
     include Shared::Metadata
+    include Shared::ToString
 
     field :id, Int, null: false
     field :slug, String, null: false
