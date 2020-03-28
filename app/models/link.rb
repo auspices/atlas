@@ -12,6 +12,8 @@
 #
 
 class Link < ApplicationRecord
+  include StringHelper
+
   has_many :contents, as: :entity, dependent: :destroy
   has_many :collections, through: :contents
   belongs_to :user
@@ -23,16 +25,7 @@ class Link < ApplicationRecord
     @uri ||= Addressable::URI.heuristic_parse(url)
   end
 
-  def truncated_url(length: 25)
-    normalized = [uri.host, uri.path].reject(&:blank?).join('/').gsub(%r{\/+$}, '')
-    return normalized if normalized.length <= length
-
-    chars = normalized.gsub(/^www\./, '').chars
-    head, tail = chars.each_slice((chars.size / 2.0).round).to_a
-    head.join('').truncate(length / 2, separator: '…') + tail.last(length / 2).join('')
-  end
-
   def to_s
-    @to_s ||= truncated_url(length: 25)
+    @to_s ||= normalize_url(url)
   end
 end

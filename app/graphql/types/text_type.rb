@@ -3,6 +3,7 @@
 module Types
   class TextType < Types::BaseObject
     include Shared::Timestamps
+    include Shared::ToString
 
     field :id, Int, null: false
     field :body, String, null: false
