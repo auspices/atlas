@@ -19,7 +19,6 @@ module StringHelper
     when :center
       chars = string.chars
       head, tail = chars.each_slice((chars.size / 2.0).round).to_a
-
       head.join('').truncate(length / 2, omission: OMISSION) + tail.last(length / 2).join('')
     when :tail
       string.truncate(length, omission: OMISSION)
@@ -42,7 +41,7 @@ module StringHelper
   end
 
   def normalize_url(string)
-    uri = Addressable::URI.heuristic_parse(string)
+    uri = Addressable::URI.heuristic_parse(CGI.unescape(string))
     [uri.host, uri.path].reject(&:blank?).join('').gsub(%r{\/+$}, '')
   end
 end

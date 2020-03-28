@@ -39,6 +39,11 @@ RSpec.describe StringHelper, type: :helper do
         expect(truncate('http://www.google.com/some/deep/path?whatever', length: 15, from: :center))
           .to eq("google…ep/path")
       end
+
+      it 'has sensible output for long encoded URLs' do
+        string = "https%3A%2F%2Fhypebeast.com%2Fimage%2F2019%2F02%2Fvetements-reebok-instapump-fury-white-black-pink-release-1.jpg?q=90&w=1400&cbr=1&fit=max"
+        expect(truncate(string, length: 35, from: :center)).to eq('hypebeast.com/im…ink-release-1.jpg')
+      end
     end
   end
 
