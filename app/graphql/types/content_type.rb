@@ -33,7 +33,7 @@ module Types
     field :previous, Types::ContentType, null: true
 
     def previous
-      Content.where(collection_id: object.collection_id).find_by('position < ?', object.position)
+      Content.where(collection_id: object.collection_id).where('position < ?', object.position).first
     end
   end
 end
