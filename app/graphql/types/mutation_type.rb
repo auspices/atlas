@@ -6,6 +6,7 @@ module Types
 
     field :create_collection, mutation: Mutations::CreateCollection
     field :update_collection, mutation: Mutations::UpdateCollection
+    field :delete_collection, mutation: Mutations::DeleteCollection
 
     field :add_to_collection, mutation: Mutations::AddToCollection
     field :remove_from_collection, mutation: Mutations::RemoveFromCollection
