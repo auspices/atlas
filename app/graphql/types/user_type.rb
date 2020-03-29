@@ -15,6 +15,14 @@ module Types
       object
     end
 
+    field :content, Types::ContentType, null: false do
+      argument :id, ID, required: true
+    end
+
+    def content(id:)
+      object.contents.find(id)
+    end
+
     field :collection, Types::CollectionType, null: false do
       argument :id, ID, required: true
     end

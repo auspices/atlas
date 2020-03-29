@@ -23,5 +23,17 @@ module Types
         Collection.where(id: ids).each { |xs| loader.call(xs.id, xs) }
       end
     end
+
+    field :next, Types::ContentType, null: true
+
+    def next
+      Content.where(collection_id: object.collection_id).where('position > ?', object.position).last
+    end
+
+    field :previous, Types::ContentType, null: true
+
+    def previous
+      Content.where(collection_id: object.collection_id).find_by('position < ?', object.position)
+    end
   end
 end

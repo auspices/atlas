@@ -8,7 +8,7 @@ module Types
       current_user
     end
 
-    field :user, Types::UserType, null: false do
+    field :user, Types::UserType, null: false, deprecation_reason: 'Moving all query underneath logged in user' do
       argument :id, ID, required: true
     end
 
@@ -16,7 +16,7 @@ module Types
       User.friendly.find(id)
     end
 
-    field :collection, Types::CollectionType, null: false do
+    field :collection, Types::CollectionType, null: false, deprecation_reason: 'Moving all query underneath logged in user' do
       argument :id, ID, required: true
     end
 
@@ -24,7 +24,7 @@ module Types
       Collection.friendly.find(id)
     end
 
-    field :content, Types::ContentType, null: false do
+    field :content, Types::ContentType, null: false, deprecation_reason: 'Moving all query underneath logged in user' do
       argument :id, ID, required: true
     end
 
