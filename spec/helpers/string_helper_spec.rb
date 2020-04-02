@@ -1,9 +1,19 @@
 require 'rails_helper'
 
+LONG_EXAMPLE = 'It is a profoundly erroneous truism, repeated by all copy-books and by eminent people when they are making speeches, that we should cultivate the habit of thinking of what we are doing. The precise opposite is the case. Civilization advances by extending the number of important operations which we can perform without thinking about them. Operations of thought are like cavalry charges in a battle they are strictly limited in number, they require fresh horses, and must only be made at decisive moments.'
+
 RSpec.describe StringHelper, type: :helper do
   describe '#truncate' do
     it 'returns back the passed in string if length is nil' do
       expect(truncate('example')).to eq('example')
+    end
+
+    it 'returns back the specified length' do
+      expect(truncate('example', length: 5)).to eq('exam…')
+    end
+
+    fit 'supports much longer strings and lengths' do
+      expect(truncate(LONG_EXAMPLE, length: 200)).to eq("It is a profoundly erroneous truism, repeated by all copy-books and by eminent people when they are making speeches, that we should cultivate the habit of thinking of what we are doing. The precise o…")
     end
 
     describe 'tail' do
