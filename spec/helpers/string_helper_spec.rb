@@ -16,6 +16,14 @@ RSpec.describe StringHelper, type: :helper do
       it 'truncates from the center' do
         expect(truncate('example', length: 4, from: :center)).to eq('e…le')
       end
+
+      it 'returns back the passed in string if the length is 1' do
+        expect(truncate('a', length: 25, from: :center)).to eq('a')
+      end
+
+      it 'does not error on short input' do
+        expect(truncate('aa', length: 25, from: :center)).to eq('aa')
+      end
     end
 
     describe 'head' do

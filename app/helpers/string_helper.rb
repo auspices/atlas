@@ -5,6 +5,7 @@ module StringHelper
 
   def truncate(string, length: nil, from: :tail)
     return string unless length
+    return string if string.length == 1
     return truncate_url(string, length: length, from: from) if string.start_with?('http')
 
     truncate_string(string, length: length, from: from)
