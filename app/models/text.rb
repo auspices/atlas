@@ -21,6 +21,6 @@ class Text < ApplicationRecord
   validates :user, :body, presence: true
 
   def to_s
-    truncate(body, length: 50)
+    body
   end
 end
