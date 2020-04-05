@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
-class AtlasSchema < GraphQL::Schema
+class ApplicationSchema < GraphQL::Schema
   mutation Types::MutationType
   query Types::QueryType
   use BatchLoader::GraphQL
 end
 
-GraphQL::Errors.configure(AtlasSchema) do
+GraphQL::Errors.configure(ApplicationSchema) do
   rescue_from ActiveRecord::RecordNotFound do |exception|
     Errors::NotFoundError.new(exception.message)
   end
