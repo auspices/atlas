@@ -1,6 +1,6 @@
 module GraphQLHelpers
   def execute(operation, current_user: nil, variables: {})
-    AtlasSchema.execute(operation,
+    ApplicationSchema.execute(operation,
       context: {
         current_user: current_user
       },
