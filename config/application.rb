@@ -25,6 +25,8 @@ module Atlas
       allow do
         origins '*'
         resource '/graphql', headers: :any, methods: %i[options get put post]
+        resource '/graph', headers: :any, methods: %i[options get put post]
+        resource '/graph/*', headers: :any, methods: %i[options get put post]
       end
     end
 
