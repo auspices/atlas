@@ -3,10 +3,11 @@
 module StringHelper
   OMISSION = '…'
 
-  def truncate(string, length: nil, from: :tail)
+  def truncate(string, length: nil, from: :tail, skip_url: false)
     return string unless length
     return string if string.length == 1
-    return truncate_url(string, length: length, from: from) if string.start_with?('http')
+
+    return truncate_url(string, length: length, from: from) if string.start_with?('http') && !skip_url
 
     truncate_string(string, length: length, from: from)
   end
@@ -38,11 +39,13 @@ module StringHelper
     sans_www = normalized.gsub(/^www\./, '')
     return sans_www if sans_www.length <= length
 
-    truncate(sans_www, length: length, from: from)
+    truncate(sans_www, length: length, from: from, skip_url: true)
   end
 
   def normalize_url(string)
     uri = Addressable::URI.heuristic_parse(CGI.unescape(string))
     [uri.host, uri.path].reject(&:blank?).join('').gsub(%r{\/+$}, '')
+  rescue StandardError
+    string
   end
 end
