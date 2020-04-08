@@ -17,7 +17,7 @@ RSpec.describe StringHelper, type: :helper do
       expect(truncate(LONG_EXAMPLE, length: 200)).to eq("It is a profoundly erroneous truism, repeated by all copy-books and by eminent people when they are making speeches, that we should cultivate the habit of thinking of what we are doing. The precise o…")
     end
 
-    fit 'handles texts with urls in them' do
+    it 'handles texts with urls in them' do
       expect(truncate(TEXT_BEGINS_WITH_URL_EXAMPLE, length: 25)).to eq("example.com\netc\nmore tex…")
     end
 
