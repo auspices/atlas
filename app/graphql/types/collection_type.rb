@@ -7,7 +7,7 @@ module Types
     include Shared::ToString
 
     field :id, Int, null: false
-    field :key, String, null: false
+    field :key, String, null: true
     field :slug, String, null: false
     field :title, String, null: false
     field :name, String, null: false, method: :title

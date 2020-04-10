@@ -27,4 +27,8 @@ class Collection < ApplicationRecord
   def to_s
     title
   end
+
+  def published?
+    key?
+  end
 end
