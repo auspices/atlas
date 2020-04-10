@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_05_172027) do
+ActiveRecord::Schema.define(version: 2020_04_09_213801) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,7 +24,8 @@ ActiveRecord::Schema.define(version: 2020_04_05_172027) do
     t.datetime "updated_at"
     t.string "slug"
     t.jsonb "metadata", default: {}, null: false
-    t.uuid "key", default: -> { "uuid_generate_v4()" }, null: false
+    t.uuid "key"
+    t.index ["key"], name: "index_collections_on_key", unique: true
     t.index ["slug"], name: "index_collections_on_slug"
     t.index ["user_id"], name: "index_collections_on_user_id"
   end
