@@ -11,6 +11,7 @@ module Types
     field :unpublish_collection, mutation: Mutations::UnpublishCollection
 
     field :add_to_collection, mutation: Mutations::AddToCollection
+    field :add_entity_to_collection, mutation: Mutations::AddEntityToCollection
     field :remove_from_collection, mutation: Mutations::RemoveFromCollection
     field :reposition_collection_content, mutation: Mutations::RepositionCollectionContent
     field :update_content, mutation: Mutations::UpdateContent

@@ -2,5 +2,5 @@
 
 Fabricator(:text, from: 'Text') do
   user { Fabricate(:user) }
-  body { 'Hello world '}
+  body { 'Hello world' }
 end

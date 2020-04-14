@@ -5,5 +5,6 @@ module Types
     value 'IMAGE', value: Image
     value 'TEXT', value: Text
     value 'LINK', value: Link
+    value 'COLLECTION', value: Collection
   end
 end
