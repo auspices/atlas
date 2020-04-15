@@ -2,6 +2,7 @@
 
 module Mutations
   class Register < GraphQL::Schema::RelayClassicMutation
+    argument :secret, String, required: true
     argument :username, String, required: true
     argument :password, String, required: true
     argument :password_confirmation, String, required: true
@@ -10,7 +11,9 @@ module Mutations
     field :jwt, String, null: false
     field :user, Types::UserType, null: false
 
-    def resolve(username:, password:, password_confirmation:, email:)
+    def resolve(secret:, username:, password:, password_confirmation:, email:)
+      return Errors::UnauthorizedError.new('Secret is invalid.') if secret != ENV['REGISTRATION_SECRET']
+
       user = User.create!(
         username: username,
         password: password,
@@ -20,7 +23,7 @@ module Mutations
 
       token = JsonWebToken.encode(id: user.id, env: ENV['RAILS_ENV'])
 
-      return { jwt: token, user: user }
+      { jwt: token, user: user }
     end
   end
 end
