@@ -11,14 +11,14 @@ module Mutations
     def resolve(username:, password:)
       user = User.find_by_username(username)
 
-      return Errors::UnauthorizedError.new('Login failed. Invalid email or password.') if user.nil?
+      return Errors::UnauthorizedError.new('Login failed. Invalid username or password.') if user.nil?
 
       if user.valid_password?(password)
         token = JsonWebToken.encode(id: user.id, env: ENV['RAILS_ENV'])
         return { jwt: token, user: user }
       end
 
-      Errors::UnauthorizedError.new('Login failed. Invalid email or password.')
+      Errors::UnauthorizedError.new('Login failed. Invalid username or password.')
     end
   end
 end
