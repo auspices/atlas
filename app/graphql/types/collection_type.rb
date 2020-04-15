@@ -39,5 +39,13 @@ module Types
     def sample(amount: 1)
       object.contents.unscope(:order).order('RANDOM()').limit(amount)
     end
+
+    field :collection, Types::CollectionType, null: false do
+      argument :id, ID, required: true
+    end
+
+    def collection(id:)
+      object.collections.friendly.find(id)
+    end
   end
 end

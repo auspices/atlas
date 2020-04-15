@@ -23,15 +23,14 @@ class Collection < ApplicationRecord
   belongs_to :user
   has_many :contents, -> { order position: :asc }, dependent: :destroy
 
-  has_many :collections, through: :contents
+  has_many :collections, through: :contents, source: :entity, source_type: 'Collection'
+  has_many :images, through: :contents, source: :entity, source_type: 'Image'
+  has_many :texts, through: :contents, source: :entity, source_type: 'Text'
+  has_many :links, through: :contents, source: :entity, source_type: 'Link'
 
   before_destroy do
     Content.where(entity_type: 'Collection', entity_id: id).destroy_all
   end
-
-  has_many :images, through: :contents, source: :entity, source_type: 'Image'
-  has_many :texts, through: :contents, source: :entity, source_type: 'Text'
-  has_many :links, through: :contents, source: :entity, source_type: 'Link'
 
   def to_s
     title
