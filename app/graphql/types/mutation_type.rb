@@ -3,6 +3,7 @@
 module Types
   class MutationType < Types::BaseObject
     field :login, mutation: Mutations::Login
+    field :register, mutation: Mutations::Register
 
     field :create_collection, mutation: Mutations::CreateCollection
     field :update_collection, mutation: Mutations::UpdateCollection
