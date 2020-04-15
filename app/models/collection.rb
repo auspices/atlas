@@ -25,6 +25,10 @@ class Collection < ApplicationRecord
 
   has_many :collections, through: :contents
 
+  before_destroy do
+    Content.where(entity_type: 'Collection', entity_id: id).destroy_all
+  end
+
   has_many :images, through: :contents, source: :entity, source_type: 'Image'
   has_many :texts, through: :contents, source: :entity, source_type: 'Text'
   has_many :links, through: :contents, source: :entity, source_type: 'Link'
