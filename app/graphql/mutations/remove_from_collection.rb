@@ -9,14 +9,7 @@ module Mutations
 
     def resolve(content_id:)
       content = Content.find(content_id)
-
-      entity_or_content = if content.entity.collections.size == 1
-        content.entity
-      else
-        content
-      end
-
-      entity_or_content.destroy
+      content.destroy
 
       { content: content, collection: content.collection }
     end
