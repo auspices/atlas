@@ -32,6 +32,14 @@ module Types
       results.page(page).per(per)
     end
 
+    field :content, Types::ContentType, null: false do
+      argument :id, ID, required: true
+    end
+
+    def content(id:)
+      object.contents.find(id)
+    end
+
     field :sample, [Types::ContentType], null: false do
       argument :amount, Int, required: false
     end
