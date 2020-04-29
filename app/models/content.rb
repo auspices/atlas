@@ -23,4 +23,11 @@ class Content < ApplicationRecord
   belongs_to :entity, polymorphic: true
 
   acts_as_list scope: :collection, top_of_list: 0, add_new_at: :top
+
+  include HasUrl
+  has_url template: -> { { segments: ['xs', id] } }
+
+  def to_sms
+    "#{entity}\n#{to_url}"
+  end
 end

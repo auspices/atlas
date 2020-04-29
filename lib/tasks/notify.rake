@@ -10,8 +10,8 @@ namespace :notify do
     end
 
     collection = user.collections.find(args[:collection_id])
-    entity = collection.texts.unscope(:order).order('RANDOM()').first
+    content = collection.contents.unscope(:order).order('RANDOM()').first
 
-    SmsNotifier.send(to: user.phone_number, body: entity.body)
+    SmsNotifier.send(to: user.phone_number, body: content.to_sms)
   end
 end
