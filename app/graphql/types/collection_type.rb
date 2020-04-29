@@ -5,6 +5,7 @@ module Types
     include Shared::Timestamps
     include Shared::Metadata
     include Shared::ToString
+    include Shared::Href
 
     field :id, Int, null: false
     field :key, String, null: true

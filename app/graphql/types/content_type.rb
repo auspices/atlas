@@ -4,6 +4,7 @@ module Types
   class ContentType < Types::BaseObject
     include Shared::Timestamps
     include Shared::Metadata
+    include Shared::Href
 
     field :id, Int, null: false
     field :position, Int, null: false
