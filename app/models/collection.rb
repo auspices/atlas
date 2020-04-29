@@ -28,6 +28,9 @@ class Collection < ApplicationRecord
   has_many :texts, through: :contents, source: :entity, source_type: 'Text'
   has_many :links, through: :contents, source: :entity, source_type: 'Link'
 
+  include HasUrl
+  has_url template: -> { { segments: ['xs', slug] } }
+
   before_destroy do
     Content.where(entity_type: 'Collection', entity_id: id).destroy_all
   end
