@@ -28,6 +28,6 @@ class Content < ApplicationRecord
   has_url template: -> { { segments: ['x', id] } }
 
   def to_sms
-    "#{entity}\n#{to_url}"
+    "#{entity.strip}\n#{to_url}"
   end
 end
