@@ -25,7 +25,7 @@ class Content < ApplicationRecord
   acts_as_list scope: :collection, top_of_list: 0, add_new_at: :top
 
   include HasUrl
-  has_url template: -> { { segments: ['xs', id] } }
+  has_url template: -> { { segments: ['x', id] } }
 
   def to_sms
     "#{entity}\n#{to_url}"
