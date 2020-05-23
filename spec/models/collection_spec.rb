@@ -12,6 +12,7 @@
 #  updated_at     :datetime
 #  slug           :string
 #  metadata       :jsonb            not null
+#  key            :uuid
 #
 
 require 'rails_helper'

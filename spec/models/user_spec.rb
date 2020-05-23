@@ -17,6 +17,8 @@
 #  reset_password_token_expires_at :datetime
 #  reset_password_email_sent_at    :datetime
 #  slug                            :string
+#  phone_number                    :string
+#  subscriptions                   :jsonb            not null
 #
 
 require 'rails_helper'
