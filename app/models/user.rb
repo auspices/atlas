@@ -42,7 +42,13 @@ class User < ApplicationRecord
     username
   end
 
-  def admin?
-    id == 1
+  def subscribe_to!(key)
+    subscriptions << Product.find(key)
+    subscriptions.uniq!
+    save!
+  end
+
+  def subscribed_to?(key)
+    subscriptions.include?(Product.find(key))
   end
 end

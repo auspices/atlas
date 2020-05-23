@@ -9,6 +9,8 @@ module Types
     field :email, String, null: false
     field :slug, String, null: false
 
+    field :subscriptions, [String], null: false
+
     field :counts, Types::UserCountsType, null: false
 
     def counts
