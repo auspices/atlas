@@ -34,6 +34,14 @@ class Image < ApplicationRecord
     end
   end
 
+  def static
+    if ENV['STATIC_CLOUDFRONT_ENDPOINT'].present?
+      return url.gsub("#{ENV['S3_BUCKET']}.s3.amazonaws.com", ENV['STATIC_CLOUDFRONT_ENDPOINT'])
+    end
+
+    url
+  end
+
   def resized(options = {})
     ResizedImage.new(self, options)
   end

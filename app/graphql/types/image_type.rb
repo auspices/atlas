@@ -13,6 +13,10 @@ module Types
     field :height, Int, null: false
     field :url, String, null: false
 
+    def url
+      object.static
+    end
+
     field :resized, Types::ResizedImageType, null: false do
       argument :width, Int, required: false
       argument :height, Int, required: false
