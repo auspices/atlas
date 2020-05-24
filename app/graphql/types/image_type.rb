@@ -8,7 +8,7 @@ module Types
     field :id, Int, null: false
     field :title, String, null: false, method: :to_s
     field :name, String, null: false, method: :to_s
-    field :source_url, String, null: false
+    field :source_url, String, null: true
     field :width, Int, null: false
     field :height, Int, null: false
     field :url, String, null: false
