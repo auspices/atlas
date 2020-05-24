@@ -3,12 +3,9 @@
 class ResizedImage
   attr_reader :image, :width, :height, :factor, :ratio, :quality
 
+  BUCKET = ENV['S3_BUCKET']
   ENDPOINT = ENV['IMAGE_RESIZING_PROXY_ENDPOINT']
-  CANCER_SECRET_KEY = ENV['CANCER_SECRET_KEY']
-  KEY_TEMPLATE = '<OP>/<WIDTH>x<HEIGHT>/<QUALITY>/<URL>'
-  REQUEST_TEMPLATE = '<ENDPOINT>/<TOKEN>/<KEY>'
   DEFAULT_SCALE = 1.0
-  DEFAULT_OP = 'resize'
   DEFAULT_QUALITY = 75
 
   # rubocop:disable Metrics/AbcSize
@@ -27,32 +24,22 @@ class ResizedImage
   # rubocop:enable Metrics/AbcSize
 
   def size(factor = 1)
-    keyed = key(factor)
-    REQUEST_TEMPLATE
-      .gsub('<ENDPOINT>', ENDPOINT)
-      .gsub('<TOKEN>', tokenize(keyed))
-      .gsub('<KEY>', keyed)
-  end
+    payload = {
+      bucket: BUCKET,
+      key: image.key,
+      edits: {
+        resize: {
+          width: width * factor,
+          height: height * factor,
+          fit: 'inside'
+        },
+        webp: { quality: quality },
+        jpeg: { quality: quality },
+        png: { quality: quality }
+      }
+    }.to_json
 
-  def key(factor = 1)
-    KEY_TEMPLATE
-      .gsub('<OP>', DEFAULT_OP)
-      .gsub('<WIDTH>', (width * factor).to_s)
-      .gsub('<HEIGHT>', (height * factor).to_s)
-      .gsub('<QUALITY>', quality.to_s)
-      .gsub('<URL>', encode_uri_component(url))
-  end
-
-  def encode_uri_component(url)
-    URI.encode_www_form_component(url)
-  end
-
-  def tokenize(data)
-    OpenSSL::HMAC.hexdigest(
-      OpenSSL::Digest.new('sha1'),
-      CANCER_SECRET_KEY,
-      data
-    )
+    [ENDPOINT, Base64.strict_encode64(payload)].join('/')
   end
 
   private

@@ -34,6 +34,14 @@ class Image < ApplicationRecord
     end
   end
 
+  def uri
+    @uri ||= Addressable::URI.parse(url)
+  end
+
+  def key
+    uri.path.delete_prefix('/')
+  end
+
   def static
     if ENV['STATIC_CLOUDFRONT_ENDPOINT'].present?
       return url.gsub("#{ENV['S3_BUCKET']}.s3.amazonaws.com", ENV['STATIC_CLOUDFRONT_ENDPOINT'])
