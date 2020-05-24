@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ResizedImage
-  attr_reader :image, :width, :height, :factor, :ratio
+  attr_reader :image, :width, :height, :factor, :ratio, :quality
 
   ENDPOINT = ENV['IMAGE_RESIZING_PROXY_ENDPOINT']
   CANCER_SECRET_KEY = ENV['CANCER_SECRET_KEY']
@@ -9,11 +9,12 @@ class ResizedImage
   REQUEST_TEMPLATE = '<ENDPOINT>/<TOKEN>/<KEY>'
   DEFAULT_SCALE = 1.0
   DEFAULT_OP = 'resize'
-  DEFAULT_QUALITY = 95
+  DEFAULT_QUALITY = 75
 
   # rubocop:disable Metrics/AbcSize
   def initialize(image, options = {})
     scale = options[:scale] || DEFAULT_SCALE
+    @quality = options[:quality] || DEFAULT_QUALITY
     @image = image
     @factor = [
       ((options[:width] / @image.width.to_f) if options[:width]),
@@ -38,7 +39,7 @@ class ResizedImage
       .gsub('<OP>', DEFAULT_OP)
       .gsub('<WIDTH>', (width * factor).to_s)
       .gsub('<HEIGHT>', (height * factor).to_s)
-      .gsub('<QUALITY>', DEFAULT_QUALITY.to_s)
+      .gsub('<QUALITY>', quality.to_s)
       .gsub('<URL>', encode_uri_component(url))
   end
 

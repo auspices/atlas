@@ -17,11 +17,12 @@ module Types
       argument :width, Int, required: false
       argument :height, Int, required: false
       argument :scale, Float, required: false
+      argument :quality, Int, required: false
     end
 
-    def resized(width: nil, height: nil, scale: nil)
+    def resized(width: nil, height: nil, scale: nil, quality: 75)
       # TODO: Validate that either width or height is present
-      object.resized(width: width, height: height, scale: scale)
+      object.resized(width: width, height: height, scale: scale, quality: quality)
     end
   end
 end
