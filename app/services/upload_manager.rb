@@ -25,7 +25,7 @@ class UploadManager
   end
 
   def upload(io)
-    obj.upload_stream(acl: 'public-read') do |write_stream|
+    obj.upload_stream(acl: 'public-read', cache_control: 'max-age=31536000') do |write_stream|
       IO.copy_stream(io, write_stream)
     end
   end
@@ -65,7 +65,7 @@ class UploadManager
     def presigned_url(mime_type:, user_id:, filename:)
       new(
         key(user_id: user_id, filename: filename)
-      ).obj.presigned_url(:put, acl: 'public-read', content_type: mime_type)
+      ).obj.presigned_url(:put, acl: 'public-read', content_type: mime_type, cache_control: 'max-age=31536000')
     end
 
     def internal_url?(url, treat_duplicates_as_external: false)
