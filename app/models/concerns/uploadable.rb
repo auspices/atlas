@@ -6,6 +6,9 @@ module Uploadable
   included do
     before_destroy :delete_upload, if: proc { |model| model.url.present? }
 
+    validates_format_of :url, with: URI.regexp(%w[https]), allow_blank: true
+    validates_uniqueness_of :url
+
     def self.key(url)
       URI.parse(url).path[1..-1]
     end

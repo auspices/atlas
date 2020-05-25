@@ -26,7 +26,7 @@ class ResizedImage
   def size(factor = 1)
     payload = {
       bucket: BUCKET,
-      key: image.key,
+      key: image.uri.path.delete_prefix('/'),
       edits: {
         resize: {
           width: width * factor,

@@ -22,8 +22,6 @@ class Image < ApplicationRecord
   belongs_to :user
 
   validates_format_of :source_url, with: URI.regexp(%w[http https]), allow_blank: true
-  validates_format_of :url, with: URI.regexp(%w[https]), allow_blank: true
-  validates_uniqueness_of :url
   validates :user, presence: true
 
   def to_s
@@ -36,10 +34,6 @@ class Image < ApplicationRecord
 
   def uri
     @uri ||= Addressable::URI.parse(url)
-  end
-
-  def key
-    uri.path.delete_prefix('/')
   end
 
   def static
