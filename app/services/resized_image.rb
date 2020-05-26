@@ -35,7 +35,8 @@ class ResizedImage
         },
         webp: { quality: quality },
         jpeg: { quality: quality },
-        png: { quality: quality }
+        # Passing `null` to the `rotate` filter utilizes the EXIF orientation
+        rotate: nil
       }
     }.to_json
 
