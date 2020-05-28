@@ -56,5 +56,15 @@ module Types
     def collection(id:)
       object.collections.friendly.find(id)
     end
+
+    field :within, [Types::CollectionType], null: false do
+      argument :page, Int, required: false
+      argument :per, Int, required: false
+    end
+
+    def within(page: nil, per: nil)
+      ids = Content.where(entity_type: 'Collection', entity_id: object.id).pluck(:collection_id)
+      Collection.where(id: ids).page(page).per(per)
+    end
   end
 end
