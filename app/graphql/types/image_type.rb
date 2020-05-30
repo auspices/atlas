@@ -22,11 +22,21 @@ module Types
       argument :height, Int, required: false
       argument :scale, Float, required: false
       argument :quality, Int, required: false
+      argument :blur, Int, required: false
+      argument :sharpen, Int, required: false
     end
 
-    def resized(width: nil, height: nil, scale: nil, quality: 75)
-      # TODO: Validate that either width or height is present
-      object.resized(width: width, height: height, scale: scale, quality: quality)
+    # rubocop:disable Metrics/ParameterLists
+    def resized(width: nil, height: nil, scale: nil, quality: 75, blur: nil, sharpen: nil)
+      object.resized(
+        width: width,
+        height: height,
+        scale: scale,
+        quality: quality,
+        blur: blur,
+        sharpen: sharpen
+      )
     end
+    # rubocop:enable Metrics/ParameterLists
   end
 end
