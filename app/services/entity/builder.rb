@@ -72,6 +72,11 @@ module Entity
       def build(user:, value:)
         new(user: user, value: value).build
       end
+
+      def build_image(user:, image:)
+        width, height = FastImage.size(image[:url])
+        user.images.build(url: image[:url], width: width, height: height)
+      end
     end
   end
 end
