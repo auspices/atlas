@@ -14,16 +14,20 @@ module Mutations
     def resolve(secret:, username:, password:, password_confirmation:, email:)
       return Errors::UnauthorizedError.new('Secret is invalid.') if secret != ENV['REGISTRATION_SECRET']
 
-      user = User.create!(
-        username: username,
-        password: password,
-        password_confirmation: password_confirmation,
-        email: email
-      )
+      ActiveRecord::Base.transaction do
+        user = User.create!(
+          username: username,
+          password: password,
+          password_confirmation: password_confirmation,
+          email: email
+        )
 
-      token = JsonWebToken.encode(id: user.id, env: ENV['RAILS_ENV'])
+        user.create_customer!
 
-      { jwt: token, user: user }
+        token = JsonWebToken.encode(id: user.id, env: ENV['RAILS_ENV'])
+
+        { jwt: token, user: user }
+      end
     end
   end
 end

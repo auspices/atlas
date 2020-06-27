@@ -38,6 +38,7 @@ end
 group :test do
   gem 'fabrication'
   gem 'shoulda-matchers', require: false
+  gem 'stripe-ruby-mock', require: 'stripe_mock'
   gem 'webmock'
 end
 
