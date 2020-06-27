@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_23_173722) do
+ActiveRecord::Schema.define(version: 2020_06_27_175411) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -99,6 +99,8 @@ ActiveRecord::Schema.define(version: 2020_05_23_173722) do
     t.string "slug"
     t.string "phone_number"
     t.jsonb "subscriptions", default: [], null: false
+    t.string "customer_id"
+    t.index ["customer_id"], name: "index_users_on_customer_id", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["remember_me_token"], name: "index_users_on_remember_me_token"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token"

@@ -19,6 +19,7 @@
 #  slug                            :string
 #  phone_number                    :string
 #  subscriptions                   :jsonb            not null
+#  customer_id                     :string
 #
 
 require 'rails_helper'

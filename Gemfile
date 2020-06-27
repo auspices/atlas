@@ -19,6 +19,7 @@ gem 'puma'
 gem 'rack-cors', require: 'rack/cors'
 gem 'rails', '~> 5'
 gem 'sorcery'
+gem 'stripe'
 gem 'twilio-ruby'
 
 group :development do

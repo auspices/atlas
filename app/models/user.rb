@@ -19,6 +19,7 @@
 #  slug                            :string
 #  phone_number                    :string
 #  subscriptions                   :jsonb            not null
+#  customer_id                     :string
 #
 
 class User < ApplicationRecord
@@ -42,6 +43,27 @@ class User < ApplicationRecord
 
   def to_s
     username
+  end
+
+  def create_customer!
+    return customer if customer?
+
+    Stripe::Customer.create(
+      email: email,
+      metadata: { id: id }
+    ).tap do |stripe_customer|
+      update_attributes!(customer_id: stripe_customer.id)
+    end
+  end
+
+  def customer
+    return nil unless customer?
+
+    @customer ||= Stripe::Customer.retrieve(customer_id)
+  end
+
+  def customer?
+    customer_id?
   end
 
   def subscribe_to!(key)
