@@ -13,7 +13,7 @@ AllCops:
 Lint/AssignmentInCondition:
   Enabled: false
 
-Layout/AlignHash:
+Layout/HashAlignment:
   Enabled: false
 
 Style/Documentation:

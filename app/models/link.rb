@@ -19,7 +19,7 @@ class Link < ApplicationRecord
   belongs_to :user
 
   validates :user, :url, presence: true
-  validates_format_of :url, with: URI.regexp(%w[http https])
+  validates_format_of :url, with: URI::DEFAULT_PARSER.make_regexp(%w[http https])
 
   def uri
     @uri ||= Addressable::URI.heuristic_parse(url)
