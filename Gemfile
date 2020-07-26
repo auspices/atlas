@@ -26,6 +26,7 @@ group :development do
   gem 'annotate'
   gem 'foreman'
   gem 'graphiql-rails'
+  gem 'listen'
   gem 'rubocop'
   gem 'rubocop-performance'
 end
