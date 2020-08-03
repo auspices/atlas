@@ -25,15 +25,15 @@ module Types
       end
     end
 
-    field :next, Types::ContentType, null: true, method: :resolve_next
+    field :next, Types::ContentType, null: true
 
-    def resolve_next
+    def next
       Content.where(collection_id: object.collection_id).where('position > ?', object.position).last
     end
 
-    field :previous, Types::ContentType, null: true, method: :resolve_previous
+    field :previous, Types::ContentType, null: true
 
-    def resolve_previous
+    def previous
       Content.where(collection_id: object.collection_id).where('position < ?', object.position).first
     end
   end
