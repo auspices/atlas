@@ -11,6 +11,8 @@ module Types
 
     field :subscriptions, [String], null: false
 
+    field :customer, CustomerType, null: false
+
     field :counts, Types::UserCountsType, null: false
 
     def counts
