@@ -18,13 +18,13 @@ module Mutations
         subscription =
           Stripe::Subscription.create(
             customer: current_user.customer_id,
-            items: [{ price: price_id }] # TODO: Get the price selected?
+            items: [{ price: price_id }]
           )
       rescue StandardError => e
         return Errors::BadRequestError.new(e.message || e.error.message)
       end
 
-      current_user.subscribe_to!(product) if subscription.status === 'active' || subscription.status === 'trialing'
+      current_user.subscribe_to!(product) if subscription.status == 'active' || subscription.status == 'trialing'
 
       { user: current_user }
     end
