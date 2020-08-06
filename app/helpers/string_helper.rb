@@ -44,7 +44,7 @@ module StringHelper
 
   def normalize_url(string)
     uri = Addressable::URI.heuristic_parse(CGI.unescape(string))
-    [uri.host, uri.path].reject(&:blank?).join('').gsub(%r{\/+$}, '')
+    [uri.host, uri.path].reject(&:blank?).join('').gsub(%r{/+$}, '')
   rescue StandardError
     string
   end
