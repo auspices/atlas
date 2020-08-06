@@ -8,11 +8,12 @@ module Extensions
     end
 
     def resolve(object:, arguments:, context:)
-      value = begin
-        yield(object, arguments, context)
-      rescue StandardError
-        object.object.send(field.name.underscore)
-      end
+      value =
+        begin
+          yield(object, arguments, context)
+        rescue StandardError
+          object.object.send(field.name.underscore)
+        end
       self.class.format_date(value: value, relative: arguments[:relative], format: arguments[:format])
     end
 
