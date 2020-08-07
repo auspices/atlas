@@ -10,7 +10,7 @@ Metrics/AbcSize:
   Max: 30
 
 # Configuration parameters: AllowURI, URISchemes.
-Metrics/LineLength:
+Layout/LineLength:
   Max: 130
 
 # Configuration parameters: CountComments.
