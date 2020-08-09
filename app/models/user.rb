@@ -75,4 +75,9 @@ class User < ApplicationRecord
   def subscribed_to?(key)
     subscriptions.include?(Product.find(key))
   end
+
+  def unsubscribe_from!(key)
+    product = Product.find(key)
+    subscriptions.reject { |subscribed_product| subscribed_product == product }
+  end
 end
