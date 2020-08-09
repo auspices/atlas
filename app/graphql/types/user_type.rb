@@ -9,8 +9,7 @@ module Types
     field :email, String, null: false
     field :slug, String, null: false
 
-    field :subscriptions, [String], null: false
-
+    field :services, [String], null: false
     field :customer, CustomerType, null: false
 
     field :counts, Types::UserCountsType, null: false
