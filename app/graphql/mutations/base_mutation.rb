@@ -3,11 +3,9 @@
 module Mutations
   class BaseMutation < GraphQL::Schema::RelayClassicMutation
     def current_user
-      user = context[:current_user]
-
-      raise(Errors::UnauthorizedError, 'Login to continue.') if user.nil? || !user.persisted?
-
-      user
+      context[:current_user].tap do |user|
+        raise(Errors::UnauthorizedError, 'login to continue') if user.nil? || !user.persisted?
+      end
     end
   end
 end

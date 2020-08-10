@@ -72,8 +72,11 @@ class User < ApplicationRecord
     save!
   end
 
-  def subscribed_to?(key)
-    subscriptions.include?(Product.find(key))
+  def subscribed_to?(*keys)
+    products = keys.map { |key| Product.find(key.to_sym) }
+    products.all? { |product| subscriptions.include?(product) }
+  rescue KeyError
+    false
   end
 
   def unsubscribe_from!(key)
