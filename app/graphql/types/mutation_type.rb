@@ -6,6 +6,7 @@ module Types
     field :register, mutation: Mutations::Register
     field :subscribe_to_product, mutation: Mutations::SubscribeToProduct
     field :unsubscribe_from_product, mutation: Mutations::UnsubscribeFromProduct
+    field :reactivate_product_subscription, mutation: Mutations::ReactivateProductSubscription
 
     field :create_collection, mutation: Mutations::CreateCollection
     field :update_collection, mutation: Mutations::UpdateCollection
