@@ -10,7 +10,7 @@ module Uploadable
     validates_uniqueness_of :url
 
     def self.key(url)
-      URI.parse(url).path[1..-1]
+      URI.parse(url).path[1..]
     end
   end
 
