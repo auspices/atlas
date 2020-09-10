@@ -59,8 +59,6 @@ module Types
     end
 
     def presigned_upload_urls(types:)
-      require_login!
-
       types.map do |type|
         ext, mime_type = type.values_at(:ext, :mime_type)
 
