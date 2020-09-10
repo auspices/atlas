@@ -64,7 +64,7 @@ module Types
 
         UploadManager.presigned_url(
           mime_type: mime_type,
-          user_id: current_user.id,
+          user_id: object.id,
           filename: "#{UploadManager.token}.#{ext}"
         )
       end
