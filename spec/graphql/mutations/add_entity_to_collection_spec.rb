@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-describe 'AddToCollection' do
+describe 'AddEntityToCollection' do
   let :mutation do
     <<-'GRAPHQL'
       mutation addEntityToCollection($id: ID!, $entity: EntityInput!) {
