@@ -7,7 +7,7 @@ module Mutations
     field :me, Types::UserType, null: false
 
     def resolve(id:)
-      collection = current_user.collections.find(id)
+      collection = current_user.collections.find_by_id!(id)
       collection.destroy
       { me: current_user }
     end
