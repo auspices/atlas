@@ -10,7 +10,7 @@ module Mutations
     field :entity, Types::EntityType, null: false
 
     def resolve(id:, entity:)
-      collection = current_user.collections.find_by_id!(id)
+      collection = current_user.collections.find(id)
       method = entity.type.name.downcase.underscore.pluralize.to_sym
       entity = current_user.send(method).find(entity.id)
       content = collection.contents.create!(user: current_user, entity: entity)
