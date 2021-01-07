@@ -7,7 +7,7 @@ module Mutations
     field :collection, Types::CollectionType, null: false
 
     def resolve(id:)
-      collection = current_user.collections.find(id)
+      collection = current_user.collections.find_by_id!(id)
       collection.update_attributes!(key: nil)
 
       { collection: collection }
