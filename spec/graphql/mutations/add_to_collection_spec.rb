@@ -9,7 +9,6 @@ describe 'AddToCollection' do
         addToCollection(input: { id: $id, value: $value, metadata: $metadata }) {
           collection {
             id
-            title
             contents {
               id
               metadata
@@ -28,7 +27,7 @@ describe 'AddToCollection' do
   end
 
   let!(:current_user) { Fabricate(:user) }
-  let!(:collection) { Fabricate(:collection, user: current_user, title: "A Collection") }
+  let!(:collection) { Fabricate(:collection, user: current_user) }
 
   let :response do
     execute mutation,
@@ -68,19 +67,6 @@ describe 'AddToCollection' do
       expect(content['metadata']['bar']).to eql('baz')
       expect(content['entity']['__typename']).to eql('Text')
       expect(content['entity']['body']).to eql('Hello world')
-    end
-  end
-
-  describe 'a collection whose slug conflicts with a numeric id' do
-    let!(:collection_with_conflicting_slug_id) { Fabricate(:collection, user: current_user, title: collection.id) }
-
-    it 'requires the id (not slug) of the collection for adding' do
-      response_collection = response['data']['addToCollection']['collection']
-      content = response['data']['addToCollection']['collection']['contents'].first
-      expect(response_collection['id']).to eql(collection.id)
-      expect(response_collection['title']).to eql("A Collection")
-      expect(content['entity']['__typename']).to eql('Text')
-      expect(content['entity']['body']).to eql('Goodbye world')
     end
   end
 end

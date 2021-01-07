@@ -13,7 +13,7 @@ module Mutations
     field :entity, Types::EntityType, null: false
 
     def resolve(id:, value:, metadata: nil)
-      collection = current_user.collections.find_by_id!(id)
+      collection = current_user.collections.find(id)
 
       ActiveRecord::Base.transaction do
         entity = Entity::Builder.build(user: current_user, value: value)
