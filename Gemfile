@@ -5,6 +5,7 @@ source 'https://rubygems.org'
 
 gem 'acts_as_list'
 gem 'addressable'
+gem 'airbrake'
 gem 'aws-sdk-s3', '~> 1.36', '>= 1.36.1'
 gem 'batch-loader'
 gem 'fastimage', '~> 2.1', '>= 2.1.5'
