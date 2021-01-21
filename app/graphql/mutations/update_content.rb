@@ -10,7 +10,7 @@ module Mutations
 
     field :content, Types::ContentType, null: false
 
-    def resolve(id:, title: nil, metadata: {}, replace:)
+    def resolve(id:, replace:, title: nil, metadata: {})
       content = current_user.contents.find(id)
       next_metadata = (replace ? metadata : content.metadata.merge(metadata).compact)
                       .reject { |k, _| k.blank? } # Empty keys removes fields
