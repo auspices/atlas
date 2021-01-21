@@ -40,6 +40,7 @@ class User < ApplicationRecord
   has_many :images, -> { order created_at: :desc }, dependent: :destroy
   has_many :texts, -> { order created_at: :desc }, dependent: :destroy
   has_many :links, -> { order created_at: :desc }, dependent: :destroy
+  has_many :attachments, -> { order created_at: :desc }, dependent: :destroy
 
   def to_s
     username
