@@ -15,7 +15,7 @@ module Mutations
       next_metadata = (replace ? metadata : content.metadata.merge(metadata).compact)
                       .reject { |k, _| k.blank? } # Empty keys removes fields
 
-      content.update_attributes!({
+      content.update!({
         title: title,
         metadata: next_metadata
       }.compact)

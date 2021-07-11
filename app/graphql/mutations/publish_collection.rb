@@ -10,7 +10,7 @@ module Mutations
     def resolve(id:, regenerate: false)
       collection = current_user.collections.find(id)
 
-      collection.update_attributes!(key: SecureRandom.uuid) if !collection.published? || regenerate
+      collection.update!(key: SecureRandom.uuid) if !collection.published? || regenerate
 
       { collection: collection }
     end

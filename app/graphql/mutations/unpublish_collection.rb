@@ -8,7 +8,7 @@ module Mutations
 
     def resolve(id:)
       collection = current_user.collections.find(id)
-      collection.update_attributes!(key: nil)
+      collection.update!(key: nil)
 
       { collection: collection }
     end
