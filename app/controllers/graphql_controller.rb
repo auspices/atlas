@@ -21,7 +21,7 @@ class GraphqlController < ApplicationController
   def current_user
     @current_user ||= begin
       if (auth_header = request.headers['Authorization']).present?
-        payload = JsonWebToken.decode(auth_header.split(' ').last)
+        payload = JsonWebToken.decode(auth_header.split.last)
         return payload && User.find(payload[:id])
       end
 

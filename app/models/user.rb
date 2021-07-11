@@ -52,7 +52,7 @@ class User < ApplicationRecord
       email: email,
       metadata: { id: id }
     ).tap do |stripe_customer|
-      update_attributes!(customer_id: stripe_customer.id)
+      update!(customer_id: stripe_customer.id)
     end
   end
 

@@ -7,6 +7,8 @@ user = User.create!(
   email: 'neo@example.com'
 )
 
+user.subscribe_to!(:gaea)
+
 collection = user.collections.create!(title: 'Genesis')
 
 entity = Entity::Builder.build(user: user, value: 'Hello world')

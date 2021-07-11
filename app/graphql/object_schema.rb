@@ -3,6 +3,9 @@
 class ObjectSchema < GraphQL::Schema
   query Types::ObjectQueryType
   use BatchLoader::GraphQL
+
+  # Revert to deprecated execution behaviors:
+  use GraphQL::Execution::Execute
 end
 
 GraphQL::Errors.configure(ObjectSchema) do
