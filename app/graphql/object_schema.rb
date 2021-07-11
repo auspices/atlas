@@ -6,9 +6,7 @@ class ObjectSchema < GraphQL::Schema
 
   # Revert to deprecated execution behaviors:
   use GraphQL::Execution::Execute
-end
 
-GraphQL::Errors.configure(ObjectSchema) do
   rescue_from ActiveRecord::RecordNotFound do |exception|
     Errors::NotFoundError.new(exception.message)
   end
