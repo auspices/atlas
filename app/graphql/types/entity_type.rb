@@ -2,7 +2,11 @@
 
 module Types
   class EntityType < Types::BaseUnion
-    possible_types Types::ImageType, Types::TextType, Types::LinkType, Types::CollectionType
+    possible_types Types::ImageType,
+                   Types::TextType,
+                   Types::LinkType,
+                   Types::AttachmentType,
+                   Types::CollectionType
 
     def self.resolve_type(object, _context)
       case object
@@ -12,6 +16,8 @@ module Types
         Types::TextType
       when Link
         Types::LinkType
+      when Attachment
+        Types::AttachmentType
       when Collection
         Types::CollectionType
       end

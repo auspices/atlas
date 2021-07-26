@@ -55,17 +55,22 @@ module Types
     end
 
     field :presigned_upload_urls, [String], null: false do
-      argument :types, [Types::SupportedUploadType], required: true
+      argument :uploads, [Types::UploadInput], required: true
     end
 
-    def presigned_upload_urls(types:)
-      types.map do |type|
-        ext, mime_type = type.values_at(:ext, :mime_type)
+    def presigned_upload_urls(uploads:)
+      uploads.map do |upload|
+        # Accept the given file extension
+        extension = File.extname(upload[:name])
+        # Otherwise try to invert it from the MIME type
+        extension = Rack::Mime::MIME_TYPES.invert[upload[:type]] if extension.blank?
+        # Otherwise fallback to bin
+        extension = '.bin' if extension.blank?
 
         UploadManager.presigned_url(
-          mime_type: mime_type,
+          mime_type: upload[:type],
           user_id: object.id,
-          filename: "#{UploadManager.token}.#{ext}"
+          filename: "#{UploadManager.token}#{extension}"
         )
       end
     end
