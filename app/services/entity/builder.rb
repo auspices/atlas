@@ -72,6 +72,24 @@ module Entity
       def build(user:, value:)
         new(user: user, value: value).build
       end
+
+      def build_image(user:, image:)
+        width, height = FastImage.size(image[:url])
+        user.images.build(
+          url: image[:url],
+          width: width,
+          height: height
+        )
+      end
+
+      def build_attachment(user:, attachment:)
+        user.attachments.build(
+          url: attachment[:url],
+          file_name: attachment[:file_name],
+          file_content_type: attachment[:file_content_type],
+          file_content_length: attachment[:file_content_length]
+        )
+      end
     end
   end
 end
