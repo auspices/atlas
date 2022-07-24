@@ -5,7 +5,7 @@ class ObjectGraphqlController < GraphqlController
     variables = ensure_hash(params[:variables])
     result = ObjectSchema.execute(params[:query],
                                   variables: variables,
-                                  context: { current_user: User.new, current_object: current_object },
+                                  context: { current_user: User.new, collection: collection },
                                   operation_name: params[:operationName])
     render json: result
   rescue StandardError => e
@@ -16,7 +16,7 @@ class ObjectGraphqlController < GraphqlController
 
   private
 
-  def current_object
-    @current_object ||= Collection.find_by_key!(params[:key])
+  def collection
+    @collection ||= Collection.find_by_key!(params[:key])
   end
 end

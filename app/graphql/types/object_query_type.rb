@@ -2,10 +2,10 @@
 
 module Types
   class ObjectQueryType < Types::BaseObject
-    field :object, Types::ObjectType, null: false
+    field :object, Types::CollectionType, null: false
 
     def object
-      context[:current_object]
+      context[:collection]
     end
   end
 end
