@@ -5,7 +5,7 @@ class ObjectSchema < GraphQL::Schema
   use BatchLoader::GraphQL
 
   # Revert to deprecated execution behaviors:
-  use GraphQL::Execution::Execute
+  # use GraphQL::Execution::Execute
 
   rescue_from ActiveRecord::RecordNotFound do |exception|
     Errors::NotFoundError.new(exception.message)
