@@ -15,6 +15,8 @@ gem 'graphql'
 gem 'jwt'
 gem 'kaminari', '~> 1.1', '>= 1.1.1'
 gem 'mime-types', '~> 3.2', '>= 3.2.2'
+gem 'net-imap', require: false
+gem 'net-pop', require: false
 gem 'net-smtp', require: false
 gem 'pg', '~> 1.1', '>= 1.1.4'
 gem 'puma'
