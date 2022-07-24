@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-ruby '2.7.1'
+ruby '3.0.4'
 source 'https://rubygems.org'
 
 gem 'acts_as_list'
