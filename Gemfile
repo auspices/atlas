@@ -15,6 +15,7 @@ gem 'graphql'
 gem 'jwt'
 gem 'kaminari', '~> 1.1', '>= 1.1.1'
 gem 'mime-types', '~> 3.2', '>= 3.2.2'
+gem 'net-smtp', require: false
 gem 'pg', '~> 1.1', '>= 1.1.4'
 gem 'puma'
 gem 'rack-cors', require: 'rack/cors'
