@@ -5,13 +5,13 @@ module Shared
     def self.included(child_class)
       child_class.field :metadata, GraphQL::Types::JSON, null: false
 
-      child_class.field :value, String, null: true, extras: [:irep_node] do
+      child_class.field :value, String, null: true, extras: [:ast_node] do
         argument :key, String, required: false
       end
     end
 
-    def value(irep_node:, key: nil)
-      object.metadata[key || irep_node.name]
+    def value(ast_node:, key: nil)
+      object.metadata[key || ast_node.name]
     end
   end
 end
