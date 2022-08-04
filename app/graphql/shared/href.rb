@@ -9,7 +9,7 @@ module Shared
     end
 
     def href(absolute: false)
-      object.to_url(absolute: absolute)
+      object.to_url(absolute:)
     end
   end
 end

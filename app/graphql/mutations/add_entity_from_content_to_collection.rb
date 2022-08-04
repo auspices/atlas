@@ -13,12 +13,12 @@ module Mutations
       collection = current_user.collections.find(id)
       existing_content = current_user.contents.find(content_id)
       entity = existing_content.entity
-      content = collection.contents.create!(user: current_user, entity: entity)
+      content = collection.contents.create!(user: current_user, entity:)
 
       {
-        collection: collection,
-        content: content,
-        entity: entity
+        collection:,
+        content:,
+        entity:
       }
     end
   end

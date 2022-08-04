@@ -16,11 +16,11 @@ module Mutations
                       .reject { |k, _| k.blank? } # Empty keys removes fields
 
       content.update!({
-        title: title,
+        title:,
         metadata: next_metadata
       }.compact)
 
-      { content: content }
+      { content: }
     end
   end
 end

@@ -16,18 +16,18 @@ module Mutations
       collections = current_user.collections.find(ids)
 
       ActiveRecord::Base.transaction do
-        entity = Entity::Builder.build(user: current_user, value: value)
+        entity = Entity::Builder.build(user: current_user, value:)
         entity.save!
 
-        options = { user: current_user, entity: entity, metadata: metadata }.compact
+        options = { user: current_user, entity:, metadata: }.compact
         contents = collections.map do |collection|
           collection.contents.create!(options)
         end
 
         return {
-          collections: collections,
-          contents: contents,
-          entity: entity
+          collections:,
+          contents:,
+          entity:
         }
       end
     end

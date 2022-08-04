@@ -17,7 +17,7 @@ module Extensions
           object.object.send(field.name.underscore)
         end
 
-      self.class.format_currency(value: value, **arguments)
+      self.class.format_currency(value:, **arguments)
     end
 
     class << self

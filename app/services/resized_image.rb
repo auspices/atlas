@@ -3,8 +3,8 @@
 class ResizedImage
   attr_reader :image, :width, :height, :factor, :ratio, :quality, :blur, :sharpen, :fit
 
-  BUCKET = ENV['S3_BUCKET']
-  ENDPOINT = ENV['IMAGE_RESIZING_PROXY_ENDPOINT']
+  BUCKET = ENV.fetch('S3_BUCKET', nil)
+  ENDPOINT = ENV.fetch('IMAGE_RESIZING_PROXY_ENDPOINT', nil)
   DEFAULT_SCALE = 1.0
   DEFAULT_QUALITY = 75
   DEFAULT_FIT = 'inside'
@@ -39,20 +39,20 @@ class ResizedImage
       resize: {
         width: width * factor,
         height: height * factor,
-        fit: fit
+        fit:
       },
-      webp: { quality: quality },
-      jpeg: { quality: quality },
+      webp: { quality: },
+      jpeg: { quality: },
       # Passing `null` to the `rotate` filter utilizes the EXIF orientation
       rotate: nil
     }
-            .merge(blur.present? ? { blur: blur } : {})
-            .merge(sharpen.present? ? { sharpen: sharpen } : {})
+            .merge(blur.present? ? { blur: } : {})
+            .merge(sharpen.present? ? { sharpen: } : {})
 
     payload = {
       bucket: BUCKET,
       key: image.uri.path.delete_prefix('/'),
-      edits: edits
+      edits:
     }.to_json
 
     [ENDPOINT, Base64.strict_encode64(payload)].join('/')
@@ -60,8 +60,8 @@ class ResizedImage
 
   private
 
-  def method_missing(method, *args, &block)
-    image.send(method, *args, &block) || super
+  def method_missing(method, *args, &)
+    image.send(method, *args, &) || super
   end
 
   def respond_to_missing?(method_name, include_private = false)

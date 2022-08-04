@@ -13,12 +13,12 @@ module Mutations
       collection = current_user.collections.find(id)
       method = entity.type.name.downcase.underscore.pluralize.to_sym
       entity = current_user.send(method).find(entity.id)
-      content = collection.contents.create!(user: current_user, entity: entity)
+      content = collection.contents.create!(user: current_user, entity:)
 
       {
-        collection: collection,
-        content: content,
-        entity: entity
+        collection:,
+        content:,
+        entity:
       }
     end
   end

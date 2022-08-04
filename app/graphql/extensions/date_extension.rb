@@ -14,7 +14,7 @@ module Extensions
         rescue StandardError
           object.object.send(field.name.underscore)
         end
-      self.class.format_date(value: value, relative: arguments[:relative], format: arguments[:format])
+      self.class.format_date(value:, relative: arguments[:relative], format: arguments[:format])
     end
 
     class << self

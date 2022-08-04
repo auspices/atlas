@@ -42,14 +42,14 @@ module Entity
     def build_image_with_direct_upload(url)
       width, height = FastImage.size(url)
       user.images.build(
-        url: url,
-        width: width,
-        height: height
+        url:,
+        width:,
+        height:
       )
     end
 
     def build_image_with_source_url(source_url)
-      image = user.images.build(source_url: source_url)
+      image = user.images.build(source_url:)
 
       image.url = UploadManager.upload_from_source_url(source_url) do |io|
         type = FastImage.type(io)
@@ -57,7 +57,7 @@ module Entity
         raise CategorizationError, '`source_url` must be an image' if type.nil?
 
         width, height = FastImage.size(io)
-        image.assign_attributes(width: width, height: height)
+        image.assign_attributes(width:, height:)
 
         UploadManager.key(
           user_id: user.id,
@@ -70,15 +70,15 @@ module Entity
 
     class << self
       def build(user:, value:)
-        new(user: user, value: value).build
+        new(user:, value:).build
       end
 
       def build_image(user:, image:)
         width, height = FastImage.size(image[:url])
         user.images.build(
           url: image[:url],
-          width: width,
-          height: height
+          width:,
+          height:
         )
       end
 

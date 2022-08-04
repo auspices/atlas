@@ -29,12 +29,12 @@ module Types
     # rubocop:disable Metrics/ParameterLists
     def resized(width: nil, height: nil, scale: nil, quality: 75, blur: nil, sharpen: nil)
       object.resized(
-        width: width,
-        height: height,
-        scale: scale,
-        quality: quality,
-        blur: blur,
-        sharpen: sharpen,
+        width:,
+        height:,
+        scale:,
+        quality:,
+        blur:,
+        sharpen:,
         fit: 'inside'
       )
     end
@@ -52,12 +52,12 @@ module Types
     # rubocop:disable Metrics/ParameterLists
     def cropped(width:, height:, scale: nil, quality: 75, blur: nil, sharpen: nil)
       object.resized(
-        width: width,
-        height: height,
-        scale: scale,
-        quality: quality,
-        blur: blur,
-        sharpen: sharpen,
+        width:,
+        height:,
+        scale:,
+        quality:,
+        blur:,
+        sharpen:,
         fit: 'cover'
       )
     end

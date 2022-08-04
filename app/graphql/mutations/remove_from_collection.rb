@@ -11,7 +11,7 @@ module Mutations
       content = Content.find(content_id)
       content.destroy
 
-      { content: content, collection: content.collection }
+      { content:, collection: content.collection }
     end
   end
 end

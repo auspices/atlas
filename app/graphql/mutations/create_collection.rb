@@ -7,9 +7,9 @@ module Mutations
     field :collection, Types::CollectionType, null: false
 
     def resolve(title:)
-      collection = current_user.collections.create!(title: title)
+      collection = current_user.collections.create!(title:)
 
-      { collection: collection }
+      { collection: }
     end
   end
 end

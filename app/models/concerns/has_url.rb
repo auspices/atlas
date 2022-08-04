@@ -18,6 +18,6 @@ module HasUrl
   end
 
   def to_url(absolute: nil)
-    @to_url ||= URL_BUILDER.to_s(options: instance_exec(&self.class.has_url_template), absolute: absolute)
+    @to_url ||= URL_BUILDER.to_s(options: instance_exec(&self.class.has_url_template), absolute:)
   end
 end

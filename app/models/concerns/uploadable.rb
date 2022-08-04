@@ -28,7 +28,7 @@ module Uploadable
 
   def static
     if ENV['STATIC_CLOUDFRONT_ENDPOINT'].present?
-      return url.gsub("#{ENV['S3_BUCKET']}.s3.amazonaws.com", ENV['STATIC_CLOUDFRONT_ENDPOINT'])
+      return url.gsub("#{ENV.fetch('S3_BUCKET', nil)}.s3.amazonaws.com", ENV['STATIC_CLOUDFRONT_ENDPOINT'])
     end
 
     url

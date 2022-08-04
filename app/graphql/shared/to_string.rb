@@ -15,7 +15,7 @@ module Shared
       string = object.to_s
       return string unless length
 
-      truncate(string, length: length, from: from)
+      truncate(string, length:, from:)
     end
   end
 end

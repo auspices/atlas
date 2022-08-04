@@ -6,8 +6,8 @@ class GraphqlController < ApplicationController
   def execute
     variables = ensure_hash(params[:variables])
     result = ApplicationSchema.execute(params[:query],
-                                       variables: variables,
-                                       context: { current_user: current_user },
+                                       variables:,
+                                       context: { current_user: },
                                        operation_name: params[:operationName])
     render json: result
   rescue StandardError => e

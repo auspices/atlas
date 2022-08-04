@@ -15,7 +15,7 @@ module Mutations
       args = [action, insert_at].compact
       content.send(*args)
 
-      { content: content, collection: content.collection }
+      { content:, collection: content.collection }
     end
   end
 end
