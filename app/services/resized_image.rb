@@ -1,12 +1,13 @@
 # frozen_string_literal: true
 
 class ResizedImage
-  attr_reader :image, :width, :height, :factor, :ratio, :quality, :blur, :sharpen
+  attr_reader :image, :width, :height, :factor, :ratio, :quality, :blur, :sharpen, :fit
 
   BUCKET = ENV['S3_BUCKET']
   ENDPOINT = ENV['IMAGE_RESIZING_PROXY_ENDPOINT']
   DEFAULT_SCALE = 1.0
   DEFAULT_QUALITY = 75
+  DEFAULT_FIT = 'inside'
 
   # rubocop:disable Metrics/AbcSize
   def initialize(image, options = {})
@@ -29,6 +30,7 @@ class ResizedImage
     @quality = options[:quality] || DEFAULT_QUALITY
     @blur = options[:blur]
     @sharpen = options[:sharpen]
+    @fit = options[:fit] || DEFAULT_FIT
   end
   # rubocop:enable Metrics/AbcSize
 
@@ -37,7 +39,7 @@ class ResizedImage
       resize: {
         width: width * factor,
         height: height * factor,
-        fit: 'inside'
+        fit: fit
       },
       webp: { quality: quality },
       jpeg: { quality: quality },
