@@ -40,14 +40,14 @@ module Entity
       width, height = FastImage.size(url)
 
       entity.assign_attributes(
-        url: url,
-        width: width,
-        height: height
+        url:,
+        width:,
+        height:
       )
     end
 
     def edit_image_with_source_url(source_url)
-      entity.assign_attributes(source_url: source_url)
+      entity.assign_attributes(source_url:)
 
       entity.url = UploadManager.upload_from_source_url(source_url) do |io|
         type = FastImage.type(io)
@@ -55,7 +55,7 @@ module Entity
         raise CategorizationError, '`source_url` must be an image' if type.nil?
 
         width, height = FastImage.size(io)
-        entity.assign_attributes(width: width, height: height)
+        entity.assign_attributes(width:, height:)
 
         UploadManager.key(
           user_id: user.id,
@@ -74,7 +74,7 @@ module Entity
 
     class << self
       def edit(entity:, value:)
-        new(entity: entity, value: value).edit
+        new(entity:, value:).edit
       end
     end
   end

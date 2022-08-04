@@ -6,7 +6,7 @@ require 'aws-sdk-s3'
 class UploadManager
   attr_reader :key
 
-  S3_BUCKET = ENV['S3_BUCKET']
+  S3_BUCKET = ENV.fetch('S3_BUCKET', nil)
 
   def initialize(key)
     @key = key
@@ -64,7 +64,7 @@ class UploadManager
 
     def presigned_url(mime_type:, user_id:, filename:)
       new(
-        key(user_id: user_id, filename: filename)
+        key(user_id:, filename:)
       ).obj.presigned_url(:put, acl: 'public-read', content_type: mime_type, cache_control: 'max-age=31536000')
     end
 
@@ -76,7 +76,7 @@ class UploadManager
 
       return is_internal unless treat_duplicates_as_external
 
-      is_internal && !Image.exists?(url: url)
+      is_internal && !Image.exists?(url:)
     rescue Addressable::URI::InvalidURIError
       false
     end

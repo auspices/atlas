@@ -12,7 +12,7 @@ module Mutations
 
       collection.update!(key: SecureRandom.uuid) if !collection.published? || regenerate
 
-      { collection: collection }
+      { collection: }
     end
   end
 end

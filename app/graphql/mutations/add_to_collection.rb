@@ -23,22 +23,22 @@ module Mutations
 
       ActiveRecord::Base.transaction do
         entity = if image
-          Entity::Builder.build_image(user: current_user, image: image)
+          Entity::Builder.build_image(user: current_user, image:)
         elsif attachment
-          Entity::Builder.build_attachment(user: current_user, attachment: attachment)
+          Entity::Builder.build_attachment(user: current_user, attachment:)
         else
-          Entity::Builder.build(user: current_user, value: value)
+          Entity::Builder.build(user: current_user, value:)
         end
 
         entity.save!
 
-        options = { user: current_user, entity: entity, metadata: metadata }.compact
+        options = { user: current_user, entity:, metadata: }.compact
         content = collection.contents.create!(options)
 
         return {
-          collection: collection,
-          content: content,
-          entity: entity
+          collection:,
+          content:,
+          entity:
         }
       end
     end

@@ -50,8 +50,8 @@ class User < ApplicationRecord
     return customer if customer?
 
     Stripe::Customer.create(
-      email: email,
-      metadata: { id: id }
+      email:,
+      metadata: { id: }
     ).tap do |stripe_customer|
       update!(customer_id: stripe_customer.id)
     end

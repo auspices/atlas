@@ -10,7 +10,7 @@ module Mutations
       collection = current_user.collections.find(id)
       collection.update!(key: nil)
 
-      { collection: collection }
+      { collection: }
     end
   end
 end

@@ -7,9 +7,9 @@ module StringHelper
     return string unless length
     return string if string.length == 1
 
-    return truncate_url(string, length: length, from: from) if string.start_with?('http') && !skip_url
+    return truncate_url(string, length:, from:) if string.start_with?('http') && !skip_url
 
-    truncate_string(string, length: length, from: from)
+    truncate_string(string, length:, from:)
   end
 
   def truncate_string(string, length: nil, from: :tail)
@@ -39,7 +39,7 @@ module StringHelper
     sans_www = normalized.gsub(/^www\./, '')
     return sans_www if sans_www.length <= length
 
-    truncate(sans_www, length: length, from: from, skip_url: true)
+    truncate(sans_www, length:, from:, skip_url: true)
   end
 
   def normalize_url(string)

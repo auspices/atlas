@@ -11,7 +11,7 @@ user.subscribe_to!(:gaea)
 
 collection = user.collections.create!(title: 'Genesis')
 
-entity = Entity::Builder.build(user: user, value: 'Hello world')
+entity = Entity::Builder.build(user:, value: 'Hello world')
 entity.save!
 
-collection.contents.create!(user: user, entity: entity)
+collection.contents.create!(user:, entity:)

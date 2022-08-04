@@ -29,12 +29,36 @@ module Types
     # rubocop:disable Metrics/ParameterLists
     def resized(width: nil, height: nil, scale: nil, quality: 75, blur: nil, sharpen: nil)
       object.resized(
-        width: width,
-        height: height,
-        scale: scale,
-        quality: quality,
-        blur: blur,
-        sharpen: sharpen
+        width:,
+        height:,
+        scale:,
+        quality:,
+        blur:,
+        sharpen:,
+        fit: 'inside'
+      )
+    end
+    # rubocop:enable Metrics/ParameterLists
+
+    field :crop, Types::ResizedImageType, null: false do
+      argument :width, Int, required: true
+      argument :height, Int, required: true
+      argument :scale, Float, required: false
+      argument :quality, Int, required: false
+      argument :blur, Int, required: false
+      argument :sharpen, Int, required: false
+    end
+
+    # rubocop:disable Metrics/ParameterLists
+    def cropped(width:, height:, scale: nil, quality: 75, blur: nil, sharpen: nil)
+      object.resized(
+        width:,
+        height:,
+        scale:,
+        quality:,
+        blur:,
+        sharpen:,
+        fit: 'cover'
       )
     end
     # rubocop:enable Metrics/ParameterLists

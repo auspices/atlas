@@ -16,7 +16,7 @@ module Types
     end
 
     def file_size(precision: nil)
-      number_to_human_size(object.file_content_length, precision: precision)
+      number_to_human_size(object.file_content_length, precision:)
     end
   end
 end

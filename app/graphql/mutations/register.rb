@@ -16,17 +16,17 @@ module Mutations
 
       ActiveRecord::Base.transaction do
         user = User.create!(
-          username: username,
-          password: password,
-          password_confirmation: password_confirmation,
-          email: email
+          username:,
+          password:,
+          password_confirmation:,
+          email:
         )
 
         user.create_customer!
 
-        token = JsonWebToken.encode(id: user.id, env: ENV['RAILS_ENV'])
+        token = JsonWebToken.encode(id: user.id, env: ENV.fetch('RAILS_ENV', nil))
 
-        { jwt: token, user: user }
+        { jwt: token, user: }
       end
     end
   end

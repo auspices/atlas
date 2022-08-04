@@ -12,11 +12,11 @@ module Mutations
       entity = current_user.send(type.name.tableize.to_sym).find(id)
 
       ActiveRecord::Base.transaction do
-        entity = Entity::Editor.edit(entity: entity, value: value)
+        entity = Entity::Editor.edit(entity:, value:)
         entity.save!
       end
 
-      { entity: entity }
+      { entity: }
     end
   end
 end

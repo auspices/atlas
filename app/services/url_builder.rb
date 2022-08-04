@@ -3,7 +3,7 @@
 class UrlBuilder
   PROTOCOL = 'https'
   HOST =
-    case ENV['RAILS_ENV']
+    case ENV.fetch('RAILS_ENV', nil)
     when 'production'
       'www.auspic.es'
     when 'test'

@@ -39,7 +39,7 @@ module Types
       results = results.where('metadata @> ?', metadata.to_json) if metadata.present?
       results.page(page).per(per)
     end
-    
+
     field :collection, Types::CollectionType, null: false do
       argument :id, ID, required: true
     end

@@ -14,8 +14,8 @@ module Mutations
       return Errors::UnauthorizedError.new('Login failed. Invalid username or password.') if user.nil?
 
       if user.valid_password?(password)
-        token = JsonWebToken.encode(id: user.id, env: ENV['RAILS_ENV'])
-        return { jwt: token, user: user }
+        token = JsonWebToken.encode(id: user.id, env: ENV.fetch('RAILS_ENV', nil))
+        return { jwt: token, user: }
       end
 
       Errors::UnauthorizedError.new('Login failed. Invalid username or password.')
