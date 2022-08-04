@@ -40,7 +40,7 @@ module Types
     end
     # rubocop:enable Metrics/ParameterLists
 
-    field :crop, Types::ResizedImageType, null: false do
+    field :cropped, Types::ResizedImageType, null: false do
       argument :width, Int, required: true
       argument :height, Int, required: true
       argument :scale, Float, required: false
