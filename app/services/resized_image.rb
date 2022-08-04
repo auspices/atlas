@@ -13,6 +13,8 @@ class ResizedImage
   def initialize(image, options = {})
     @image = image
 
+    @fit = options[:fit] || DEFAULT_FIT
+
     # Resized properties
     @factor = [
       ((options[:width] / @image.width.to_f) if options[:width]),
@@ -21,8 +23,8 @@ class ResizedImage
 
     scale = options[:scale] || DEFAULT_SCALE
 
-    @width = ([(@image.width * factor), @image.width].min * scale).to_i
-    @height = ([(@image.height * factor), @image.height].min * scale).to_i
+    @width = @fit == 'cover' ? options[:width] : ([(@image.width * factor), @image.width].min * scale).to_i
+    @height = @fit == 'cover' ? options[:height] : ([(@image.height * factor), @image.height].min * scale).to_i
 
     @ratio = (@height / @width.to_f * 100.0)
 
@@ -30,7 +32,6 @@ class ResizedImage
     @quality = options[:quality] || DEFAULT_QUALITY
     @blur = options[:blur]
     @sharpen = options[:sharpen]
-    @fit = options[:fit] || DEFAULT_FIT
   end
   # rubocop:enable Metrics/AbcSize
 
