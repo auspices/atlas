@@ -51,6 +51,4 @@ describe 'ResizedImage' do
       expect(resized_portrait.ratio).to eq(100)
     end
   end
-
-
 end
