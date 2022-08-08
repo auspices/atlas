@@ -12,8 +12,10 @@ class ResizedImage
   # rubocop:disable Metrics/AbcSize
   def initialize(image, options = {})
     @image = image
-
     @fit = options[:fit] || DEFAULT_FIT
+
+    raise ArgumentError, 'either `width` or `height` is required' if fit == 'inside' && !(options[:width] || options[:height])
+    raise ArgumentError, 'both `width` and `height` are required' if fit == 'cover' && !(options[:width] && options[:height])
 
     # Resized properties
     @factor = [

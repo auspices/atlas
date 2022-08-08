@@ -24,10 +24,11 @@ module Types
       argument :quality, Int, required: false
       argument :blur, Int, required: false
       argument :sharpen, Int, required: false
+      argument :fit, Types::ResizedImageFitType, required: false, default_value: 'inside'
     end
 
     # rubocop:disable Metrics/ParameterLists
-    def resized(width: nil, height: nil, scale: nil, quality: 75, blur: nil, sharpen: nil)
+    def resized(width: nil, height: nil, scale: nil, quality: 75, blur: nil, sharpen: nil, fit: 'inside')
       object.resized(
         width:,
         height:,
@@ -35,7 +36,7 @@ module Types
         quality:,
         blur:,
         sharpen:,
-        fit: 'inside'
+        fit:
       )
     end
     # rubocop:enable Metrics/ParameterLists
