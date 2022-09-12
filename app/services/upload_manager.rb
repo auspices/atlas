@@ -25,7 +25,7 @@ class UploadManager
   end
 
   def upload(io)
-    obj.upload_stream(acl: 'public-read', cache_control: 'max-age=31536000') do |write_stream|
+    obj.upload_stream(acl: 'public-read', content_type: io.content_type, cache_control: 'max-age=31536000') do |write_stream|
       IO.copy_stream(io, write_stream)
     end
   end
