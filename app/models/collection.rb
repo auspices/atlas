@@ -43,4 +43,18 @@ class Collection < ApplicationRecord
   def published?
     key?
   end
+
+  def contains_collection?(target_collection_id, visited = Set.new)
+    # If this collection has already been visited, return false to avoid loops.
+    return false if visited.include?(self.id)
+    visited.add(self.id)
+
+    # Return true if this collection is the target collection.
+    return true if self.id == target_collection_id
+
+    # Check if any of the child collections contain the target collection.
+    self.collections.any? do |child_collection|
+      child_collection.contains_collection?(target_collection_id, visited)
+    end
+  end
 end
