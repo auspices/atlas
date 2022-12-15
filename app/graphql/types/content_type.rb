@@ -28,13 +28,13 @@ module Types
     field :next, Types::ContentType, null: true
 
     def next
-      Content.where(collection_id: object.collection_id).where('position > ?', object.position).last
+      Content.where(collection_id: object.collection_id).where('position > ?', object.position).order(position: :asc).first
     end
 
     field :previous, Types::ContentType, null: true
 
     def previous
-      Content.where(collection_id: object.collection_id).where('position < ?', object.position).first
+      Content.where(collection_id: object.collection_id).where('position < ?', object.position).order(position: :desc).first
     end
   end
 end
