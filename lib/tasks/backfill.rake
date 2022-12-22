@@ -14,13 +14,12 @@ namespace :backfill do
       file_content_length = io.size
 
       image.update_columns(
-        file_name: file_name,
-        file_content_type: file_content_type,
-        file_content_length: file_content_length
+        file_name:,
+        file_content_type:,
+        file_content_length:
       )
     rescue StandardError
       puts "Failed to backfill image #{image.id}"
     end
   end
 end
-
