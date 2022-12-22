@@ -4,14 +4,17 @@
 #
 # Table name: images
 #
-#  id         :integer          not null, primary key
-#  url        :text
-#  source_url :text
-#  created_at :datetime
-#  updated_at :datetime
-#  user_id    :integer
-#  width      :integer
-#  height     :integer
+#  id                  :integer          not null, primary key
+#  url                 :text
+#  source_url          :text
+#  created_at          :datetime
+#  updated_at          :datetime
+#  user_id             :integer
+#  width               :integer
+#  height              :integer
+#  file_name           :text
+#  file_content_type   :string
+#  file_content_length :integer
 #
 
 class Image < ApplicationRecord
@@ -25,7 +28,9 @@ class Image < ApplicationRecord
   validates :user, presence: true
 
   def to_s
-    @to_s ||= if source_url.present? || url.present?
+    @to_s ||= if file_name?
+      file_name
+    elsif source_url.present? || url.present?
       File.basename(source_url || url)
     else
       'image'

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_26_162728) do
+ActiveRecord::Schema.define(version: 2022_12_22_202642) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -75,6 +75,9 @@ ActiveRecord::Schema.define(version: 2020_07_26_162728) do
     t.integer "user_id"
     t.integer "width"
     t.integer "height"
+    t.text "file_name"
+    t.string "file_content_type"
+    t.integer "file_content_length"
     t.index ["url"], name: "index_images_on_url", unique: true
     t.index ["user_id"], name: "index_images_on_user_id"
   end

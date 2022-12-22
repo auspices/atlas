@@ -49,7 +49,10 @@ describe 'AddToCollection' do
       {
         id: collection.id,
         image: {
-          url: 'https://example.com/example.jpg'
+          url: 'https://example.com/example.jpg',
+          fileName: 'example.jpg',
+          fileContentType: 'image/jpeg',
+          fileContentLength: 666
         }
       }
     end
