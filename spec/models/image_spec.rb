@@ -4,14 +4,17 @@
 #
 # Table name: images
 #
-#  id         :integer          not null, primary key
-#  url        :text
-#  source_url :text
-#  created_at :datetime
-#  updated_at :datetime
-#  user_id    :integer
-#  width      :integer
-#  height     :integer
+#  id                  :integer          not null, primary key
+#  url                 :text
+#  source_url          :text
+#  created_at          :datetime
+#  updated_at          :datetime
+#  user_id             :integer
+#  width               :integer
+#  height              :integer
+#  file_name           :text
+#  file_content_type   :string
+#  file_content_length :integer
 #
 
 require 'rails_helper'
