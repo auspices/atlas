@@ -24,12 +24,14 @@ module Types
       argument :per, Int, required: false
       argument :metadata, GraphQL::Types::JSON, required: false
       argument :sort_by, Types::ContentsSortType, required: false
+      argument :entity_type, Types::EntityTypes, required: false
     end
 
-    def contents(page: nil, per: nil, metadata: nil, sort_by: nil)
+    def contents(page: nil, per: nil, metadata: nil, sort_by: nil, entity_type: nil)
       results = object.contents
       results = results.unscope(:order).order(sort_by) if sort_by.present?
       results = results.where('metadata @> ?', metadata.to_json) if metadata.present?
+      results = results.where(entity_type: entity_type.to_s) if entity_type.present?
       results.page(page).per(per)
     end
 
