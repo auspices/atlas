@@ -57,4 +57,37 @@ RSpec.describe Collection, type: :model do
       end
     end
   end
+
+  describe '#contains_collection?' do
+    let(:user) { Fabricate(:user) }
+
+    let(:nested_collection) do
+      Fabricate(:collection)
+    end
+
+    let(:unnested_collection) do
+      Fabricate(:collection)
+    end
+
+    let(:deeply_nested_collection) do
+      Fabricate(:collection)
+    end
+
+    it 'returns true if the collection contains the target collection' do
+      collection.contents.create!(user: user, entity: nested_collection)
+
+      expect(collection.contains_collection?(nested_collection.id)).to be(true)
+    end
+
+    it 'returns false if the collection does not contain the target collection' do
+      expect(collection.contains_collection?(unnested_collection.id)).to be(false)
+    end
+
+    it 'detects a deeply nested collection' do
+      collection.contents.create!(user: user, entity: nested_collection)
+      nested_collection.contents.create!(user: user, entity: deeply_nested_collection)
+
+      expect(collection.contains_collection?(deeply_nested_collection.id)).to be(true)
+    end
+  end
 end

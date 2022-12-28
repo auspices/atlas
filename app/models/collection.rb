@@ -54,9 +54,15 @@ class Collection < ApplicationRecord
     # Return true if this collection is the target collection.
     return true if id == target_collection_id
 
-    # Check if any of the child collections contain the target collection.
-    collections.any? do |child_collection|
-      child_collection.contains_collection?(target_collection_id, visited)
+    begin
+      collections.find(target_collection_id).present?
+    rescue ActiveRecord::RecordNotFound
+      # If the target collection is not a direct child of this collection, continue.
+
+      # Check if any of the child collections contain the target collection.
+      collections.any? do |child_collection|
+        child_collection.contains_collection?(target_collection_id, visited)
+      end
     end
   end
 end

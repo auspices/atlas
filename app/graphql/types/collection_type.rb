@@ -56,6 +56,8 @@ module Types
     end
 
     def collection(id:)
+      object.collections.friendly.find(id)
+    rescue ActiveRecord::RecordNotFound
       Collection.find(id).tap do |target_collection|
         unless object.contains_collection?(target_collection.id)
           return Errors::NotFoundError.new("#{id} not contained within this collection")
