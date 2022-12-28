@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ApplicationSchema < GraphQL::Schema
-  use(GraphQL::Tracing::NewRelicTracing) if Rails.env.production?
+  use(GraphQL::Tracing::NewRelicTracing, set_transaction_name: true) if Rails.env.production?
 
   mutation Types::MutationType
   query Types::QueryType
