@@ -165,6 +165,7 @@ GEM
       digest
       net-protocol
       timeout
+    newrelic_rpm (8.14.0)
     nio4r (2.5.8)
     nokogiri (1.13.8-x86_64-darwin)
       racc (~> 1.4)
@@ -325,6 +326,7 @@ DEPENDENCIES
   net-imap
   net-pop
   net-smtp
+  newrelic_rpm
   pg (~> 1.1, >= 1.1.4)
   puma
   rack-cors
