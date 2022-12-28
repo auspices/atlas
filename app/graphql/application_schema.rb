@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class ApplicationSchema < GraphQL::Schema
+  use(GraphQL::Tracing::NewRelicTracing) if Rails.env.production?
+
   mutation Types::MutationType
   query Types::QueryType
   use BatchLoader::GraphQL

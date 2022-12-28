@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class ObjectSchema < GraphQL::Schema
+  use(GraphQL::Tracing::NewRelicTracing) if Rails.env.production?
+
   query Types::ObjectQueryType
   use BatchLoader::GraphQL
 
