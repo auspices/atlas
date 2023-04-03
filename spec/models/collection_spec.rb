@@ -118,7 +118,65 @@ RSpec.describe Collection, type: :model do
       expect(collection_a.contains_collection?(collection_e.id)).to be(true)
     end
 
-    describe 'under stress', focus: true do
+    it "returns true for circular references" do
+      # Create collections
+      collection1 = Fabricate(:collection)
+      collection2 = Fabricate(:collection)
+      collection3 = Fabricate(:collection)
+
+      # Create contents with circular references
+      Fabricate(:content, collection: collection1, entity: collection2)
+      Fabricate(:content, collection: collection2, entity: collection3)
+      Fabricate(:content, collection: collection3, entity: collection1)
+
+      # Assert that contains_collection? returns true for the circular reference
+      expect(collection1.contains_collection?(collection1.id)).to be(true)
+      expect(collection2.contains_collection?(collection2.id)).to be(true)
+      expect(collection3.contains_collection?(collection3.id)).to be(true)
+    end
+
+    it "returns false for circular references that don't include the target collection" do
+      # Create collections
+      collection1 = Fabricate(:collection)
+      collection2 = Fabricate(:collection)
+      collection3 = Fabricate(:collection)
+
+      # Create contents with circular references
+      Fabricate(:content, collection: collection1, entity: collection2)
+      Fabricate(:content, collection: collection2, entity: collection3)
+      Fabricate(:content, collection: collection3, entity: collection1)
+
+      # Assert that contains_collection? returns false for the circular reference
+      expect(collection1.contains_collection?(99999)).to be(false)
+    end
+
+    describe.skip 'with max_depth' do
+      let(:collection) { Fabricate(:collection) }
+      let(:target_collection_1) { Fabricate(:collection) }
+      let(:target_collection_2) { Fabricate(:collection) }
+      let(:target_collection_3) { Fabricate(:collection) }
+  
+      before do
+        # Nest target collections inside each other
+        collection.contents.create(entity: target_collection_1)
+        target_collection_1.contents.create(entity: target_collection_2)
+        target_collection_2.contents.create(entity: target_collection_3)
+      end
+  
+      context 'when max_depth is specified' do
+        it 'returns true if target collection is within the specified depth' do
+          expect(collection.contains_collection?(target_collection_1.id, 1)).to be true
+          expect(collection.contains_collection?(target_collection_2.id, 2)).to be true
+        end
+  
+        it 'returns false if target collection is not within the specified depth' do
+          expect(collection.contains_collection?(target_collection_2.id, 1)).to be false
+          expect(collection.contains_collection?(target_collection_3.id, 2)).to be false
+        end
+      end
+    end
+
+    describe 'under stress' do
       let!(:root_collection) { Fabricate(:collection) }
       let!(:nested_collections) { Fabricate.times(10, :collection) }
       let!(:deeply_nested_collections) { Fabricate.times(10, :collection) }

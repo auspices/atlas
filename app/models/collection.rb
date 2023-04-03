@@ -46,28 +46,25 @@ class Collection < ApplicationRecord
   end
 
   def contains_collection?(target_collection_id)
-    # Recursive Common Table Expression (CTE) to find nested collections
+    # Recursive CTE to find nested collections
     cte_query = <<-SQL
-      WITH RECURSIVE nested_collections AS (
-        -- Base case: Select the root collection's ID and its directly nested collections
-        SELECT collection_id, entity_id
-        FROM contents
-        WHERE collection_id = $1 AND entity_type = 'Collection'
+    WITH RECURSIVE nested_collections(path) AS (
+      SELECT ARRAY[collection_id, entity_id]
+      FROM contents
+      WHERE collection_id = $1 AND entity_type = 'Collection'
+    #{'  '}
+      UNION ALL
+    #{'  '}
+      SELECT nc.path || c.entity_id
+      FROM contents c
+      JOIN nested_collections nc ON c.collection_id = nc.path[array_upper(nc.path, 1)]
+      WHERE c.entity_type = 'Collection' AND NOT (c.entity_id = ANY(nc.path))
+    )
 
-        UNION ALL
-
-        -- Recursive step: For each nested collection found in the previous step, find its nested collections
-        SELECT c.collection_id, c.entity_id
-        FROM contents c
-        JOIN nested_collections nc ON c.collection_id = nc.entity_id
-        WHERE c.entity_type = 'Collection'
-      )
-
-      -- Check if the target collection is present in the recursive traversal results
-      SELECT 1
-      FROM nested_collections
-      WHERE entity_id = $2
-      LIMIT 1;
+    SELECT 1
+    FROM nested_collections
+    WHERE $2 = ANY(path)
+    LIMIT 1;
     SQL
 
     # Execute the raw SQL query
