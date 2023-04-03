@@ -1,6 +1,8 @@
 defaults: &defaults
   adapter: postgresql
   encoding: unicode
+  variables:
+    statement_timeout: 5000
 
 development:
   <<: *defaults
