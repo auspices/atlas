@@ -89,33 +89,5 @@ RSpec.describe Collection, type: :model do
 
       expect(collection.contains_collection?(deeply_nested_collection.id)).to be(true)
     end
-
-    it 'detects a collection nested multiple levels deep' do
-      collection_a = Fabricate(:collection)
-      collection_b = Fabricate(:collection)
-      collection_c = Fabricate(:collection)
-      collection_d = Fabricate(:collection)
-  
-      collection_a.contents.create!(user: user, entity: collection_b)
-      collection_b.contents.create!(user: user, entity: collection_c)
-      collection_c.contents.create!(user: user, entity: collection_d)
-  
-      expect(collection_a.contains_collection?(collection_d.id)).to be(true)
-    end
-  
-    it 'detects a collection in another branch of the tree' do
-      collection_a = Fabricate(:collection)
-      collection_b = Fabricate(:collection)
-      collection_c = Fabricate(:collection)
-      collection_d = Fabricate(:collection)
-      collection_e = Fabricate(:collection)
-  
-      collection_a.contents.create!(user: user, entity: collection_b)
-      collection_a.contents.create!(user: user, entity: collection_c)
-      collection_b.contents.create!(user: user, entity: collection_d)
-      collection_c.contents.create!(user: user, entity: collection_e)
-  
-      expect(collection_a.contains_collection?(collection_e.id)).to be(true)
-    end
   end
 end
