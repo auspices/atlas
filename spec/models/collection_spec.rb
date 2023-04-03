@@ -117,5 +117,38 @@ RSpec.describe Collection, type: :model do
   
       expect(collection_a.contains_collection?(collection_e.id)).to be(true)
     end
+
+    describe 'under stress', focus: true do
+      let!(:root_collection) { Fabricate(:collection) }
+      let!(:nested_collections) { Fabricate.times(10, :collection) }
+      let!(:deeply_nested_collections) { Fabricate.times(10, :collection) }
+
+      before do
+        # Create the structure of nested collections
+        nested_collections.each_with_index do |collection, index|
+          Fabricate(:content, collection: index.zero? ? root_collection : nested_collections[index - 1], entity: collection)
+        end
+
+        deeply_nested_collections.each_with_index do |collection, index|
+          Fabricate(:content, collection: index.zero? ? nested_collections.last : deeply_nested_collections[index - 1], entity: collection)
+        end
+      end
+
+      it 'handles stress test with multiple parallel queries' do
+        stress_test_threads = []
+
+        # Run 20 parallel queries
+        20.times do
+          stress_test_threads << Thread.new do
+            10.times do
+              expect(root_collection.contains_collection?(deeply_nested_collections.sample.id)).to be(true)
+            end
+          end
+        end
+
+        # Wait for all threads to finish
+        stress_test_threads.each(&:join)
+      end
+    end
   end
 end
