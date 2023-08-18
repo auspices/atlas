@@ -167,7 +167,7 @@ GEM
       net-protocol
       timeout
     newrelic_rpm (8.14.0)
-    nio4r (2.5.8)
+    nio4r (2.5.9)
     nokogiri (1.13.10)
       mini_portile2 (~> 2.8.0)
       racc (~> 1.4)
@@ -183,7 +183,7 @@ GEM
       ast (~> 2.4.1)
     pg (1.4.1)
     public_suffix (4.0.7)
-    puma (5.6.4)
+    puma (5.6.7)
       nio4r (~> 2.0)
     racc (1.6.2)
     rack (2.2.4)
