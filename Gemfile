@@ -21,7 +21,7 @@ gem 'net-smtp', require: false
 gem 'pg', '~> 1.1', '>= 1.1.4'
 gem 'puma'
 gem 'rack-cors', require: 'rack/cors'
-gem 'rails', '~> 6'
+gem 'rails', '~> 7'
 gem 'sorcery'
 gem 'stripe'
 gem 'twilio-ruby'
