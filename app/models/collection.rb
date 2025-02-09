@@ -45,17 +45,17 @@ class Collection < ApplicationRecord
     key?
   end
 
-  def contains_collection?(target_collection_id)
+  def contains_collection?(target_collection_id) # rubocop:disable Metrics/MethodLength
     # Recursive CTE to find nested collections
     cte_query = <<-SQL
     WITH RECURSIVE nested_collections(path) AS (
-      SELECT ARRAY[collection_id, entity_id]
+      SELECT ARRAY[collection_id, entity_id]::bigint[]
       FROM contents
-      WHERE collection_id = $1 AND entity_type = 'Collection'
+      WHERE collection_id = $1::bigint AND entity_type = 'Collection'
 
       UNION ALL
 
-      SELECT nc.path || c.entity_id
+      SELECT (nc.path || c.entity_id)::bigint[]
       FROM contents c
       JOIN nested_collections nc ON c.collection_id = nc.path[array_upper(nc.path, 1)]
       WHERE c.entity_type = 'Collection' AND NOT (c.entity_id = ANY(nc.path))
@@ -63,12 +63,19 @@ class Collection < ApplicationRecord
 
     SELECT 1
     FROM nested_collections
-    WHERE $2 = ANY(path)
+    WHERE $2::bigint = ANY(path)
     LIMIT 1;
     SQL
 
-    # Execute the raw SQL query
-    result = ActiveRecord::Base.connection.exec_query(cte_query, 'contains_collection?', [[nil, id], [nil, target_collection_id]])
+    # Execute the raw SQL query with explicit type casting
+    result = ActiveRecord::Base.connection.exec_query(
+      cte_query,
+      'contains_collection?',
+      [
+        ActiveRecord::Relation::QueryAttribute.new('id', id, ActiveRecord::Type::BigInteger.new),
+        ActiveRecord::Relation::QueryAttribute.new('target_id', target_collection_id, ActiveRecord::Type::BigInteger.new)
+      ]
+    )
 
     # Check if there's any row in the result
     result.any?
@@ -83,15 +90,15 @@ class Collection < ApplicationRecord
     cte_query = <<-SQL
       WITH RECURSIVE nested_collections AS (
         -- Base case: direct children
-        SELECT entity_id, 1 as depth
+        SELECT entity_id::bigint, 1 as depth
         FROM contents
-        WHERE collection_id = $1#{' '}
+        WHERE collection_id = $1::bigint
           AND entity_type = 'Collection'
 
         UNION ALL
 
         -- Recursive case: children of children
-        SELECT c.entity_id, nc.depth + 1
+        SELECT c.entity_id::bigint, nc.depth + 1
         FROM contents c
         INNER JOIN nested_collections nc ON c.collection_id = nc.entity_id
         WHERE c.entity_type = 'Collection'
@@ -100,15 +107,18 @@ class Collection < ApplicationRecord
       SELECT EXISTS (
         SELECT 1
         FROM nested_collections
-        WHERE entity_id = $2
+        WHERE entity_id = $2::bigint
       );
     SQL
 
-    # Execute the raw SQL query with prepared statement
+    # Execute the raw SQL query with explicit type casting
     result = ActiveRecord::Base.connection.exec_query(
       cte_query,
       'contains_collection_optimized?',
-      [[nil, id], [nil, target_collection_id]]
+      [
+        ActiveRecord::Relation::QueryAttribute.new('id', id, ActiveRecord::Type::BigInteger.new),
+        ActiveRecord::Relation::QueryAttribute.new('target_id', target_collection_id, ActiveRecord::Type::BigInteger.new)
+      ]
     )
 
     result.first['exists']

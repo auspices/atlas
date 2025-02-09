@@ -2,7 +2,7 @@
 
 source 'https://rubygems.org'
 
-ruby '3.2.0'
+ruby '3.4.1'
 
 gem 'acts_as_list'
 gem 'addressable'
@@ -11,7 +11,6 @@ gem 'aws-sdk-s3'
 gem 'batch-loader'
 gem 'fastimage'
 gem 'friendly_id'
-gem 'graphiql-rails'
 gem 'graphql'
 gem 'jwt'
 gem 'kaminari'
@@ -19,7 +18,7 @@ gem 'mime-types'
 gem 'pg'
 gem 'puma'
 gem 'rack-cors'
-gem 'rails', '~> 6.1.6'
+gem 'rails', '~> 7.1.3'
 gem 'sorcery'
 gem 'stripe'
 gem 'twilio-ruby'
@@ -27,13 +26,14 @@ gem 'twilio-ruby'
 group :development, :test do
   gem 'annotate'
   gem 'benchmark-ips'
-  gem 'byebug'
+  gem 'debug'
   gem 'fabrication'
   gem 'foreman'
   gem 'listen'
   gem 'rspec-rails'
   gem 'rubocop'
   gem 'rubocop-performance'
+  gem 'rubocop-rails'
   gem 'shoulda-matchers'
   gem 'stripe-ruby-mock', '3.1.0.rc3'
   gem 'webmock'
@@ -41,7 +41,4 @@ end
 
 group :production do
   gem 'newrelic_rpm'
-  gem 'rails_12factor'
 end
-
-gem 'concurrent-ruby', '= 1.3.4'

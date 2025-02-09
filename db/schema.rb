@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_04_03_021431) do
-
+ActiveRecord::Schema[7.1].define(version: 2023_04_03_021431) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
@@ -22,8 +21,8 @@ ActiveRecord::Schema.define(version: 2023_04_03_021431) do
     t.string "file_content_type"
     t.integer "file_content_length"
     t.bigint "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["user_id"], name: "index_attachments_on_user_id"
   end
 
@@ -31,8 +30,8 @@ ActiveRecord::Schema.define(version: 2023_04_03_021431) do
     t.string "title"
     t.integer "contents_count", default: 0
     t.integer "user_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "slug"
     t.jsonb "metadata", default: {}, null: false
     t.uuid "key"
@@ -44,8 +43,8 @@ ActiveRecord::Schema.define(version: 2023_04_03_021431) do
   create_table "contents", force: :cascade do |t|
     t.integer "collection_id", null: false
     t.integer "user_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.integer "position"
     t.string "entity_type"
     t.bigint "entity_id"
@@ -61,7 +60,7 @@ ActiveRecord::Schema.define(version: 2023_04_03_021431) do
     t.integer "sluggable_id", null: false
     t.string "sluggable_type", limit: 50
     t.string "scope"
-    t.datetime "created_at"
+    t.datetime "created_at", precision: nil
     t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
     t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
     t.index ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id"
@@ -71,8 +70,8 @@ ActiveRecord::Schema.define(version: 2023_04_03_021431) do
   create_table "images", force: :cascade do |t|
     t.text "url"
     t.text "source_url"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.integer "user_id"
     t.integer "width"
     t.integer "height"
@@ -86,16 +85,16 @@ ActiveRecord::Schema.define(version: 2023_04_03_021431) do
   create_table "links", force: :cascade do |t|
     t.text "url"
     t.bigint "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["user_id"], name: "index_links_on_user_id"
   end
 
   create_table "texts", force: :cascade do |t|
     t.text "body"
     t.bigint "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["user_id"], name: "index_texts_on_user_id"
   end
 
@@ -104,13 +103,13 @@ ActiveRecord::Schema.define(version: 2023_04_03_021431) do
     t.string "username", null: false
     t.string "crypted_password", null: false
     t.string "salt", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "remember_me_token"
-    t.datetime "remember_me_token_expires_at"
+    t.datetime "remember_me_token_expires_at", precision: nil
     t.string "reset_password_token"
-    t.datetime "reset_password_token_expires_at"
-    t.datetime "reset_password_email_sent_at"
+    t.datetime "reset_password_token_expires_at", precision: nil
+    t.datetime "reset_password_email_sent_at", precision: nil
     t.string "slug"
     t.string "phone_number"
     t.jsonb "subscriptions", default: [], null: false
