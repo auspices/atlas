@@ -3,10 +3,10 @@
 module Mutations
   class AddToCollections < BaseMutation
     argument :ids, [ID], required: true, description: 'Collection IDs'
-    argument :value, String, required: true, description: 'URL or plain text'
     argument :metadata, GraphQL::Types::JSON, required: false, prepare: lambda { |metadata, _ctx|
       JSON.parse(metadata)
     }
+    argument :value, String, required: true, description: 'URL or plain text'
 
     field :collections, [Types::CollectionType], null: false
     field :contents, [Types::ContentType], null: false

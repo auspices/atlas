@@ -2,16 +2,16 @@
 
 module Types
   class ResizedImageType < Types::BaseObject
-    field :width, Int, null: false
     field :height, Int, null: false
+    field :width, Int, null: false
+
+    field :url, String, null: false
 
     field :urls, Types::RetinaImageType, null: false
 
     def urls
       RetinaImage.new(object)
     end
-
-    field :url, String, null: false
 
     def url
       object.size(1)

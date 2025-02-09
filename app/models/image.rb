@@ -24,8 +24,7 @@ class Image < ApplicationRecord
   has_many :collections, through: :contents
   belongs_to :user
 
-  validates_format_of :source_url, with: URI::DEFAULT_PARSER.make_regexp(%w[http https]), allow_blank: true
-  validates :user, presence: true
+  validates :source_url, format: { with: URI::DEFAULT_PARSER.make_regexp(%w[http https]), allow_blank: true }
 
   def to_s
     @to_s ||= if file_name?

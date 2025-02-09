@@ -18,7 +18,7 @@ class Text < ApplicationRecord
   has_many :collections, through: :contents
   belongs_to :user
 
-  validates :user, :body, presence: true
+  validates :body, presence: true
 
   def to_s
     body

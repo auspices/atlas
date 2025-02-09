@@ -1,9 +1,15 @@
-require: rubocop-performance
+require:
+  - rubocop-performance
+  - rubocop-rails
+  - rubocop-graphql
+  - rubocop-rspec
+
 inherit_from: .rubocop_todo.yml
 
 AllCops:
   NewCops: enable
   DisplayCopNames: true
+  SuggestExtensions: false
   Exclude:
     - tmp/**/*
     - vendor/**/*
@@ -11,16 +17,8 @@ AllCops:
     - spec/**/*
     - db/schema.rb
 
-Lint/AssignmentInCondition:
-  Enabled: false
-
+# Layout
 Layout/HashAlignment:
-  Enabled: false
-
-Style/Documentation:
-  Enabled: false
-
-Style/MultilineBlockChain:
   Enabled: false
 
 Layout/MultilineOperationIndentation:
@@ -29,6 +27,18 @@ Layout/MultilineOperationIndentation:
 Layout/EndAlignment:
   EnforcedStyleAlignWith: variable
 
+# Lint
+Lint/AssignmentInCondition:
+  Enabled: false
+
+# Style
+Style/Documentation:
+  Enabled: false
+
+Style/MultilineBlockChain:
+  Enabled: false
+
+# Metrics
 Metrics/MethodLength:
   Enabled: false
 
@@ -39,4 +49,26 @@ Metrics/PerceivedComplexity:
   Enabled: false
 
 Metrics/CyclomaticComplexity:
+  Enabled: false
+
+# GraphQL
+GraphQL/FieldDescription:
+  Enabled: false
+
+GraphQL/ArgumentDescription:
+  Enabled: false
+
+GraphQL/ObjectDescription:
+  Enabled: false
+
+GraphQL/ExtractInputType:
+  Enabled: false
+
+GraphQL/ExtractType:
+  Enabled: false
+
+GraphQL/OrderedFields:
+  Enabled: false
+
+GraphQL/OrderedArguments:
   Enabled: false

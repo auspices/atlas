@@ -2,8 +2,8 @@
 
 module Mutations
   class AddEntityFromContentToCollection < BaseMutation
-    argument :id, ID, required: true, description: 'Collection ID'
     argument :content_id, ID, required: true, description: 'Content ID'
+    argument :id, ID, required: true, description: 'Collection ID'
 
     field :collection, Types::CollectionType, null: false
     field :content, Types::ContentType, null: false

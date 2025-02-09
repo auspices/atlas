@@ -3,11 +3,11 @@
 module Mutations
   class UpdateCollection < BaseMutation
     argument :id, ID, required: true
-    argument :title, String, required: false
     argument :metadata, GraphQL::Types::JSON, required: false, prepare: lambda { |metadata, _ctx|
       JSON.parse(metadata)
     }
     argument :replace, Boolean, required: false, default_value: false
+    argument :title, String, required: false
 
     field :collection, Types::CollectionType, null: false
 

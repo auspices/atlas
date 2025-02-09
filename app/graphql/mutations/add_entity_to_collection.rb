@@ -2,8 +2,8 @@
 
 module Mutations
   class AddEntityToCollection < BaseMutation
-    argument :id, ID, required: true, description: 'Collection ID'
     argument :entity, Types::EntityInput, required: true
+    argument :id, ID, required: true, description: 'Collection ID'
 
     field :collection, Types::CollectionType, null: false
     field :content, Types::ContentType, null: false

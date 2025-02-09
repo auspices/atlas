@@ -6,6 +6,11 @@ class ObjectSchema < GraphQL::Schema
   query Types::ObjectQueryType
   use BatchLoader::GraphQL
 
+  # Prevent overly complex queries
+  max_complexity 300
+  # Prevent deeply nested queries
+  max_depth 15
+
   rescue_from ActiveRecord::RecordNotFound do |exception|
     Errors::NotFoundError.new(exception.message)
   end

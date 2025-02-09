@@ -30,9 +30,7 @@ class UploadManager
     end
   end
 
-  def delete
-    obj.delete
-  end
+  delegate :delete, to: :obj
 
   def public_url
     obj.public_url(secure: true)
