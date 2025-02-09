@@ -2,9 +2,9 @@
 
 module Types
   class SubscriptionType < Types::BaseObject
+    field :cancel_at_period_end, Boolean, null: false
     field :id, String, null: false
     field :plan, PlanType, null: false
-    field :cancel_at_period_end, Boolean, null: false
 
     field :current_period_end_at, String, null: false, extensions: [Extensions::DateExtension]
     field :current_period_start_at, String, null: false, extensions: [Extensions::DateExtension]

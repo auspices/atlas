@@ -18,8 +18,8 @@ class Link < ApplicationRecord
   has_many :collections, through: :contents
   belongs_to :user
 
-  validates :user, :url, presence: true
-  validates_format_of :url, with: URI::DEFAULT_PARSER.make_regexp(%w[http https])
+  validates :url, presence: true
+  validates :url, format: { with: URI::DEFAULT_PARSER.make_regexp(%w[http https]) }
 
   def uri
     @uri ||= Addressable::URI.heuristic_parse(url)

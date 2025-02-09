@@ -4,11 +4,11 @@ module Types
   class UserCountsType < Types::BaseObject
     field :collections, Int, null: false
 
+    field :contents, Int, null: false
+
     def collections
       object.collections.size
     end
-
-    field :contents, Int, null: false
 
     def contents
       object.contents.size

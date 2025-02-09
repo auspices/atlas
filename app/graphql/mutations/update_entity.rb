@@ -2,8 +2,8 @@
 
 module Mutations
   class UpdateEntity < BaseMutation
-    argument :type, Types::EntityTypes, required: true
     argument :id, ID, required: true
+    argument :type, Types::EntityTypes, required: true
     argument :value, String, required: true, description: 'URL or plain text'
 
     field :entity, Types::EntityType, null: false

@@ -2,7 +2,7 @@
 
 namespace :sync do
   desc 'Sync production database with local'
-  task 'production_to_local' do
+  task 'production_to_local' => :environment do
     Bundler.with_clean_env do
       `heroku pg:backups:capture --app auspices-atlas-production`
       %x(curl -o latest.dump `heroku pg:backups:url --app auspices-atlas-production`)

@@ -2,14 +2,14 @@
 
 module Mutations
   class Login < GraphQL::Schema::RelayClassicMutation
-    argument :username, String, required: true
     argument :password, String, required: true
+    argument :username, String, required: true
 
     field :jwt, String, null: false
     field :user, Types::UserType, null: false
 
     def resolve(username:, password:)
-      user = User.find_by_username(username)
+      user = User.find_by(username: username)
 
       return Errors::UnauthorizedError.new('Login failed. Invalid username or password.') if user.nil?
 

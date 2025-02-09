@@ -17,6 +17,6 @@ class ObjectGraphqlController < GraphqlController
   private
 
   def collection
-    @collection ||= Collection.find_by_key!(params[:key])
+    @collection ||= Collection.find_by!(key: params[:key])
   end
 end

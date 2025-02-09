@@ -2,13 +2,13 @@
 
 module Mutations
   class AddToCollection < BaseMutation
-    argument :id, ID, required: true, description: 'Collection ID'
-    argument :value, String, required: false, description: 'URL or plain text'
-    argument :image, Types::ImageInput, required: false, description: 'Upload an image directly'
     argument :attachment, Types::AttachmentInput, required: false, description: 'Upload an attachment directly'
+    argument :id, ID, required: true, description: 'Collection ID'
+    argument :image, Types::ImageInput, required: false, description: 'Upload an image directly'
     argument :metadata, GraphQL::Types::JSON, required: false, prepare: lambda { |metadata, _ctx|
       JSON.parse(metadata)
     }
+    argument :value, String, required: false, description: 'URL or plain text'
 
     field :collection, Types::CollectionType, null: false
     field :content, Types::ContentType, null: false
@@ -17,9 +17,7 @@ module Mutations
     def resolve(id:, value: nil, image: nil, attachment: nil, metadata: nil)
       collection = current_user.collections.find(id)
 
-      unless (image || attachment || value).present?
-        return Errors::BadRequestError.new('Requires `image`, `attachment`, or `value`')
-      end
+      return Errors::BadRequestError.new('Requires `image`, `attachment`, or `value`') if (image || attachment || value).blank?
 
       ActiveRecord::Base.transaction do
         entity = if image

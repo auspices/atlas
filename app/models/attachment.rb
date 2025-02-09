@@ -21,7 +21,6 @@ class Attachment < ApplicationRecord
   has_many :collections, through: :contents
   belongs_to :user
 
-  validates :user, presence: true
   validates :file_name, presence: true
   validates :file_content_type, presence: true
   validates :file_content_length, presence: true

@@ -19,11 +19,11 @@ class Collection < ApplicationRecord
   extend FriendlyId
   friendly_id :title, use: :scoped, scope: :user
 
-  validates :title, :user, presence: true
+  validates :title, presence: true
   validate :validate_schema_structure, if: -> { schema.present? }
 
-  belongs_to :user
-  has_many :contents, -> { order position: :asc }, dependent: :destroy
+  belongs_to :user, inverse_of: :collections
+  has_many :contents, -> { order position: :asc }, dependent: :destroy, inverse_of: :collection
 
   has_many :attachments, through: :contents, source: :entity, source_type: 'Attachment'
   has_many :collections, through: :contents, source: :entity, source_type: 'Collection'
@@ -82,7 +82,7 @@ class Collection < ApplicationRecord
 
   def contains_collection?(target_collection_id)
     # Recursive CTE to find nested collections
-    cte_query = <<-SQL
+    cte_query = <<-SQL.squish
     WITH RECURSIVE nested_collections(path) AS (
       SELECT ARRAY[collection_id, entity_id]::bigint[]
       FROM contents

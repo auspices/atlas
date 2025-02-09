@@ -8,11 +8,39 @@ module Types
     include Shared::Href
 
     field :id, Int, null: false
+
+    field :counts, Types::CollectionCountsType, null: false
+
+    field :contents, [Types::ContentType], null: false do
+      argument :entity_type, Types::EntityTypes, required: false
+      argument :metadata, GraphQL::Types::JSON, required: false
+      argument :page, Int, required: false
+      argument :per, Int, required: false
+      argument :sort_by, Types::ContentsSortType, required: false
+    end
+
+    field :content, Types::ContentType, null: false do
+      argument :id, ID, required: true
+    end
+
+    field :sample, [Types::ContentType], null: false do
+      argument :amount, Int, required: false
+    end
+
+    field :collection, Types::CollectionType, null: false do
+      argument :id, ID, required: true
+    end
+
+    field :within, [Types::CollectionType], null: false do
+      argument :page, Int, required: false
+      argument :per, Int, required: false
+    end
+
     field :key, String, null: true
-    field :slug, String, null: false
-    field :title, String, null: false
     field :name, String, null: false, method: :title
     field :schema, GraphQL::Types::JSON, null: true
+    field :slug, String, null: false
+    field :title, String, null: false
 
     field :schema_fields, [Types::SchemaFieldType], null: false do
       argument :name, String, required: false
@@ -29,18 +57,8 @@ module Types
       end
     end
 
-    field :counts, Types::CollectionCountsType, null: false
-
     def counts
       object
-    end
-
-    field :contents, [Types::ContentType], null: false do
-      argument :page, Int, required: false
-      argument :per, Int, required: false
-      argument :metadata, GraphQL::Types::JSON, required: false
-      argument :sort_by, Types::ContentsSortType, required: false
-      argument :entity_type, Types::EntityTypes, required: false
     end
 
     def contents(page: nil, per: nil, metadata: nil, sort_by: nil, entity_type: nil)
@@ -51,24 +69,12 @@ module Types
       results.page(page).per(per)
     end
 
-    field :content, Types::ContentType, null: false do
-      argument :id, ID, required: true
-    end
-
     def content(id:)
       object.contents.find(id)
     end
 
-    field :sample, [Types::ContentType], null: false do
-      argument :amount, Int, required: false
-    end
-
     def sample(amount: 1)
       object.contents.unscope(:order).order('RANDOM()').limit(amount)
-    end
-
-    field :collection, Types::CollectionType, null: false do
-      argument :id, ID, required: true
     end
 
     def collection(id:)
@@ -79,11 +85,6 @@ module Types
           return Errors::NotFoundError.new("#{id} not contained within this collection")
         end
       end
-    end
-
-    field :within, [Types::CollectionType], null: false do
-      argument :page, Int, required: false
-      argument :per, Int, required: false
     end
 
     def within(page: nil, per: nil)

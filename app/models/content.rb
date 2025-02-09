@@ -16,7 +16,6 @@
 #
 
 class Content < ApplicationRecord
-  validates :collection, :entity, :user, presence: true
   validate :validate_metadata_against_schema, if: -> { collection&.schema.present? }
 
   belongs_to :user

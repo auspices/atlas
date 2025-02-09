@@ -2,9 +2,9 @@
 
 module Mutations
   class SubscribeToProduct < BaseMutation
-    argument :product, Types::ProductsType, required: true
     argument :payment_method_id, String, required: true
     argument :price_id, String, required: true
+    argument :product, Types::ProductsType, required: true
 
     field :user, Types::UserType, null: false
 
