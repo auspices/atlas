@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_04_03_021431) do
+ActiveRecord::Schema[7.1].define(version: 2025_02_09_173724) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
@@ -35,7 +35,9 @@ ActiveRecord::Schema[7.1].define(version: 2023_04_03_021431) do
     t.string "slug"
     t.jsonb "metadata", default: {}, null: false
     t.uuid "key"
+    t.jsonb "schema"
     t.index ["key"], name: "index_collections_on_key", unique: true
+    t.index ["schema"], name: "index_collections_on_schema", using: :gin
     t.index ["slug"], name: "index_collections_on_slug"
     t.index ["user_id"], name: "index_collections_on_user_id"
   end

@@ -12,6 +12,22 @@ module Types
     field :slug, String, null: false
     field :title, String, null: false
     field :name, String, null: false, method: :title
+    field :schema, GraphQL::Types::JSON, null: true
+
+    field :schema_fields, [Types::SchemaFieldType], null: false do
+      argument :name, String, required: false
+    end
+
+    def schema_fields(name: nil)
+      fields = object.schema_fields
+      return [] if fields.empty?
+
+      fields.filter_map do |field_name, field_def|
+        next if name.present? && field_name != name
+
+        field_def.merge('name' => field_name)
+      end
+    end
 
     field :counts, Types::CollectionCountsType, null: false
 

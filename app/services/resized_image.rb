@@ -10,7 +10,7 @@ class ResizedImage
   DEFAULT_FIT = 'inside'
 
   # rubocop:disable Metrics/AbcSize
-  def initialize(image, options = {}) # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
+  def initialize(image, options = {})
     @image = image
     @fit = options[:fit] || DEFAULT_FIT
 
