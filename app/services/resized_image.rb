@@ -10,7 +10,7 @@ class ResizedImage
   DEFAULT_FIT = 'inside'
 
   # rubocop:disable Metrics/AbcSize
-  def initialize(image, options = {})
+  def initialize(image, options = {}) # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
     @image = image
     @fit = options[:fit] || DEFAULT_FIT
 
@@ -63,8 +63,8 @@ class ResizedImage
 
   private
 
-  def method_missing(method, *args, &)
-    image.send(method, *args, &) || super
+  def method_missing(method, *, &)
+    image.send(method, *, &) || super
   end
 
   def respond_to_missing?(method_name, include_private = false)

@@ -6,7 +6,7 @@ module Entity
 
     attr_reader :user
 
-    def initialize(value:, user:)
+    def initialize(value:, user:) # rubocop:disable Lint/MissingSuper
       @user = user
       @value = value
     end
@@ -55,7 +55,7 @@ module Entity
       )
     end
 
-    def build_image_with_source_url(source_url)
+    def build_image_with_source_url(source_url) # rubocop:disable Metrics/MethodLength
       image = user.images.build(
         source_url:,
         file_name: File.basename(source_url)

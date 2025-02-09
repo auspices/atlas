@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class AddPositionToConnection < ActiveRecord::Migration[5.2]
+class AddPositionToConnection < ActiveRecord::Migration[6.1]
   def change
     add_column :connections, :position, :integer
 

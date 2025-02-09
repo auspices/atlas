@@ -19,12 +19,14 @@ class GraphqlController < ApplicationController
   private
 
   def current_user
-    @current_user ||= begin
-      if (auth_header = request.headers['Authorization']).present?
+    @current_user ||= if (auth_header = request.headers['Authorization']).present?
+      begin
         payload = JsonWebToken.decode(auth_header.split.last)
-        return payload && User.find(payload[:id])
+        payload && User.find_by(id: payload[:id])
+      rescue JWT::DecodeError, ActiveRecord::RecordNotFound => _e
+        User.new
       end
-
+    else
       User.new
     end
   end

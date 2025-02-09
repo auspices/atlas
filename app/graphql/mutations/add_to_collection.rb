@@ -14,7 +14,7 @@ module Mutations
     field :content, Types::ContentType, null: false
     field :entity, Types::EntityType, null: false
 
-    def resolve(id:, value: nil, image: nil, attachment: nil, metadata: nil)
+    def resolve(id:, value: nil, image: nil, attachment: nil, metadata: nil) # rubocop:disable Metrics/MethodLength
       collection = current_user.collections.find(id)
 
       unless (image || attachment || value).present?

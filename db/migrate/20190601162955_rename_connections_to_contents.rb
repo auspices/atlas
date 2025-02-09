@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class RenameConnectionsToContents < ActiveRecord::Migration[5.2]
+class RenameConnectionsToContents < ActiveRecord::Migration[6.1]
   def change
     remove_index :connections, :collection_id
     remove_index :connections, :image_id

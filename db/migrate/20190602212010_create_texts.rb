@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class CreateTexts < ActiveRecord::Migration[5.2]
+class CreateTexts < ActiveRecord::Migration[6.1]
   def change
     create_table :texts do |t|
       t.text :body

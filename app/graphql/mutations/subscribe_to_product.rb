@@ -24,7 +24,7 @@ module Mutations
         return Errors::BadRequestError.new(e.message || e.error.message)
       end
 
-      current_user.subscribe_to!(product) if subscription.status == 'active' || subscription.status == 'trialing'
+      current_user.subscribe_to!(product) if %w[active trialing].include?(subscription.status)
 
       { user: current_user }
     end
