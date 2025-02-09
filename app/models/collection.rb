@@ -52,9 +52,9 @@ class Collection < ApplicationRecord
       SELECT ARRAY[collection_id, entity_id]
       FROM contents
       WHERE collection_id = $1 AND entity_type = 'Collection'
-    #{'  '}
+
       UNION ALL
-    #{'  '}
+
       SELECT nc.path || c.entity_id
       FROM contents c
       JOIN nested_collections nc ON c.collection_id = nc.path[array_upper(nc.path, 1)]
@@ -72,5 +72,45 @@ class Collection < ApplicationRecord
 
     # Check if there's any row in the result
     result.any?
+  end
+
+  # TODO: Validate and further optimize
+  def contains_collection_optimized?(target_collection_id) # rubocop:disable Metrics/MethodLength
+    # Early return if checking against self
+    return false if id == target_collection_id
+
+    # Recursive CTE to find nested collections with depth limit
+    cte_query = <<-SQL
+      WITH RECURSIVE nested_collections AS (
+        -- Base case: direct children
+        SELECT entity_id, 1 as depth
+        FROM contents
+        WHERE collection_id = $1#{' '}
+          AND entity_type = 'Collection'
+
+        UNION ALL
+
+        -- Recursive case: children of children
+        SELECT c.entity_id, nc.depth + 1
+        FROM contents c
+        INNER JOIN nested_collections nc ON c.collection_id = nc.entity_id
+        WHERE c.entity_type = 'Collection'
+          AND nc.depth < 100  -- Prevent infinite recursion
+      )
+      SELECT EXISTS (
+        SELECT 1
+        FROM nested_collections
+        WHERE entity_id = $2
+      );
+    SQL
+
+    # Execute the raw SQL query with prepared statement
+    result = ActiveRecord::Base.connection.exec_query(
+      cte_query,
+      'contains_collection_optimized?',
+      [[nil, id], [nil, target_collection_id]]
+    )
+
+    result.first['exists']
   end
 end

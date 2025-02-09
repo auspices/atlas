@@ -1,3 +1,7 @@
+# frozen_string_literal: true
+
+require 'stripe_mock'
+
 module Macros
   def mock_stripe
     let :stripe_helper do

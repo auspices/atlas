@@ -27,12 +27,12 @@ ActiveRecord::Schema.define(version: 2023_04_03_021431) do
     t.index ["user_id"], name: "index_attachments_on_user_id"
   end
 
-  create_table "collections", id: :serial, force: :cascade do |t|
+  create_table "collections", force: :cascade do |t|
     t.string "title"
     t.integer "contents_count", default: 0
     t.integer "user_id", null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.string "slug"
     t.jsonb "metadata", default: {}, null: false
     t.uuid "key"
@@ -41,11 +41,11 @@ ActiveRecord::Schema.define(version: 2023_04_03_021431) do
     t.index ["user_id"], name: "index_collections_on_user_id"
   end
 
-  create_table "contents", id: :serial, force: :cascade do |t|
+  create_table "contents", force: :cascade do |t|
     t.integer "collection_id", null: false
     t.integer "user_id", null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.integer "position"
     t.string "entity_type"
     t.bigint "entity_id"
@@ -56,7 +56,7 @@ ActiveRecord::Schema.define(version: 2023_04_03_021431) do
     t.index ["user_id"], name: "index_contents_on_user_id"
   end
 
-  create_table "friendly_id_slugs", id: :serial, force: :cascade do |t|
+  create_table "friendly_id_slugs", force: :cascade do |t|
     t.string "slug", null: false
     t.integer "sluggable_id", null: false
     t.string "sluggable_type", limit: 50
@@ -68,11 +68,11 @@ ActiveRecord::Schema.define(version: 2023_04_03_021431) do
     t.index ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type"
   end
 
-  create_table "images", id: :serial, force: :cascade do |t|
+  create_table "images", force: :cascade do |t|
     t.text "url"
     t.text "source_url"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.integer "user_id"
     t.integer "width"
     t.integer "height"
@@ -99,13 +99,13 @@ ActiveRecord::Schema.define(version: 2023_04_03_021431) do
     t.index ["user_id"], name: "index_texts_on_user_id"
   end
 
-  create_table "users", id: :serial, force: :cascade do |t|
+  create_table "users", force: :cascade do |t|
     t.string "email", null: false
     t.string "username", null: false
     t.string "crypted_password", null: false
     t.string "salt", null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.string "remember_me_token"
     t.datetime "remember_me_token_expires_at"
     t.string "reset_password_token"

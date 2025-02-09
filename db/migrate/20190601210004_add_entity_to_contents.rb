@@ -2,7 +2,7 @@
 
 require_relative '../migration_helpers'
 
-class AddEntityToContents < ActiveRecord::Migration[5.2]
+class AddEntityToContents < ActiveRecord::Migration[6.1]
   def change
     add_reference :contents, :entity, polymorphic: true, index: true
 
