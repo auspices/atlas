@@ -10,7 +10,7 @@ class UrlBuilder
       'test.auspic.es'
     when 'development'
       'localhost:5001'
-    else
+    else # rubocop:disable Lint/DuplicateBranch
       'www.auspic.es'
     end
 

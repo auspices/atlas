@@ -6,7 +6,7 @@ module Entity
 
     attr_reader :entity
 
-    def initialize(value:, entity:)
+    def initialize(value:, entity:) # rubocop:disable Lint/MissingSuper
       @value = value
       @entity = entity
     end
