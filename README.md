@@ -1,7 +1,5 @@
 # Atlas
 
-[![Build Status](https://travis-ci.org/auspices/atlas.svg?branch=master)](https://travis-ci.org/auspices/atlas)
-
 ## Meta
 
 - **State**: production
@@ -9,7 +7,7 @@
   - **URL**: https://atlas.auspic.es/
   - **URL**: https://auspices-atlas-production.herokuapp.com/
 - **Host**: https://dashboard.heroku.com/apps/auspices-atlas-production
-- **Deploys**: Merged PRs to `auspices/atlas#master` are automatically deployed to production [via Travis](https://travis-ci.org/auspices/atlas).
+- **Deploys**: Merged PRs to `auspices/atlas#master` are automatically deployed to production.
 
 ## Getting Started
 
