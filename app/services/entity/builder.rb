@@ -55,7 +55,7 @@ module Entity
       )
     end
 
-    def build_image_with_source_url(source_url) # rubocop:disable Metrics/MethodLength
+    def build_image_with_source_url(source_url)
       image = user.images.build(
         source_url:,
         file_name: File.basename(source_url)

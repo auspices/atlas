@@ -20,6 +20,7 @@ class Collection < ApplicationRecord
   friendly_id :title, use: :scoped, scope: :user
 
   validates :title, :user, presence: true
+  validate :validate_schema_structure, if: -> { schema.present? }
 
   belongs_to :user
   has_many :contents, -> { order position: :asc }, dependent: :destroy
@@ -33,8 +34,42 @@ class Collection < ApplicationRecord
   include HasUrl
   has_url template: -> { { segments: ['xs', slug] } }
 
+  VALID_SCHEMA_TYPES = %w[string number boolean].freeze
+  BOOLEAN_VALUES = [true, false].freeze
+
   before_destroy do
     Content.where(entity_type: 'Collection', entity_id: id).destroy_all
+  end
+
+  def schema_fields
+    schema&.dig('fields') || {}
+  end
+
+  def validate_content_metadata(metadata)
+    return true if schema.blank?
+
+    errors = []
+    schema_fields.each do |field_name, field_def|
+      value = metadata[field_name]
+
+      if field_def['required'] && value.nil?
+        errors << "#{field_name} is required"
+        next
+      end
+
+      next if value.nil?
+
+      case field_def['type']
+      when 'string'
+        errors << "#{field_name} must be a string" unless value.is_a?(String)
+      when 'number'
+        errors << "#{field_name} must be a number" unless value.is_a?(Numeric)
+      when 'boolean'
+        errors << "#{field_name} must be a boolean" unless BOOLEAN_VALUES.include?(value)
+      end
+    end
+
+    errors
   end
 
   def to_s
@@ -45,7 +80,7 @@ class Collection < ApplicationRecord
     key?
   end
 
-  def contains_collection?(target_collection_id) # rubocop:disable Metrics/MethodLength
+  def contains_collection?(target_collection_id)
     # Recursive CTE to find nested collections
     cte_query = <<-SQL
     WITH RECURSIVE nested_collections(path) AS (
@@ -82,7 +117,7 @@ class Collection < ApplicationRecord
   end
 
   # TODO: Validate and further optimize
-  def contains_collection_optimized?(target_collection_id) # rubocop:disable Metrics/MethodLength
+  def contains_collection_optimized?(target_collection_id)
     # Early return if checking against self
     return false if id == target_collection_id
 
@@ -122,5 +157,24 @@ class Collection < ApplicationRecord
     )
 
     result.first['exists']
+  end
+
+  private
+
+  def validate_schema_structure
+    return if valid_schema_structure?
+
+    errors.add(:schema, 'must be a valid schema structure')
+  end
+
+  def valid_schema_structure?
+    return false unless schema.is_a?(Hash)
+    return false unless schema['fields'].is_a?(Hash)
+
+    schema['fields'].all? do |_field_name, field_def|
+      field_def.is_a?(Hash) &&
+        VALID_SCHEMA_TYPES.include?(field_def['type']) &&
+        BOOLEAN_VALUES.include?(field_def['required'])
+    end
   end
 end

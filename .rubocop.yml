@@ -28,3 +28,15 @@ Layout/MultilineOperationIndentation:
 
 Layout/EndAlignment:
   EnforcedStyleAlignWith: variable
+
+Metrics/MethodLength:
+  Enabled: false
+
+Metrics/ClassLength:
+  Enabled: false
+
+Metrics/PerceivedComplexity:
+  Enabled: false
+
+Metrics/CyclomaticComplexity:
+  Enabled: false

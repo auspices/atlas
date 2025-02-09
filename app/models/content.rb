@@ -17,6 +17,7 @@
 
 class Content < ApplicationRecord
   validates :collection, :entity, :user, presence: true
+  validate :validate_metadata_against_schema, if: -> { collection&.schema.present? }
 
   belongs_to :user
   belongs_to :collection, counter_cache: :contents_count, touch: true
@@ -29,5 +30,12 @@ class Content < ApplicationRecord
 
   def to_sms
     "#{entity.to_s.strip}\n#{to_url}"
+  end
+
+  private
+
+  def validate_metadata_against_schema
+    validation_errors = collection.validate_content_metadata(metadata)
+    validation_errors.each { |error| errors.add(:metadata, error) } if validation_errors.any?
   end
 end

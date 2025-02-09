@@ -24,6 +24,101 @@ RSpec.describe Collection, type: :model do
     expect(collection).to be_valid
   end
 
+  describe 'schema validation' do
+    context 'when schema is not present' do
+      it 'is valid' do
+        collection.schema = nil
+        expect(collection).to be_valid
+      end
+    end
+
+    context 'when schema is present' do
+      it 'is valid with a proper schema structure' do
+        collection.schema = {
+          'fields' => {
+            'year' => { 'type' => 'number', 'required' => true },
+            'title' => { 'type' => 'string', 'required' => false },
+            'published' => { 'type' => 'boolean', 'required' => false }
+          }
+        }
+        expect(collection).to be_valid
+      end
+
+      it 'is invalid with improper schema structure' do
+        collection.schema = { 'invalid' => 'schema' }
+        expect(collection).not_to be_valid
+        expect(collection.errors[:schema]).to include('must be a valid schema structure')
+      end
+
+      it 'is invalid with unknown type' do
+        collection.schema = {
+          'fields' => {
+            'field' => { 'type' => 'unknown', 'required' => true }
+          }
+        }
+        expect(collection).not_to be_valid
+      end
+
+      it 'is invalid without required field' do
+        collection.schema = {
+          'fields' => {
+            'field' => { 'type' => 'string' }
+          }
+        }
+        expect(collection).not_to be_valid
+      end
+    end
+  end
+
+  describe '#validate_content_metadata' do
+    let(:collection) { Fabricate(:collection) }
+
+    before do
+      collection.schema = {
+        'fields' => {
+          'year' => { 'type' => 'number', 'required' => true },
+          'title' => { 'type' => 'string', 'required' => true },
+          'published' => { 'type' => 'boolean', 'required' => false }
+        }
+      }
+    end
+
+    it 'returns empty array for valid metadata' do
+      metadata = {
+        'year' => 2024,
+        'title' => 'Test Title',
+        'published' => true
+      }
+      expect(collection.validate_content_metadata(metadata)).to be_empty
+    end
+
+    it 'returns errors for missing required fields' do
+      metadata = { 'year' => 2024 }
+      errors = collection.validate_content_metadata(metadata)
+      expect(errors).to include('title is required')
+    end
+
+    it 'returns errors for invalid types' do
+      metadata = {
+        'year' => '2024',
+        'title' => 123,
+        'published' => 'true'
+      }
+      errors = collection.validate_content_metadata(metadata)
+      expect(errors).to include('year must be a number')
+      expect(errors).to include('title must be a string')
+      expect(errors).to include('published must be a boolean')
+    end
+
+    it 'allows optional fields to be omitted' do
+      metadata = {
+        'year' => 2024,
+        'title' => 'Test Title'
+      }
+      expect(collection.validate_content_metadata(metadata)).to be_empty
+    end
+  end
+
   describe 'relationships' do
     let(:user) { Fabricate(:user) }
 

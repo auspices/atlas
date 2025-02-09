@@ -13,6 +13,8 @@ module Types
     field :delete_collection, mutation: Mutations::DeleteCollection
     field :publish_collection, mutation: Mutations::PublishCollection
     field :unpublish_collection, mutation: Mutations::UnpublishCollection
+    field :update_collection_schema, mutation: Mutations::UpdateCollectionSchema
+    field :remove_collection_schema, mutation: Mutations::RemoveCollectionSchema
 
     field :add_to_collection, mutation: Mutations::AddToCollection
     field :add_to_collections, mutation: Mutations::AddToCollections
