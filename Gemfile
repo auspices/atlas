@@ -44,4 +44,4 @@ group :production do
   gem 'rails_12factor'
 end
 
-gem 'concurrent-ruby', '= 1.3.4'
+gem 'concurrent-ruby', '= 1.3.5'
