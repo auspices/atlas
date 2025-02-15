@@ -2,7 +2,7 @@
 
 source 'https://rubygems.org'
 
-ruby '3.4.1'
+ruby '3.4.2'
 
 gem 'acts_as_list'
 gem 'addressable'
