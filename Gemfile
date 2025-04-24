@@ -37,7 +37,7 @@ group :development, :test do
   gem 'rubocop-rails'
   gem 'rubocop-rspec'
   gem 'shoulda-matchers'
-  gem 'stripe-ruby-mock', '3.1.0.rc3'
+  gem 'stripe-ruby-mock', '4.1.0'
   gem 'webmock'
 end
 
